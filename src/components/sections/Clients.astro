@@ -1,0 +1,162 @@
+---
+import { clients } from '../../data/company';
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  title = 'Confían en Nosotros',
+  subtitle = 'Empresas líderes que han elegido BRIANE como su socio logístico',
+} = Astro.props;
+---
+
+<section class="clients-section section bg-gray-50">
+  <div class="container">
+    <div class="section-header text-center reveal">
+      <h2 class="section-title">{title}</h2>
+      <p class="section-subtitle">{subtitle}</p>
+    </div>
+  </div>
+
+  <div class="marquee-wrapper">
+    <div class="marquee-track">
+      {
+        clients.map((client) => (
+          <div class="client-logo">
+            <img src={client.logo} alt={client.name} />
+          </div>
+        ))
+      }
+      {
+        clients.map((client) => (
+          <div class="client-logo">
+            <img src={client.logo} alt={client.name} />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .clients-section {
+    padding: var(--spacing-2xl) 0;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .clients-section {
+      padding: var(--spacing-4xl) 0;
+    }
+  }
+
+  .section-header {
+    margin-bottom: var(--spacing-xl);
+    padding: 0 var(--spacing-md);
+  }
+
+  @media (min-width: 768px) {
+    .section-header {
+      margin-bottom: var(--spacing-3xl);
+      padding: 0;
+    }
+  }
+
+  .section-title {
+    font-size: var(--text-xl);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  @media (min-width: 768px) {
+    .section-title {
+      font-size: var(--text-3xl);
+      margin-bottom: var(--spacing-sm);
+    }
+  }
+
+  .section-subtitle {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .section-subtitle {
+      font-size: var(--text-lg);
+    }
+  }
+
+  .marquee-wrapper {
+    width: 100%;
+    overflow: hidden;
+    padding: var(--spacing-md) 0;
+  }
+
+  @media (min-width: 768px) {
+    .marquee-wrapper {
+      padding: var(--spacing-lg) 0;
+    }
+  }
+
+  .marquee-track {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xl);
+    animation: marquee 20s linear infinite;
+    width: max-content;
+  }
+
+  .marquee-wrapper:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .client-logo {
+    flex-shrink: 0;
+    width: 100px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (min-width: 480px) {
+    .client-logo {
+      width: 130px;
+      height: 70px;
+    }
+  }
+
+  .client-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+
+  .client-logo:hover img {
+    transform: scale(1.15);
+  }
+
+  @media (min-width: 768px) {
+    .client-logo {
+      width: 180px;
+      height: 100px;
+    }
+
+    .marquee-track {
+      gap: var(--spacing-4xl);
+    }
+  }
+</style>

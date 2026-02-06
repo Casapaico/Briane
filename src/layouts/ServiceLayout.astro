@@ -1,0 +1,254 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { Service } from '../types';
+
+export interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+---
+
+<BaseLayout
+  title={service.name}
+  description={service.description}
+>
+  <section class="service-hero">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/servicios">Servicios</a></li>
+          <li aria-current="page">{service.name}</li>
+        </ol>
+      </nav>
+      <h1 class="service-title">{service.name}</h1>
+      <p class="service-tagline">{service.shortDescription}</p>
+    </div>
+  </section>
+
+  <section class="service-content section">
+    <div class="container">
+      <div class="service-grid">
+        <div class="service-info">
+          <h2>Descripción del Servicio</h2>
+          <p class="service-description">{service.description}</p>
+
+          <h3>Características</h3>
+          <ul class="features-list">
+            {service.features.map((feature) => (
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="service-sidebar">
+          <div class="cta-card">
+            <h3>Solicitar Cotización</h3>
+            <p>Contáctenos para obtener una cotización personalizada.</p>
+            <a href="/contactenos" class="btn btn-primary">Contactar</a>
+          </div>
+
+          <div class="info-card">
+            <h4>Atención al Cliente</h4>
+            <p>Estamos disponibles para resolver sus dudas.</p>
+            <p class="phone">+51 1 234 5678</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <slot />
+</BaseLayout>
+
+<style>
+  .service-hero {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-3xl) 0;
+    margin-top: var(--header-height);
+  }
+
+  .breadcrumb {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .breadcrumb ol {
+    display: flex;
+    gap: var(--spacing-sm);
+    font-size: var(--text-sm);
+  }
+
+  .breadcrumb li {
+    display: flex;
+    align-items: center;
+  }
+
+  .breadcrumb li:not(:last-child)::after {
+    content: '/';
+    margin-left: var(--spacing-sm);
+    opacity: 0.7;
+  }
+
+  .breadcrumb a {
+    color: var(--color-white);
+    opacity: 0.8;
+    transition: opacity var(--transition-fast);
+  }
+
+  .breadcrumb a:hover {
+    opacity: 1;
+  }
+
+  .service-title {
+    color: var(--color-white);
+    font-size: var(--text-5xl);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .service-tagline {
+    font-size: var(--text-xl);
+    opacity: 0.9;
+    margin: 0;
+  }
+
+  .service-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+  }
+
+  @media (min-width: 1024px) {
+    .service-grid {
+      grid-template-columns: 2fr 1fr;
+    }
+  }
+
+  .service-info h2 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-gray-900);
+  }
+
+  .service-info h3 {
+    font-size: var(--text-xl);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-gray-900);
+  }
+
+  .service-description {
+    font-size: var(--text-lg);
+    color: var(--color-gray-700);
+    line-height: 1.8;
+  }
+
+  .features-list {
+    display: grid;
+    gap: var(--spacing-md);
+  }
+
+  .features-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    color: var(--color-gray-700);
+  }
+
+  .features-list svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .service-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .cta-card {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: var(--color-white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-card);
+  }
+
+  .cta-card h3 {
+    color: var(--color-white);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .cta-card p {
+    opacity: 0.9;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .btn {
+    display: inline-block;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--radius-md);
+    font-weight: var(--font-semibold);
+    text-align: center;
+    transition: all var(--transition-base);
+  }
+
+  .btn-primary {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-gray-100);
+    color: var(--color-primary-dark);
+  }
+
+  .info-card {
+    background-color: var(--color-gray-50);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-gray-200);
+  }
+
+  .info-card h4 {
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .info-card p {
+    color: var(--color-gray-600);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .phone {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    color: var(--color-primary) !important;
+  }
+
+  @media (max-width: 768px) {
+    .service-hero {
+      padding: var(--spacing-2xl) 0;
+    }
+
+    .service-title {
+      font-size: var(--text-3xl);
+    }
+  }
+</style>

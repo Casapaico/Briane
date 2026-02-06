@@ -1,0 +1,803 @@
+---
+import Button from '../ui/Button.astro';
+import { stats } from '../../data/company';
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  showStats?: boolean;
+  backgroundImage?: string;
+}
+
+const {
+  title = 'Soluciones Logísticas de Confianza',
+  subtitle = 'Transporte y almacenamiento de primera clase para impulsar el crecimiento de su empresa en todo el Perú.',
+  showStats = true,
+  backgroundImage = '/images/hero/transporte-en-puerto-4.jpeg',
+} = Astro.props;
+
+const features = [
+  { icon: 'tracking', label: 'Rastreo en Tiempo Real' },
+  { icon: 'security', label: 'Máxima Seguridad' },
+  { icon: 'digital', label: '100% Digitalizado' },
+];
+---
+
+<section class="hero" style={`--hero-bg: url(${backgroundImage})`}>
+  <div class="hero-bg-container">
+    <div class="hero-bg-image"></div>
+  </div>
+  <div class="hero-overlay"></div>
+
+  <!-- Objeto 3D Flotante -->
+  <div class="hero-3d-object">
+    <img src="/images/hero/objetohero.png" alt="Camión BRIANE" class="floating-truck" />
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-container">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <span class="hero-badge animate-fade-in">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+            </svg>
+            Más de 40 años de experiencia
+          </span>
+          <h1 class="hero-title animate-fade-in-up">{title}</h1>
+          <p class="hero-subtitle animate-fade-in-up">{subtitle}</p>
+
+          <!-- Feature Pills -->
+          <div class="hero-features animate-fade-in-up">
+            {features.map((feature) => (
+              <div class="feature-pill">
+                {feature.icon === 'tracking' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                  </svg>
+                )}
+                {feature.icon === 'security' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                  </svg>
+                )}
+                {feature.icon === 'digital' && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7v2H8v2h8v-2h-2v-2h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H3V4h18v12z"/>
+                  </svg>
+                )}
+                <span>{feature.label}</span>
+              </div>
+            ))}
+          </div>
+
+          <div class="hero-actions animate-fade-in-up">
+            <Button href="/contactenos" variant="secondary" size="lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+              Solicitar Cotización
+            </Button>
+            <Button href="/servicios" variant="outline" size="lg">
+              Conocer Servicios
+            </Button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  {
+    showStats && (
+      <div class="hero-stats-unified animate-fade-in-up">
+        {/* SVG para la forma con línea dorada continua */}
+        <svg class="stats-shape" viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
+          {/* Fondo rojo con forma de S */}
+          <path
+            d="M0 100 L0 150 L1200 150 L1200 0 L424 0 Q400 0 400 24 L400 76 Q400 100 376 100 L0 100 Z"
+            fill="var(--color-primary)"
+          />
+          {/* Línea dorada que sigue el contorno */}
+          <path
+            d="M0 100 L376 100 Q400 100 400 76 L400 24 Q400 0 424 0 L1200 0"
+            fill="none"
+            stroke="var(--color-secondary)"
+            stroke-width="6"
+          />
+        </svg>
+        <div class="stats-content">
+          <div class="stats-card-header">
+            <span class="stats-badge">BRIANE en Números</span>
+          </div>
+          <div class="stats-grid">
+            {stats.map((stat) => (
+              <div class="stat-item">
+                <span class="stat-value" data-value={stat.value}>
+                  {stat.value}{stat.suffix}
+                </span>
+                <span class="stat-label">{stat.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+</section>
+
+<script>
+  // Notificar al header que estamos en la página con hero
+  document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('has-hero');
+
+    // Animación de conteo mejorada con efecto de aceleración
+    const animateCountUp = (element: Element) => {
+      const target = parseInt(element.getAttribute('data-value') || '0', 10);
+      const duration = 2500;
+      const frameDuration = 1000 / 60;
+      const totalFrames = Math.round(duration / frameDuration);
+
+      let frame = 0;
+      const originalText = element.textContent || '';
+      const suffix = originalText.replace(/[\d,]+/, '');
+
+      // Efecto de easing más dramático - empieza rápido, termina suave
+      const easeOutExpo = (t: number) => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+
+      // Iniciar desde 0
+      element.textContent = '0' + suffix;
+
+      const counter = setInterval(() => {
+        frame++;
+        const progress = easeOutExpo(frame / totalFrames);
+        const currentCount = Math.round(target * progress);
+
+        // Formato con comas para miles
+        const formattedNumber = currentCount.toLocaleString('es-PE');
+        element.textContent = formattedNumber + suffix;
+
+        if (frame === totalFrames) {
+          clearInterval(counter);
+          // Efecto final de "llegada"
+          element.style.transform = 'scale(1.08)';
+          setTimeout(() => {
+            element.style.transform = 'scale(1)';
+          }, 150);
+        }
+      }, frameDuration);
+    };
+
+    // Observer para iniciar animación cuando sea visible
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const statValues = entry.target.querySelectorAll('.stat-value');
+          statValues.forEach((stat, index) => {
+            // Delay escalonado para efecto cascada
+            setTimeout(() => {
+              stat.classList.add('counting');
+              animateCountUp(stat);
+            }, index * 200);
+          });
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const statsCard = document.querySelector('.hero-stats-card');
+    if (statsCard) {
+      statsObserver.observe(statsCard);
+    }
+  });
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-gray-900);
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  /* Background Image Container */
+  .hero-bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .hero-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--hero-bg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transform: scale(1.05);
+    animation: slowZoom 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes slowZoom {
+    from { transform: scale(1.05); }
+    to { transform: scale(1.15); }
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(26, 26, 26, 0.88) 0%,
+      rgba(26, 26, 26, 0.75) 40%,
+      rgba(227, 39, 29, 0.25) 100%
+    );
+    z-index: 1;
+  }
+
+  /* Objeto 3D Flotante con efecto Teletransporte */
+  .hero-3d-object {
+    position: absolute;
+    right: -5%;
+    bottom: 120px;
+    z-index: 6;
+    pointer-events: none;
+  }
+
+  .floating-truck {
+    width: clamp(420px, 65vw, 1000px);
+    height: auto;
+    animation: floatTruck 4s ease-in-out infinite, teleportGlow 3s ease-in-out infinite;
+    transform-style: preserve-3d;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4))
+            drop-shadow(0 0 30px rgba(227, 39, 29, 0.3))
+            drop-shadow(0 0 60px rgba(246, 194, 29, 0.2));
+  }
+
+  /* Efecto de estela de velocidad */
+  .hero-3d-object::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -20%;
+    width: 60%;
+    height: 8px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(246, 194, 29, 0.1) 20%,
+      rgba(246, 194, 29, 0.4) 50%,
+      rgba(227, 39, 29, 0.6) 80%,
+      transparent 100%
+    );
+    transform: translateY(-50%);
+    animation: speedTrail 2s ease-in-out infinite;
+    filter: blur(4px);
+    border-radius: 50%;
+  }
+
+  .hero-3d-object::after {
+    content: '';
+    position: absolute;
+    top: 45%;
+    left: -15%;
+    width: 50%;
+    height: 4px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 30%,
+      rgba(246, 194, 29, 0.5) 70%,
+      transparent 100%
+    );
+    transform: translateY(-50%);
+    animation: speedTrail 2s ease-in-out infinite 0.3s;
+    filter: blur(2px);
+    border-radius: 50%;
+  }
+
+  @keyframes floatTruck {
+    0%, 100% {
+      transform: translateY(0) translateX(0) scale(1);
+    }
+    25% {
+      transform: translateY(-12px) translateX(5px) scale(1.01);
+    }
+    50% {
+      transform: translateY(-20px) translateX(0) scale(1.02);
+    }
+    75% {
+      transform: translateY(-12px) translateX(-5px) scale(1.01);
+    }
+  }
+
+  @keyframes teleportGlow {
+    0%, 100% {
+      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4))
+              drop-shadow(0 0 30px rgba(227, 39, 29, 0.3))
+              drop-shadow(0 0 60px rgba(246, 194, 29, 0.2));
+    }
+    50% {
+      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5))
+              drop-shadow(0 0 50px rgba(227, 39, 29, 0.5))
+              drop-shadow(0 0 80px rgba(246, 194, 29, 0.4));
+    }
+  }
+
+  @keyframes speedTrail {
+    0%, 100% {
+      opacity: 0;
+      transform: translateY(-50%) translateX(-30px) scaleX(0.5);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0) scaleX(1);
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .hero-3d-object {
+      right: -3%;
+      bottom: 160px;
+    }
+
+    .floating-truck {
+      width: clamp(320px, 50vw, 600px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-3d-object {
+      display: none;
+    }
+
+    .floating-truck {
+      display: none;
+    }
+
+    .hero-3d-object::before,
+    .hero-3d-object::after {
+      display: none;
+    }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    flex: 1;
+    padding: calc(var(--header-height) + var(--spacing-xl)) 0 var(--spacing-xl) 0;
+  }
+
+  @media (min-width: 768px) {
+    .hero-content {
+      padding-top: calc(var(--header-height) + var(--spacing-xl));
+      padding-bottom: 180px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-content {
+      padding-bottom: 160px;
+    }
+  }
+
+  /* Container alineado con el header */
+  .hero-container {
+    width: 100%;
+    max-width: var(--container-2xl);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  @media (min-width: 768px) {
+    .hero-container {
+      padding: 0 var(--spacing-xl);
+    }
+  }
+
+  .hero-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3xl);
+  }
+
+  .hero-text {
+    color: var(--color-white);
+    max-width: 600px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: linear-gradient(135deg, rgba(246, 194, 29, 0.2), rgba(246, 194, 29, 0.1));
+    border: 1px solid rgba(246, 194, 29, 0.3);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-secondary);
+  }
+
+  .hero-badge svg {
+    color: var(--color-secondary);
+  }
+
+  .hero-title {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    line-height: 1.1;
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-white);
+  }
+
+  @media (min-width: 768px) {
+    .hero-title {
+      font-size: var(--text-5xl);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-title {
+      font-size: var(--text-6xl);
+    }
+  }
+
+  .hero-subtitle {
+    font-size: var(--text-lg);
+    line-height: 1.7;
+    opacity: 0.9;
+    margin-bottom: var(--spacing-xl);
+    max-width: 540px;
+  }
+
+  /* Feature Pills */
+  .hero-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .feature-pill {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: var(--text-sm);
+    color: var(--color-white);
+  }
+
+  .feature-pill svg {
+    color: var(--color-secondary);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+  }
+
+  .hero-actions :global(.btn-outline) {
+    color: var(--color-white);
+    border-color: var(--color-white);
+  }
+
+  .hero-actions :global(.btn-outline:hover) {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+  }
+
+  /* Stats Unificado con SVG */
+  .hero-stats-unified {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 5;
+  }
+
+  /* SVG oculto en móvil, visible en desktop */
+  .stats-shape {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .stats-shape {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 150px;
+    }
+  }
+
+  /* Fondo para móvil */
+  .hero-stats-unified::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--color-primary);
+    z-index: -1;
+  }
+
+  .hero-stats-unified::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--color-secondary);
+  }
+
+  @media (min-width: 768px) {
+    .hero-stats-unified::before,
+    .hero-stats-unified::after {
+      display: none;
+    }
+  }
+
+  /* Contenido de stats */
+  .stats-content {
+    position: relative;
+    z-index: 2;
+    padding: var(--spacing-sm);
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .stats-content {
+      margin-left: 33.334%;
+      width: 66.666%;
+      padding: var(--spacing-sm) var(--spacing-md);
+    }
+  }
+
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .stats-inner {
+    padding: var(--spacing-sm) var(--spacing-sm);
+    max-width: 100%;
+    margin: 0;
+  }
+
+  @media (min-width: 768px) {
+    .stats-inner {
+      padding: var(--spacing-sm) var(--spacing-md);
+    }
+  }
+
+  .stats-card-header {
+    margin-bottom: var(--spacing-sm);
+    text-align: center;
+  }
+
+  .stats-badge {
+    display: inline-block;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background: var(--color-secondary);
+    border: none;
+    color: var(--color-gray-900);
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xs);
+  }
+
+  @media (min-width: 768px) {
+    .stats-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: var(--spacing-xs);
+    flex: 1;
+    position: relative;
+  }
+
+  @media (min-width: 768px) {
+    .stat-item {
+      border-right: 2px solid rgba(255, 255, 255, 0.3);
+      padding: var(--spacing-xs) var(--spacing-md);
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+    }
+  }
+
+  .stat-value {
+    display: block;
+    font-family: 'Bebas Neue', var(--font-heading), sans-serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-white);
+    letter-spacing: 0.02em;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .stat-value.counting {
+    animation: countPulse 2s ease-out;
+  }
+
+  @keyframes countPulse {
+    0% {
+      transform: scale(0.8) translateY(10px);
+      filter: blur(4px);
+      opacity: 0;
+    }
+    20% {
+      transform: scale(1.1) translateY(-5px);
+      filter: blur(0);
+      opacity: 1;
+    }
+    40% {
+      transform: scale(0.98) translateY(0);
+    }
+    60% {
+      transform: scale(1.03);
+    }
+    80% {
+      transform: scale(0.99);
+    }
+    100% {
+      transform: scale(1);
+      filter: blur(0);
+      opacity: 1;
+    }
+  }
+
+  .stat-item:hover .stat-value {
+    transform: scale(1.08);
+  }
+
+  @media (min-width: 768px) {
+    .stat-value {
+      font-size: 3.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .stat-value {
+      font-size: 4.5rem;
+    }
+  }
+
+  .stat-label {
+    font-size: var(--text-xs);
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.4;
+    font-weight: var(--font-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  @media (min-width: 768px) {
+    .stat-label {
+      font-size: var(--text-sm);
+    }
+  }
+
+  /* Animations */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-up {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .animate-fade-in-up:nth-child(2) { animation-delay: 0.1s; }
+  .animate-fade-in-up:nth-child(3) { animation-delay: 0.2s; }
+  .animate-fade-in-up:nth-child(4) { animation-delay: 0.3s; }
+  .animate-fade-in-up:nth-child(5) { animation-delay: 0.4s; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-stats-unified {
+      position: relative;
+    }
+
+    .stats-card-header {
+      margin-bottom: var(--spacing-sm);
+      text-align: center;
+    }
+
+    .stats-content {
+      margin-left: 0;
+      width: 100%;
+      padding: var(--spacing-md);
+    }
+
+    .stats-grid {
+      gap: var(--spacing-sm);
+    }
+
+    .stat-value {
+      font-size: 2rem;
+    }
+
+    .stats-badge {
+      font-size: var(--text-xs);
+      padding: var(--spacing-xs) var(--spacing-md);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stat-value {
+      font-size: 1.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.6rem;
+    }
+
+    .stats-content {
+      padding: var(--spacing-sm);
+    }
+
+    .stats-badge {
+      font-size: 0.65rem;
+    }
+  }
+</style>

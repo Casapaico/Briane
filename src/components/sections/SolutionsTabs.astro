@@ -1,0 +1,651 @@
+---
+// Componente de soluciones - Diseño de paneles expandibles
+const solutions = [
+  {
+    id: 'logistica',
+    icon: 'truck',
+    title: 'Logística de Vanguardia',
+    subtitle: 'Solución Perfecta',
+    description: 'Soluciones de valor con talento humano especializado para el éxito de su empresa.',
+    image: '/images/soluciones/solu3.png',
+    href: '/servicios/supervan',
+  },
+  {
+    id: 'monitoreo',
+    icon: 'satellite',
+    title: 'Monitoreo Satelital',
+    subtitle: 'Control Total 24/7',
+    description: 'Seguimiento en tiempo real con transmisión de video y respuesta inmediata.',
+    image: '/images/soluciones/equipo-briane-monitoreo.jpeg',
+    href: '/servicios',
+  },
+  {
+    id: 'seguridad',
+    icon: 'shield',
+    title: 'Máxima Seguridad',
+    subtitle: 'Protección Integral',
+    description: 'Colaboradores entrenados con seguridad en su ADN para un servicio eficiente.',
+    image: '/images/soluciones/academia-Briane3.jpeg',
+    href: '/servicios',
+  },
+  {
+    id: 'academia',
+    icon: 'graduation',
+    title: 'Universidad Briane',
+    subtitle: 'Formación Continua',
+    description: 'Capacitación permanente para mantener los más altos estándares de calidad.',
+    image: '/images/soluciones/academia-Briane5.jpeg',
+    href: '/briane',
+  },
+];
+---
+
+<section class="solutions-section">
+  <div class="container">
+    <div class="solutions-header animate-on-scroll">
+      <span class="solutions-badge">Excelencia Operativa</span>
+      <h2 class="solutions-title">Nuestras <span>Soluciones</span></h2>
+      <p class="solutions-subtitle">Tecnología, seguridad y experiencia al servicio de su empresa</p>
+    </div>
+  </div>
+
+  <div class="solutions-panels">
+    {solutions.map((solution, index) => (
+      <a
+        href={solution.href}
+        class="solution-panel animate-on-scroll"
+        style={`--delay: ${index * 0.1}s; --bg-image: url(${solution.image})`}
+      >
+        <div class="panel-bg"></div>
+        <div class="panel-info-box">
+          <div class="panel-icon">
+            {solution.icon === 'truck' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18 18.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zm1.5-9H17V12h4.46L19.5 9.5zM6 18.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5-1.5.67-1.5 1.5.67 1.5 1.5 1.5zM20 8l3 4v5h-2c0 1.66-1.34 3-3 3s-3-1.34-3-3H9c0 1.66-1.34 3-3 3s-3-1.34-3-3H1V6c0-1.11.89-2 2-2h14v4h3zM3 6v9h.76c.55-.61 1.35-1 2.24-1s1.69.39 2.24 1H15V6H3z"/>
+              </svg>
+            )}
+            {solution.icon === 'satellite' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"/>
+                <circle cx="12" cy="9" r="2.5"/>
+              </svg>
+            )}
+            {solution.icon === 'shield' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+              </svg>
+            )}
+            {solution.icon === 'graduation' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+              </svg>
+            )}
+          </div>
+          <h3 class="panel-title">{solution.title}</h3>
+          <p class="panel-description">{solution.description}</p>
+          <div class="panel-arrow">
+            <span>Ver más</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+
+  <!-- Sección con animación del camión -->
+  <div class="truck-animation-section">
+    <div class="truck-animated gsap-move" aria-hidden="true">
+      <img src="/images/soluciones/solu2.png" alt="" loading="lazy" />
+    </div>
+
+    <!-- BRIANESMART Link -->
+    <div class="container">
+      <div class="smart-link-wrapper animate-on-scroll">
+        <a
+          role="button"
+          href="http://66.23.235.30:8080/briane/#/login"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="smart-button"
+        >
+          <span class="smart-button-text">BRIANE SMART</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .solutions-section {
+    padding: var(--spacing-2xl) 0;
+    background: var(--color-gray-50);
+  }
+
+  @media (min-width: 768px) {
+    .solutions-section {
+      padding: var(--spacing-4xl) 0;
+    }
+  }
+
+  .solutions-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    padding: 0 var(--spacing-md);
+  }
+
+  @media (min-width: 768px) {
+    .solutions-header {
+      margin-bottom: var(--spacing-3xl);
+      padding: 0;
+    }
+  }
+
+  .solutions-badge {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: linear-gradient(135deg, rgba(227, 39, 29, 0.1), rgba(227, 39, 29, 0.05));
+    color: var(--color-primary);
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  @media (min-width: 768px) {
+    .solutions-badge {
+      font-size: var(--text-sm);
+      margin-bottom: var(--spacing-md);
+    }
+  }
+
+  .solutions-title {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  @media (min-width: 768px) {
+    .solutions-title {
+      font-size: var(--text-4xl);
+      margin-bottom: var(--spacing-sm);
+    }
+  }
+
+  .solutions-title span {
+    color: var(--color-primary);
+  }
+
+  .solutions-subtitle {
+    font-size: var(--text-base);
+    color: var(--color-gray-600);
+  }
+
+  @media (min-width: 768px) {
+    .solutions-subtitle {
+      font-size: var(--text-lg);
+    }
+  }
+
+  /* Panels Container */
+  .solutions-panels {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-3xl);
+    padding: 0 var(--spacing-md);
+  }
+
+  @media (min-width: 480px) {
+    .solutions-panels {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-sm);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .solutions-panels {
+      display: flex;
+      flex-direction: row;
+      min-height: 600px;
+      gap: 0;
+      padding: 0;
+    }
+  }
+
+  /* Individual Panel */
+  .solution-panel {
+    position: relative;
+    flex: 1;
+    min-height: 320px;
+    overflow: hidden;
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 12px;
+  }
+
+  @media (min-width: 768px) {
+    .solution-panel {
+      min-height: auto;
+      border-radius: 0;
+    }
+
+    .solution-panel:hover {
+      flex: 1.5;
+    }
+  }
+
+  .panel-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 100px;
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @media (min-width: 768px) {
+    .panel-bg {
+      bottom: 180px;
+    }
+  }
+
+  .solution-panel:hover .panel-bg {
+    transform: scale(1.05);
+  }
+
+  /* Info Box - Marco Amarillo */
+  .panel-info-box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-secondary);
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    min-height: 100px;
+    transition: all 0.4s ease;
+  }
+
+  @media (min-width: 768px) {
+    .panel-info-box {
+      min-height: 180px;
+      padding: var(--spacing-xl);
+    }
+  }
+
+  .solution-panel:hover .panel-info-box {
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-secondary-dark) 100%);
+  }
+
+  .panel-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+    transition: all 0.4s ease;
+  }
+
+  @media (min-width: 768px) {
+    .panel-icon {
+      width: 45px;
+      height: 45px;
+      margin-bottom: var(--spacing-sm);
+    }
+  }
+
+  .solution-panel:hover .panel-icon {
+    background: var(--color-gray-900);
+    transform: scale(1.1);
+  }
+
+  .panel-icon svg {
+    width: 18px;
+    height: 18px;
+    color: var(--color-white);
+  }
+
+  @media (min-width: 768px) {
+    .panel-icon svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .panel-title {
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    color: var(--color-gray-900);
+    margin-bottom: 2px;
+    line-height: 1.2;
+  }
+
+  @media (min-width: 768px) {
+    .panel-title {
+      font-size: var(--text-lg);
+      margin-bottom: var(--spacing-xs);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .panel-title {
+      font-size: var(--text-xl);
+    }
+  }
+
+  .panel-description {
+    font-size: var(--text-xs);
+    line-height: 1.4;
+    color: var(--color-gray-800);
+    flex: 1;
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .panel-description {
+      display: block;
+      font-size: var(--text-sm);
+      line-height: 1.5;
+    }
+  }
+
+  .panel-arrow {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-xs);
+    color: var(--color-gray-900);
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.4s ease;
+  }
+
+  @media (min-width: 768px) {
+    .panel-arrow {
+      opacity: 0;
+      transform: translateY(10px);
+      margin-top: var(--spacing-sm);
+      font-size: var(--text-sm);
+    }
+
+    .solution-panel:hover .panel-arrow {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .panel-arrow svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+  }
+
+  @media (min-width: 768px) {
+    .panel-arrow svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .solution-panel:hover .panel-arrow svg {
+    transform: translateX(5px);
+  }
+
+  /* Sección con animación del camión */
+  .truck-animation-section {
+    position: relative;
+    padding: var(--spacing-xl) 0;
+    padding-bottom: 80px;
+    background: var(--color-gray-50);
+    overflow: hidden;
+    min-height: 180px;
+  }
+
+  @media (min-width: 768px) {
+    .truck-animation-section {
+      padding: var(--spacing-3xl) 0;
+      padding-bottom: 120px;
+      min-height: 280px;
+    }
+  }
+
+  .truck-animated {
+    position: absolute;
+    bottom: 0;
+    left: -20px;
+    width: 180px;
+    z-index: 1;
+    pointer-events: none;
+    will-change: transform;
+    transition: transform 0.1s linear;
+    opacity: 0.7;
+  }
+
+  @media (min-width: 480px) {
+    .truck-animated {
+      width: 220px;
+      left: 0;
+      opacity: 1;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .truck-animated {
+      width: 340px;
+      bottom: 0;
+      left: 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .truck-animated {
+      width: 420px;
+      left: 0;
+      bottom: 0;
+    }
+  }
+
+  .truck-animated img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* BRIANESMART Button */
+  .smart-link-wrapper {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .smart-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    background: var(--color-primary);
+    border: none;
+    border-radius: 0;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: visible;
+  }
+
+  @media (min-width: 768px) {
+    .smart-button {
+      padding: 16px 32px;
+    }
+  }
+
+  .smart-button::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 0;
+    background: linear-gradient(
+      45deg,
+      #ffcc00,
+      #ff9500,
+      #e3271d,
+      #ff5500,
+      #ffcc00
+    );
+    background-size: 400% 400%;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+    filter: blur(10px);
+  }
+
+  .smart-button:hover::before {
+    opacity: 1;
+    animation: aurora 3s ease infinite;
+  }
+
+  .smart-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(227, 39, 29, 0.4);
+  }
+
+  .smart-button:active {
+    transform: scale(0.98) translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .smart-button-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-white);
+    letter-spacing: 0.03em;
+  }
+
+  @media (min-width: 768px) {
+    .smart-button-text {
+      font-size: 16px;
+    }
+  }
+
+  @keyframes aurora {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Animations */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition-delay: var(--delay, 0s);
+  }
+
+  .animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 767px) {
+    .panel-description {
+      opacity: 1;
+      max-height: 100px;
+    }
+
+    .panel-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .smart-link {
+      flex-direction: column;
+      text-align: center;
+      padding: var(--spacing-xl);
+    }
+
+    .smart-link-content {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<script>
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -50px 0px',
+    threshold: 0.1
+  };
+
+  const animateObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animated');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.solutions-section .animate-on-scroll').forEach((el) => {
+    animateObserver.observe(el);
+  });
+
+  // Animación parallax del camión
+  const truckElement = document.querySelector('.truck-animated');
+  const truckSection = document.querySelector('.truck-animation-section');
+
+  if (truckElement && truckSection) {
+    const updateTruckPosition = () => {
+      const rect = truckSection.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Calcular progreso de scroll cuando la sección está visible
+      if (rect.top < windowHeight && rect.bottom > 0) {
+        const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
+        // Mover el camión de izquierda a derecha (hasta 400px de movimiento)
+        const translateX = Math.min(progress * 600, 500);
+        truckElement.style.transform = `translate3d(${translateX}px, 0, 0)`;
+      }
+    };
+
+    // Usar requestAnimationFrame para mejor rendimiento
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateTruckPosition();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // Posición inicial
+    updateTruckPosition();
+  }
+</script>

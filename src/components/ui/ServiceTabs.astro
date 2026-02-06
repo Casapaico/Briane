@@ -1,0 +1,231 @@
+---
+import { services } from '../../data/services';
+import TabPanel from './TabPanel.astro';
+
+export interface Props {
+  defaultTab?: string;
+}
+
+const { defaultTab = 'supervan' } = Astro.props;
+---
+
+<div class="service-tabs" data-default-tab={defaultTab}>
+  <div class="tabs-header" role="tablist" aria-label="Servicios">
+    {
+      services.map((service, index) => (
+        <button
+          role="tab"
+          id={`tab-${service.id}`}
+          aria-controls={`panel-${service.id}`}
+          aria-selected={service.id === defaultTab ? 'true' : 'false'}
+          class={`tab-button ${service.id === defaultTab ? 'active' : ''}`}
+          tabindex={service.id === defaultTab ? 0 : -1}
+          data-tab={service.id}
+        >
+          {service.id === 'supervan' && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="1" y="3" width="15" height="13" />
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+              <circle cx="5.5" cy="18.5" r="2.5" />
+              <circle cx="18.5" cy="18.5" r="2.5" />
+            </svg>
+          )}
+          {service.id === 'almacenes' && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+          )}
+          <span>{service.name}</span>
+        </button>
+      ))
+    }
+    <div class="tab-indicator" aria-hidden="true"></div>
+  </div>
+
+  <div class="tabs-content">
+    {
+      services.map((service) => (
+        <TabPanel
+          id={service.id}
+          active={service.id === defaultTab}
+          service={service}
+        />
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .service-tabs {
+    width: 100%;
+  }
+
+  .tabs-header {
+    display: flex;
+    position: relative;
+    background-color: var(--color-gray-100);
+    border-radius: var(--radius-card);
+    padding: var(--spacing-xs);
+    gap: var(--spacing-xs);
+  }
+
+  .tab-button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    color: var(--color-gray-600);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: color var(--transition-base);
+    position: relative;
+    z-index: 1;
+  }
+
+  .tab-button:hover {
+    color: var(--color-gray-900);
+  }
+
+  .tab-button.active {
+    color: var(--color-white);
+  }
+
+  .tab-button svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .tab-indicator {
+    position: absolute;
+    top: var(--spacing-xs);
+    left: var(--spacing-xs);
+    height: calc(100% - var(--spacing-sm));
+    width: calc(50% - var(--spacing-xs));
+    background-color: var(--color-primary);
+    border-radius: var(--radius-md);
+    transition: transform var(--transition-base);
+    z-index: 0;
+  }
+
+  .tabs-content {
+    margin-top: var(--spacing-xl);
+  }
+
+  @media (max-width: 640px) {
+    .tab-button {
+      padding: var(--spacing-sm) var(--spacing-md);
+      font-size: var(--text-sm);
+    }
+
+    .tab-button span {
+      display: none;
+    }
+
+    .tab-button svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+</style>
+
+<script>
+  const serviceTabs = document.querySelector('.service-tabs');
+  const tabButtons = serviceTabs?.querySelectorAll('.tab-button');
+  const tabPanels = serviceTabs?.querySelectorAll('.tab-panel');
+  const tabIndicator = serviceTabs?.querySelector('.tab-indicator') as HTMLElement;
+
+  function updateIndicator(activeButton: HTMLElement) {
+    if (!tabIndicator || !activeButton) return;
+    const buttons = Array.from(tabButtons || []);
+    const index = buttons.indexOf(activeButton);
+    tabIndicator.style.transform = `translateX(${index * 100}%)`;
+  }
+
+  function switchTab(tabId: string) {
+    tabButtons?.forEach((button) => {
+      const isActive = button.getAttribute('data-tab') === tabId;
+      button.classList.toggle('active', isActive);
+      button.setAttribute('aria-selected', String(isActive));
+      button.setAttribute('tabindex', isActive ? '0' : '-1');
+
+      if (isActive) {
+        updateIndicator(button as HTMLElement);
+      }
+    });
+
+    tabPanels?.forEach((panel) => {
+      const isActive = panel.id === `panel-${tabId}`;
+      panel.classList.toggle('active', isActive);
+      panel.setAttribute('aria-hidden', String(!isActive));
+    });
+  }
+
+  // Click handler
+  tabButtons?.forEach((button) => {
+    button.addEventListener('click', () => {
+      const tabId = button.getAttribute('data-tab');
+      if (tabId) switchTab(tabId);
+    });
+  });
+
+  // Keyboard navigation
+  tabButtons?.forEach((button) => {
+    button.addEventListener('keydown', (e) => {
+      const buttons = Array.from(tabButtons || []);
+      const currentIndex = buttons.indexOf(button);
+      let newIndex = currentIndex;
+
+      if (e.key === 'ArrowRight') {
+        newIndex = (currentIndex + 1) % buttons.length;
+      } else if (e.key === 'ArrowLeft') {
+        newIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+      } else if (e.key === 'Home') {
+        newIndex = 0;
+      } else if (e.key === 'End') {
+        newIndex = buttons.length - 1;
+      } else {
+        return;
+      }
+
+      e.preventDefault();
+      const newButton = buttons[newIndex] as HTMLElement;
+      newButton.focus();
+      const tabId = newButton.getAttribute('data-tab');
+      if (tabId) switchTab(tabId);
+    });
+  });
+
+  // Initialize indicator position
+  const defaultTab = serviceTabs?.getAttribute('data-default-tab') || 'supervan';
+  const activeButton = serviceTabs?.querySelector(`[data-tab="${defaultTab}"]`) as HTMLElement;
+  if (activeButton) {
+    updateIndicator(activeButton);
+  }
+</script>

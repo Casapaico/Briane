@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://briane.pe/sitemap-index.xml

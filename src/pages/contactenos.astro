@@ -1,0 +1,346 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import ContactForm from '../components/ui/ContactForm.astro';
+import { companyInfo } from '../data/company';
+---
+
+<PageLayout
+  title="Contactenos"
+  description="Contacte a BRIANE. Estamos listos para atender sus consultas y brindarle la mejor solucion logistica."
+  heroTitle="Contactenos"
+  heroSubtitle="Estamos listos para ayudarle"
+>
+  <section class="contact-section section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info reveal">
+          <h2>Hablemos</h2>
+          <p>
+            Estamos aqui para responder sus preguntas y ayudarle a encontrar la
+            mejor solucion logistica para su empresa.
+          </p>
+
+          <div class="info-cards">
+            <div class="info-card">
+              <div class="info-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </div>
+              <div class="info-content">
+                <h3>Direccion</h3>
+                <p>{companyInfo.contact.address}</p>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="info-content">
+                <h3>Teléfonos</h3>
+                {
+                  companyInfo.contact.phone.map((phone) => (
+                    <p>
+                      <a href={`tel:${phone.replace(/\s/g, '')}`}>{phone}</a>
+                    </p>
+                  ))
+                }
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  ></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </div>
+              <div class="info-content">
+                <h3>Correos</h3>
+                {
+                  companyInfo.contact.email.map((email) => (
+                    <p>
+                      <a href={`mailto:${email}`}>{email}</a>
+                    </p>
+                  ))
+                }
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="info-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              </div>
+              <div class="info-content">
+                <h3>Horario de Atencion</h3>
+                <p>{companyInfo.contact.hours}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <h3>Siguenos</h3>
+            <div class="social-icons">
+              {
+                companyInfo.social.map((social) => (
+                  <a
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.platform}
+                    class="social-icon"
+                  >
+                    {social.icon === 'facebook' && (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                      </svg>
+                    )}
+                    {social.icon === 'linkedin' && (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                        <rect x="2" y="9" width="4" height="12" />
+                        <circle cx="4" cy="4" r="2" />
+                      </svg>
+                    )}
+                    {social.icon === 'instagram' && (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                      </svg>
+                    )}
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-wrapper reveal-right">
+          <h2>Envienos un mensaje</h2>
+          <ContactForm />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="map-section">
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.9661760889396!2d-77.09691552487!3d-12.02683284153!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105ce5f35b24ad7%3A0x8c8e3c9a0f7c8c0!2sAv.%20Elmer%20Faucett%205104%2C%20Lima%2007031%2C%20Peru!5e0!3m2!1ses!2spe!4v1699999999999!5m2!1ses!2spe"
+        width="100%"
+        height="100%"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Ubicacion de BRIANE - Av. Elmer Faucett 5104, Callao"
+      ></iframe>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-3xl);
+  }
+
+  @media (min-width: 1024px) {
+    .contact-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .contact-info h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .contact-info > p {
+    color: var(--color-gray-600);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .info-cards {
+    display: grid;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .info-card {
+    display: flex;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+    background-color: var(--color-gray-50);
+    border-radius: var(--radius-card);
+    transition: background-color var(--transition-fast);
+  }
+
+  .info-card:hover {
+    background-color: var(--color-gray-100);
+  }
+
+  .info-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+  }
+
+  .info-content h3 {
+    font-size: var(--text-base);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .info-content p {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+    margin: 0;
+  }
+
+  .info-content a {
+    color: var(--color-gray-600);
+    transition: color var(--transition-fast);
+  }
+
+  .info-content a:hover {
+    color: var(--color-primary);
+  }
+
+  .social-links h3 {
+    font-size: var(--text-base);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .social-icons {
+    display: flex;
+    gap: var(--spacing-sm);
+  }
+
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-600);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+  }
+
+  .social-icon:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .contact-form-wrapper {
+    padding: var(--spacing-xl);
+    background-color: var(--color-gray-50);
+    border-radius: var(--radius-image);
+  }
+
+  .contact-form-wrapper h2 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .map-section {
+    height: 450px;
+    background-color: var(--color-gray-100);
+  }
+
+  .map-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .map-container iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+</style>

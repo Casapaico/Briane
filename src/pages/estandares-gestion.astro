@@ -1,0 +1,794 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Card from '../components/ui/Card.astro';
+import CallToAction from '../components/sections/CallToAction.astro';
+
+const certifications = [
+  {
+    name: 'ISO 9001:2015',
+    title: 'Sistema de Gestión de Calidad',
+    description:
+      'Certificación que garantiza procesos estandarizados y enfocados en la satisfacción del cliente.',
+    scope: 'Todos los procesos operativos y administrativos',
+  },
+  {
+    name: 'ISO 14001:2015',
+    title: 'Sistema de Gestión Ambiental',
+    description:
+      'Compromiso con la protección del medio ambiente y la gestión responsable de recursos.',
+    scope: 'Operaciones de transporte y almacenamiento',
+  },
+  {
+    name: 'ISO 45001:2018',
+    title: 'Seguridad y Salud en el Trabajo',
+    description:
+      'Garantizamos un ambiente de trabajo seguro para todos nuestros colaboradores.',
+    scope: 'Todo el personal y operaciones',
+  },
+  {
+    name: 'BASC',
+    title: 'Business Alliance for Secure Commerce',
+    description:
+      'Certificación de seguridad en la cadena de suministro contra actividades ilícitas.',
+    scope: 'Cadena logística completa',
+  },
+];
+
+const policies = [
+  {
+    title: 'Política de Calidad',
+    content:
+      'Nos comprometemos a brindar servicios logísticos que cumplan con los requisitos de nuestros clientes, mejorando continuamente la eficacia de nuestro sistema de gestión.',
+  },
+  {
+    title: 'Política Ambiental',
+    content:
+      'Operamos de manera responsable con el medio ambiente, minimizando el impacto de nuestras actividades y promoviendo prácticas sostenibles.',
+  },
+  {
+    title: 'Política de Seguridad',
+    content:
+      'Garantizamos la integridad de las personas, la mercadería y las instalaciones mediante controles efectivos y capacitación continua.',
+  },
+];
+---
+
+<PageLayout
+  title="Estándares de Gestión"
+  description="Conozca nuestras certificaciones y estándares de gestión que garantizan la calidad y seguridad de nuestros servicios logísticos."
+  heroTitle="Estándares de Gestión"
+  heroSubtitle="Buenas prácticas con los más altos estándares en calidad, seguridad y medio ambiente"
+>
+  <!-- Introduccion Estandares -->
+  <section class="standards-intro-section section">
+    <div class="container">
+      <div class="standards-intro-content reveal">
+        <div class="standards-hero-grid">
+          <div class="standards-hero-text">
+            <div class="standards-badge">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+              <span>Certificados y Comprometidos</span>
+            </div>
+            <h2 class="standards-title">
+              Buenas Prácticas con los más altos
+              <span class="highlight-yellow">Estándares en Calidad,</span>
+              <span class="highlight-yellow">Seguridad y Medio Ambiente</span>
+            </h2>
+            <p class="standards-description">
+              Hemos implementado políticas y procedimientos en calidad, seguridad en el transporte con el objetivo de cumplir con los estándares exigidos en la legislación vigente y por nuestros clientes.
+            </p>
+            <div class="standards-stats">
+              <div class="stat-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>ISO 9001</span>
+              </div>
+              <div class="stat-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>ISO 14001</span>
+              </div>
+              <div class="stat-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>ISO 45001</span>
+              </div>
+              <div class="stat-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>BASC</span>
+              </div>
+            </div>
+          </div>
+          <div class="standards-hero-visual">
+            <div class="iso-image-container">
+              <img src="/images/iso90.png" alt="Certificaciones ISO" class="iso-image" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Control de Operaciones -->
+  <section class="operations-section section">
+    <div class="container">
+      <div class="operations-content reveal">
+        <div class="operations-info">
+          <h2>Control de Operaciones</h2>
+          <p class="operations-description">
+            Nos esforzamos en capacitar a nuestro personal en los temas de seguridad de transporte orientados a cumplir con los requisitos exigidos en la legislacion vigente y por nuestros clientes.
+          </p>
+          <ul class="operations-list">
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Plan anual de seguridad y salud ocupacional para operaciones de alto riesgo</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Plan anual de capacitacion</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Evaluaciones de riesgo personas, instalaciones y operaciones</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Hojas y estudio de ruta</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>IPER de rutas</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Reporte GEI</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Mapa de procesos</span>
+            </li>
+          </ul>
+        </div>
+        <div class="operations-visual">
+          <div class="image-frame">
+            <img src="/images/hero2.jpeg" alt="Control de Operaciones BRIANE" class="featured-image" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Control Satelital -->
+  <section class="satellite-section section">
+    <div class="container">
+      <div class="satellite-content reverse reveal">
+        <div class="satellite-info">
+          <h2>Control Satelital</h2>
+          <p class="satellite-description">
+            Contamos con tecnologia de vanguardia para el monitoreo de nuestras unidades.
+          </p>
+          <ul class="satellite-list">
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Seguridad</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Control de tiempos</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Control de velocidad</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Control de carga</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Informacion a clientes</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Control de Operaciones</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Sistema de Reportes online</span>
+            </li>
+          </ul>
+        </div>
+        <div class="satellite-visual">
+          <div class="image-frame">
+            <img src="/images/equipo/equipo-briane-monitoreo.jpeg" alt="Control Satelital y Monitoreo GPS" class="featured-image" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios de Seguro -->
+  <section class="insurance-section section">
+    <div class="container">
+      <div class="insurance-content reveal">
+        <div class="insurance-info">
+          <h2>Servicios de Seguro en las Operaciones</h2>
+          <p class="insurance-description">
+            Para nuestras operaciones contamos con variadas opciones de seguros en nuestras operaciones.
+          </p>
+          <ul class="insurance-list">
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Proteccion integral de carga</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Responsabilidad civil</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Cobertura total</span>
+            </li>
+          </ul>
+        </div>
+        <div class="insurance-visual">
+          <div class="image-frame">
+            <img src="/images/maxima4.png" alt="Servicios de Seguro en las Operaciones" class="featured-image" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="policies-section section bg-gray-50">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <h2>Politicas Integradas</h2>
+        <p class="section-subtitle">
+          Nuestras politicas guian todas las actividades de la organizacion
+        </p>
+      </div>
+
+      <div class="policies-grid stagger-children">
+        {
+          policies.map((policy) => (
+            <div class="policy-item">
+              <h3>{policy.title}</h3>
+              <p>{policy.content}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="commitment-section section">
+    <div class="container">
+      <div class="commitment-content text-center reveal">
+        <h2>Mejora Continua</h2>
+        <p>
+          En BRIANE estamos comprometidos con la mejora continua de todos
+          nuestros procesos. Realizamos auditorias internas periodicas, medimos
+          indicadores de desempeño y buscamos constantemente oportunidades de
+          optimizacion.
+        </p>
+
+        <div class="improvement-stats">
+          <div class="improvement-item">
+            <span class="improvement-value">12</span>
+            <span class="improvement-label">Auditorias anuales</span>
+          </div>
+          <div class="improvement-item">
+            <span class="improvement-value">50+</span>
+            <span class="improvement-label">KPIs monitoreados</span>
+          </div>
+          <div class="improvement-item">
+            <span class="improvement-value">98%</span>
+            <span class="improvement-label">Cumplimiento objetivos</span>
+          </div>
+          <div class="improvement-item">
+            <span class="improvement-value">100%</span>
+            <span class="improvement-label">Personal capacitado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CallToAction
+    title="Calidad garantizada en cada servicio"
+    description="Confie en una empresa certificada internacionalmente."
+  />
+</PageLayout>
+
+<style>
+  /* Standards Intro Section */
+  .standards-intro-section {
+    background: #ffffff;
+    overflow: hidden;
+  }
+
+  .standards-intro-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .standards-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .standards-hero-grid {
+      grid-template-columns: 1.2fr 1fr;
+    }
+  }
+
+  .standards-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    background: rgba(250, 204, 21, 0.15);
+    color: var(--color-gray-900);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    margin-bottom: var(--spacing-lg);
+    border: 1px solid rgba(250, 204, 21, 0.5);
+  }
+
+  .standards-badge svg {
+    color: var(--color-primary);
+  }
+
+  .standards-title {
+    font-size: var(--text-3xl);
+    color: var(--color-gray-900);
+    line-height: 1.3;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  @media (min-width: 768px) {
+    .standards-title {
+      font-size: var(--text-4xl);
+    }
+  }
+
+  .highlight-yellow {
+    display: block;
+    color: var(--color-primary);
+  }
+
+  .standards-description {
+    font-size: var(--text-lg);
+    color: var(--color-gray-700);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .standards-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+  }
+
+  .stat-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    background: var(--color-gray-100);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    color: var(--color-gray-900);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    border: 1px solid var(--color-gray-200);
+  }
+
+  .stat-item svg {
+    color: var(--color-primary);
+  }
+
+  .standards-hero-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .iso-image-container {
+    max-width: 450px;
+    width: 100%;
+  }
+
+  .iso-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Operations Section */
+  .operations-section {
+    background-color: #facc15;
+  }
+
+  .operations-section .operations-info h2,
+  .operations-section .operations-description,
+  .operations-section .operations-list li {
+    color: var(--color-gray-900);
+  }
+
+  .operations-section .operations-list svg {
+    color: var(--color-gray-900);
+  }
+
+  /* Insurance Section */
+  .insurance-section {
+    background-color: #facc15;
+  }
+
+  .insurance-section .insurance-info h2,
+  .insurance-section .insurance-description {
+    color: var(--color-gray-900);
+  }
+
+  .insurance-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .insurance-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    color: var(--color-gray-900);
+    font-size: var(--text-base);
+  }
+
+  .insurance-list svg {
+    color: var(--color-gray-900);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .operations-content,
+  .satellite-content,
+  .insurance-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .operations-content,
+    .satellite-content,
+    .insurance-content {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .satellite-content.reverse {
+      direction: rtl;
+    }
+
+    .satellite-content.reverse > * {
+      direction: ltr;
+    }
+  }
+
+  .operations-info h2,
+  .satellite-info h2,
+  .insurance-info h2 {
+    font-size: var(--text-3xl);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .operations-description,
+  .satellite-description,
+  .insurance-description {
+    font-size: var(--text-lg);
+    color: var(--color-gray-700);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .operations-list,
+  .satellite-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .operations-list li,
+  .satellite-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    color: var(--color-gray-700);
+    font-size: var(--text-base);
+  }
+
+  .operations-list svg,
+  .satellite-list svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .operations-visual,
+  .satellite-visual,
+  .insurance-visual {
+    display: flex;
+    justify-content: center;
+  }
+
+  .visual-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 450px;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--color-gray-100), var(--color-gray-200));
+    border-radius: var(--radius-image);
+    color: var(--color-gray-400);
+    gap: var(--spacing-md);
+    border: 2px dashed var(--color-gray-300);
+  }
+
+  .placeholder-text {
+    font-size: var(--text-sm);
+    color: var(--color-gray-500);
+    font-weight: var(--font-medium);
+  }
+
+  /* Image Frame Styles */
+  .image-frame {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    border-radius: var(--radius-image);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
+  }
+
+  .image-frame:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  }
+
+  .featured-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s ease-out;
+  }
+
+  .image-frame:hover .featured-image {
+    transform: scale(1.05);
+  }
+
+  /* Insurance Features */
+  .insurance-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .insurance-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    background-color: var(--color-white);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-gray-200);
+  }
+
+  .insurance-section .insurance-item {
+    background-color: var(--color-gray-50);
+  }
+
+  .insurance-item svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .insurance-item span {
+    font-size: var(--text-base);
+    color: var(--color-gray-700);
+  }
+
+  .section-header {
+    margin-bottom: var(--spacing-3xl);
+  }
+
+  .section-header h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section-subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-gray-600);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .certifications-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  @media (min-width: 768px) {
+    .certifications-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .cert-card {
+    text-align: center;
+  }
+
+  .cert-badge {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-md);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: var(--font-bold);
+    font-size: var(--text-sm);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .cert-card h3 {
+    font-size: var(--text-lg);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .cert-description {
+    color: var(--color-gray-600);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .cert-scope {
+    font-size: var(--text-sm);
+    color: var(--color-gray-500);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-gray-100);
+  }
+
+  .cert-scope strong {
+    color: var(--color-gray-700);
+  }
+
+  .policies-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  @media (min-width: 1024px) {
+    .policies-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .policy-item {
+    padding: var(--spacing-xl);
+    background-color: var(--color-white);
+    border-radius: var(--radius-card);
+    border-left: 4px solid var(--color-primary);
+  }
+
+  .policy-item h3 {
+    font-size: var(--text-lg);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .policy-item p {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .commitment-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .commitment-content h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .commitment-content > p {
+    color: var(--color-gray-600);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .improvement-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  @media (min-width: 768px) {
+    .improvement-stats {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .improvement-item {
+    padding: var(--spacing-lg);
+    background-color: var(--color-gray-50);
+    border-radius: var(--radius-card);
+  }
+
+  .improvement-value {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: var(--text-3xl);
+    font-weight: var(--font-bold);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .improvement-label {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+  }
+</style>

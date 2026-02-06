@@ -1,0 +1,212 @@
+---
+import type { Service } from '../../types';
+import Button from './Button.astro';
+
+export interface Props {
+  id: string;
+  active?: boolean;
+  service: Service;
+}
+
+const { id, active = false, service } = Astro.props;
+---
+
+<div
+  role="tabpanel"
+  id={`panel-${id}`}
+  aria-labelledby={`tab-${id}`}
+  aria-hidden={!active}
+  class={`tab-panel ${active ? 'active' : ''}`}
+  tabindex="0"
+>
+  <div class="panel-content">
+    <div class="panel-info">
+      <h2 class="panel-title">{service.name}</h2>
+      <p class="panel-tagline">{service.shortDescription}</p>
+      <p class="panel-description">{service.description}</p>
+
+      <div class="panel-features">
+        <h3>Caracteristicas principales</h3>
+        <ul>
+          {
+            service.features.slice(0, 4).map((feature) => (
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span>{feature}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="panel-actions">
+        <Button href={`/servicios/${service.slug}`} variant="primary">
+          Ver mas detalles
+        </Button>
+        <Button href="/contactenos" variant="outline">
+          Solicitar cotizacion
+        </Button>
+      </div>
+    </div>
+
+    <div class="panel-visual">
+      {
+        service.id === 'supervan' ? (
+          <div class="visual-image">
+            <img src="/images/servicios/supervan-bg.png" alt="SUPERVAN - Transporte de carga" loading="lazy" />
+          </div>
+        ) : (
+          <div class="visual-image">
+            <img src="/images/servicios/almacenes-bg.png" alt="ALMACENES DIEF - Almacenamiento" loading="lazy" />
+          </div>
+        )
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .tab-panel {
+    display: none;
+    animation: fadeIn var(--transition-base) ease-out;
+  }
+
+  .tab-panel.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .panel-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .panel-content {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .panel-title {
+    font-size: var(--text-3xl);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .panel-tagline {
+    font-size: var(--text-lg);
+    color: var(--color-gray-600);
+    font-weight: var(--font-medium);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .panel-description {
+    color: var(--color-gray-700);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .panel-features {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .panel-features h3 {
+    font-size: var(--text-lg);
+    margin-bottom: var(--spacing-md);
+    color: var(--color-gray-900);
+  }
+
+  .panel-features ul {
+    display: grid;
+    gap: var(--spacing-sm);
+  }
+
+  .panel-features li {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--color-gray-700);
+  }
+
+  .panel-features svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .panel-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+  }
+
+  .panel-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .visual-image {
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+    border-radius: var(--radius-image);
+  }
+
+  .visual-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .visual-image:hover img {
+    transform: scale(1.03);
+  }
+
+  .visual-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--color-gray-100), var(--color-gray-200));
+    border-radius: var(--radius-image);
+    color: var(--color-gray-400);
+  }
+
+  @media (max-width: 1023px) {
+    .panel-visual {
+      order: -1;
+    }
+
+    .visual-placeholder {
+      max-width: 300px;
+    }
+  }
+</style>

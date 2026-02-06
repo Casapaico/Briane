@@ -1,0 +1,409 @@
+---
+const benefits = [
+  {
+    icon: 'monitoring',
+    title: 'Monitoreo 24/7',
+    description: 'Seguimiento en tiempo real de sus envíos con tecnología GPS avanzada y alertas automáticas.',
+    highlight: 'Visibilidad Total',
+  },
+  {
+    icon: 'security',
+    title: 'Seguridad Garantizada',
+    description: 'Protocolos de seguridad certificados, videovigilancia y control de acceso en todas nuestras operaciones.',
+    highlight: 'Certificado ISO',
+  },
+  {
+    icon: 'digital',
+    title: '100% Digitalizado',
+    description: 'Plataforma digital integrada para gestión de pedidos, documentación y reportes en línea.',
+    highlight: 'Sin Papeles',
+  },
+  {
+    icon: 'speed',
+    title: 'Respuesta Rápida',
+    description: 'Tiempos de respuesta optimizados y coordinación eficiente para maximizar su productividad.',
+    highlight: '< 24 Horas',
+  },
+];
+---
+
+<section class="value-proposition">
+  <div class="container">
+    <div class="vp-header animate-on-scroll">
+      <span class="vp-badge">Por qué elegirnos</span>
+      <h2 class="vp-title">Logística Inteligente para <span>su Negocio</span></h2>
+      <p class="vp-subtitle">
+        Combinamos experiencia, tecnología y compromiso para ofrecer soluciones logísticas que impulsan el éxito de su empresa.
+      </p>
+    </div>
+  </div>
+
+  <!-- Sección con imagen de fondo -->
+  <div class="vp-background-section">
+    <div class="vp-bg-image" aria-hidden="true">
+      <img src="/images/soluciones/solu7.png" alt="" loading="lazy" />
+      <div class="vp-bg-overlay"></div>
+    </div>
+
+    <div class="container">
+    <div class="vp-grid">
+      {benefits.map((benefit, index) => (
+        <div class="vp-card animate-on-scroll" style={`--delay: ${index * 0.1}s`}>
+          <div class="vp-card-highlight">{benefit.highlight}</div>
+          <div class="vp-card-icon">
+            {benefit.icon === 'monitoring' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z"/>
+                <circle cx="12" cy="9" r="2.5"/>
+              </svg>
+            )}
+            {benefit.icon === 'security' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+              </svg>
+            )}
+            {benefit.icon === 'digital' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H3V4h18v10z"/>
+              </svg>
+            )}
+            {benefit.icon === 'speed' && (
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
+              </svg>
+            )}
+          </div>
+          <h3 class="vp-card-title">{benefit.title}</h3>
+          <p class="vp-card-description">{benefit.description}</p>
+          <div class="vp-card-decoration"></div>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA Banner -->
+    <div class="vp-cta animate-on-scroll">
+      <div class="vp-cta-content">
+        <h3>Descubra cómo podemos optimizar su logística</h3>
+        <p>Nuestro equipo está listo para diseñar una solución personalizada para su empresa.</p>
+      </div>
+      <a href="/contactenos" class="vp-cta-button">
+        <span>Solicitar Asesoría Gratuita</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .value-proposition {
+    padding: var(--spacing-4xl) 0 0 0;
+    background: var(--color-white);
+  }
+
+  /* Sección con imagen de fondo */
+  .vp-background-section {
+    position: relative;
+    padding: var(--spacing-3xl) 0 var(--spacing-4xl);
+    margin-top: var(--spacing-xl);
+  }
+
+  .vp-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .vp-bg-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .vp-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(26, 26, 26, 0.85) 0%,
+      rgba(26, 26, 26, 0.75) 50%,
+      rgba(227, 39, 29, 0.3) 100%
+    );
+  }
+
+  .vp-background-section .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .vp-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto var(--spacing-3xl);
+  }
+
+  .vp-badge {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: linear-gradient(135deg, rgba(227, 39, 29, 0.1), rgba(227, 39, 29, 0.05));
+    color: var(--color-primary);
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .vp-title {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+  }
+
+  .vp-title span {
+    color: var(--color-primary);
+  }
+
+  .vp-subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-gray-600);
+    line-height: 1.7;
+  }
+
+  .vp-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-3xl);
+  }
+
+  @media (min-width: 640px) {
+    .vp-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .vp-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .vp-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: var(--spacing-xl);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow: hidden;
+  }
+
+  .vp-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .vp-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    background: var(--color-white);
+  }
+
+  .vp-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .vp-card-highlight {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: var(--color-secondary);
+    color: var(--color-gray-900);
+    font-size: var(--text-xs);
+    font-weight: var(--font-bold);
+  }
+
+  .vp-card-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(227, 39, 29, 0.1), rgba(227, 39, 29, 0.05));
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-primary);
+    transition: all 0.4s ease;
+  }
+
+  .vp-card:hover .vp-card-icon {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: var(--color-white);
+  }
+
+  .vp-card-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .vp-card-title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .vp-card-description {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .vp-card-decoration {
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, rgba(227, 39, 29, 0.05), transparent);
+    border-radius: 50%;
+    transition: all 0.4s ease;
+  }
+
+  .vp-card:hover .vp-card-decoration {
+    transform: scale(1.5);
+  }
+
+  /* CTA Banner */
+  .vp-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xl);
+    padding: var(--spacing-2xl);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vp-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.3;
+  }
+
+  @media (min-width: 768px) {
+    .vp-cta {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+  }
+
+  .vp-cta-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .vp-cta-content h3 {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--color-white);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .vp-cta-content p {
+    font-size: var(--text-base);
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+  }
+
+  .vp-cta-button {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-xl);
+    background: var(--color-secondary);
+    color: var(--color-gray-900);
+    font-weight: var(--font-bold);
+    text-decoration: none;
+    transition: all var(--transition-base);
+    white-space: nowrap;
+  }
+
+  .vp-cta-button:hover {
+    background: var(--color-white);
+    transform: translateX(5px);
+  }
+
+  .vp-cta-button svg {
+    transition: transform var(--transition-base);
+  }
+
+  .vp-cta-button:hover svg {
+    transform: translateX(5px);
+  }
+
+  /* Animations */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition-delay: var(--delay, 0s);
+  }
+
+  .animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -50px 0px',
+    threshold: 0.1
+  };
+
+  const animateObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animated');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.value-proposition .animate-on-scroll').forEach((el) => {
+    animateObserver.observe(el);
+  });
+</script>

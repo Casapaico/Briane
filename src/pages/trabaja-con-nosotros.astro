@@ -1,0 +1,1057 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const equipoImages = [
+  { src: '/images/equipo/equipo-briane.jpeg', alt: 'Equipo BRIANE', nombre: 'Carlos Mendoza', comentario: 'Orgulloso de ser parte de esta gran familia' },
+  { src: '/images/equipo/equipo-briane2.jpeg', alt: 'Colaboradores BRIANE', nombre: 'María García', comentario: 'Aquí crecemos juntos cada día' },
+  { src: '/images/equipo/equipo-briane3.jpeg', alt: 'Profesionales BRIANE', nombre: 'José Pérez', comentario: 'El mejor equipo de trabajo' },
+  { src: '/images/equipo/equipo-briane4.jpeg', alt: 'Equipo de trabajo', nombre: 'Ana López', comentario: 'Comprometidos con la excelencia' },
+  { src: '/images/equipo/equipo-briane-operarios.jpeg', alt: 'Operarios BRIANE', nombre: 'Luis Rodríguez', comentario: 'Profesionales en cada entrega' },
+  { src: '/images/equipo/equipo-briane-RRHH.jpeg', alt: 'Recursos Humanos', nombre: 'Patricia Sánchez', comentario: 'Cuidamos a nuestra gente' },
+];
+
+const eventosImages = [
+  { src: '/images/eventos/eventos1.jpeg', alt: 'Evento BRIANE 1' },
+  { src: '/images/eventos/eventos2.jpeg', alt: 'Evento BRIANE 2' },
+  { src: '/images/eventos/eventos3.jpeg', alt: 'Evento BRIANE 3' },
+  { src: '/images/eventos/eventos4.jpeg', alt: 'Evento BRIANE 4' },
+  { src: '/images/eventos/eventos5.jpeg', alt: 'Evento BRIANE 5' },
+];
+---
+
+<BaseLayout
+  title="Trabaja con Nosotros"
+  description="Unete al equipo BRIANE. Somos 300 colaboradores comprometidos con el transporte de carga. Conoce nuestras ofertas laborales."
+>
+  <!-- Hero con imagen de fondo -->
+  <section class="hero-trabajo">
+    <img src="/images/equipo-briane.jpeg" alt="Equipo BRIANE" class="hero-image" />
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="hero-content">
+        <h1>UNETE AL EQUIPO BRIANE</h1>
+        <p class="hero-subtitle">Somos los 300 colaboradores que hacen que cumplan tus pedidos a tiempo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galeria del equipo con scroll dinamico -->
+  <section class="equipo-gallery-section section">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <h2>Conoce a Nuestro Equipo</h2>
+        <p class="section-subtitle">Profesionales comprometidos con la excelencia</p>
+      </div>
+      <div class="equipo-scroll-wrapper">
+        <div class="equipo-scroll-gallery">
+          {equipoImages.map((img) => (
+            <div class="equipo-gallery-item">
+              <img src={img.src} alt={img.alt} loading="lazy" />
+              <div class="equipo-info-overlay">
+                <h4 class="equipo-nombre">{img.nombre}</h4>
+                <p class="equipo-comentario">"{img.comentario}"</p>
+              </div>
+            </div>
+          ))}
+          {equipoImages.map((img) => (
+            <div class="equipo-gallery-item">
+              <img src={img.src} alt={img.alt} loading="lazy" />
+              <div class="equipo-info-overlay">
+                <h4 class="equipo-nombre">{img.nombre}</h4>
+                <p class="equipo-comentario">"{img.comentario}"</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Por que elegir BRIANE -->
+  <section class="porque-section section">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <h2>¿Por que elegir BRIANE?</h2>
+        <p class="section-subtitle">Profesional del Transporte</p>
+      </div>
+
+      <div class="benefits-grid stagger-children">
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+          </div>
+          <h3>Planilla desde el primer dia</h3>
+          <p>Ingresas a planillas desde el primer dia de trabajo.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="3" width="15" height="13"></rect>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+              <circle cx="5.5" cy="18.5" r="2.5"></circle>
+              <circle cx="18.5" cy="18.5" r="2.5"></circle>
+            </svg>
+          </div>
+          <h3>Mayor carga transportada</h3>
+          <p>Movemos mayor carga que la competencia.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"></line>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <h3>Viaticos asegurados</h3>
+          <p>Contamos con viaticos asegurados en cada jornada.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </div>
+          <h3>Reconocimiento por esfuerzo</h3>
+          <p>Alto reconocimiento por tu esfuerzo generando atractivos ingresos adicionales.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+              <polyline points="17 6 23 6 23 12"></polyline>
+            </svg>
+          </div>
+          <h3>Linea de carrera</h3>
+          <p>Contamos con linea de carrera para poder asegurar tu crecimiento profesional.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+          </div>
+          <h3>Capacitacion constante</h3>
+          <p>Capacitacion constante para tu desarrollo profesional.</p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+              <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+          </div>
+          <h3>Mayores ingresos</h3>
+          <p>Mayores ingresos asegurados gracias a nuestro almacen que asegura la carga.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Juntos con nuestra Comunidad -->
+  <section class="comunidad-section section">
+    <div class="container">
+      <div class="comunidad-content reveal">
+        <div class="comunidad-info">
+          <h2>Juntos con nuestra Comunidad</h2>
+          <p class="comunidad-intro">
+            Somos conscientes que para poder crecer debemos de vivir en comunidad.
+          </p>
+          <ul class="comunidad-list">
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Desplegamos actividades en conjunto con la comunidad que permita encontrar un equilibrio entre empresa y comunidad.</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Brindamos empleo formal para las comunidades donde nos encontramos.</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Nos capacitamos constantemente para poder desarrollar proyectos con la comunidad.</span>
+            </li>
+          </ul>
+        </div>
+        <div class="comunidad-visual">
+          <div class="comunidad-carousel">
+            <div class="comunidad-images">
+              <img src="/images/equipo/equipo-briane-ingeniera.jpeg" alt="Ingeniera BRIANE" class="comunidad-img active" loading="lazy" />
+              <img src="/images/equipo/equipo-briane-RRHH.jpeg" alt="Recursos Humanos" class="comunidad-img" loading="lazy" />
+            </div>
+            <div class="comunidad-nav">
+              <button class="comunidad-btn prev" aria-label="Imagen anterior">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <button class="comunidad-btn next" aria-label="Imagen siguiente">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galeria de Eventos con efecto dinamico -->
+  <section class="eventos-section section">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <h2>Nuestros Eventos</h2>
+        <p class="section-subtitle">Momentos que nos unen como familia BRIANE</p>
+      </div>
+      <div class="eventos-grid stagger-children">
+        {eventosImages.map((img, index) => (
+          <div class={`evento-item evento-item-${index + 1}`}>
+            <img src={img.src} alt={img.alt} loading="lazy" />
+            <div class="evento-overlay"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Ofertas Laborales -->
+  <section class="ofertas-section section">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <h2>Ofertas Laborales</h2>
+      </div>
+
+      <div class="ofertas-grid stagger-children">
+        <div class="oferta-card">
+          <div class="oferta-header">
+            <h3>Puesto</h3>
+          </div>
+          <div class="oferta-body">
+            <h4>Conductor de Semi Trailer - Prueba</h4>
+            <a href="#aplicar" class="apply-btn">APLICAR</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulario Unete a Nosotros -->
+  <section class="aplicar-section section bg-gray-50" id="aplicar">
+    <div class="container">
+      <div class="aplicar-content">
+        <div class="aplicar-info reveal">
+          <h2>Unete a Nosotros</h2>
+          <p>
+            Buscamos tu talento. Si deseas ser parte de nuestro equipo, envia tu curriculum online si quieres trabajar:
+          </p>
+        </div>
+        <div class="aplicar-form reveal-right">
+          <form class="cv-form" id="cv-form">
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" required />
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" required />
+              </div>
+              <div class="form-group">
+                <label for="ciudad">Ciudad</label>
+                <input type="text" id="ciudad" name="ciudad" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="puesto">Puesto de Trabajo</label>
+              <select id="puesto" name="puesto" required>
+                <option value="">Seleccionar puesto</option>
+                <option value="Conductor de Semi Trailer">Conductor de Semi Trailer</option>
+                <option value="Conductor de Trailer">Conductor de Trailer</option>
+                <option value="Asistente de Almacen">Asistente de Almacen</option>
+                <option value="Coordinador de Operaciones">Coordinador de Operaciones</option>
+                <option value="Otro">Otro</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="cv">Adjuntar CV</label>
+              <div class="file-upload">
+                <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required />
+                <span class="file-label" id="file-label">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                  </svg>
+                  <span id="file-name">Seleccionar archivo</span>
+                </span>
+              </div>
+              <p class="cv-note">* El CV deberás adjuntarlo directamente en WhatsApp</p>
+            </div>
+            <button type="submit" class="submit-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Enviar CV por WhatsApp
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero Section with Video */
+  .hero-trabajo {
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: var(--header-height);
+    overflow: hidden;
+  }
+
+  .hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .hero-trabajo .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-content {
+    text-align: center;
+    color: var(--color-white);
+    padding: var(--spacing-3xl) 0;
+  }
+
+  .hero-content h1 {
+    font-size: var(--text-5xl);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-white);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-subtitle {
+    font-size: var(--text-xl);
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0.95;
+    line-height: 1.6;
+  }
+
+  /* Equipo Gallery Section */
+  .equipo-gallery-section {
+    overflow: hidden;
+  }
+
+  .equipo-scroll-wrapper {
+    overflow: hidden;
+    padding: var(--spacing-xl) 0;
+  }
+
+  .equipo-scroll-gallery {
+    display: flex;
+    gap: var(--spacing-lg);
+    animation: scrollEquipo 30s linear infinite;
+    width: max-content;
+  }
+
+  .equipo-scroll-gallery:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes scrollEquipo {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .equipo-gallery-item {
+    position: relative;
+    flex: 0 0 300px;
+    height: 350px;
+    border-radius: var(--radius-image);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, flex 0.4s ease;
+    cursor: pointer;
+  }
+
+  .equipo-gallery-item:hover {
+    transform: scale(1.15);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+  }
+
+  .equipo-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .equipo-gallery-item:hover img {
+    transform: scale(1.1);
+  }
+
+  .equipo-info-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-lg);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.6) 50%, transparent 100%);
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+  }
+
+  .equipo-gallery-item:hover .equipo-info-overlay {
+    transform: translateY(0);
+  }
+
+  .equipo-nombre {
+    font-size: var(--text-lg);
+    font-weight: var(--font-bold);
+    color: var(--color-white);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .equipo-comentario {
+    font-size: var(--text-sm);
+    color: rgba(255, 255, 255, 0.9);
+    font-style: italic;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Comunidad Carousel */
+  .comunidad-carousel {
+    position: relative;
+    width: 100%;
+  }
+
+  .comunidad-images {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: visible;
+  }
+
+  .comunidad-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-image);
+    box-shadow: var(--shadow-lg);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.6s ease,
+                transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.6s ease;
+    pointer-events: none;
+  }
+
+  .comunidad-img.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .comunidad-img.active:hover {
+    z-index: 20;
+    transform: scale(1.3) translateX(-15%);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.35);
+  }
+
+  @media (max-width: 1024px) {
+    .comunidad-img.active:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  .comunidad-nav {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+  }
+
+  .comunidad-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background-color: var(--color-gray-900);
+    color: var(--color-white);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .comunidad-btn:hover {
+    background-color: var(--color-primary);
+    transform: scale(1.1);
+  }
+
+  /* Eventos Grid */
+  .eventos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 200px);
+    gap: var(--spacing-md);
+  }
+
+  @media (min-width: 768px) {
+    .eventos-grid {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 250px);
+    }
+  }
+
+  .evento-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-image);
+    box-shadow: var(--shadow-md);
+  }
+
+  .evento-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease-out;
+  }
+
+  .evento-item:hover img {
+    transform: scale(1.1);
+  }
+
+  .evento-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(227, 39, 29, 0.6) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+  }
+
+  .evento-item:hover .evento-overlay {
+    opacity: 1;
+  }
+
+  @media (min-width: 768px) {
+    .evento-item-1 {
+      grid-row: span 2;
+    }
+  }
+
+  /* Section Headers */
+  .section-header {
+    margin-bottom: var(--spacing-3xl);
+  }
+
+  .section-header h2 {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-gray-900);
+  }
+
+  .section-subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-primary);
+    font-weight: var(--font-semibold);
+  }
+
+  /* Benefits Grid */
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  @media (min-width: 640px) {
+    .benefits-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .benefits-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .benefit-card {
+    text-align: center;
+    padding: var(--spacing-xl);
+    background-color: var(--color-white);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-gray-200);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .benefit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .benefit-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--radius-card);
+    margin: 0 auto var(--spacing-md);
+  }
+
+  .benefit-card h3 {
+    font-size: var(--text-base);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .benefit-card p {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Comunidad Section */
+  .comunidad-section {
+    background-color: #facc15;
+    overflow: visible;
+  }
+
+  .comunidad-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .comunidad-content {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .comunidad-info h2 {
+    font-size: var(--text-3xl);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .comunidad-intro {
+    font-size: var(--text-lg);
+    color: var(--color-gray-700);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .comunidad-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .comunidad-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    color: var(--color-gray-700);
+    font-size: var(--text-base);
+    line-height: 1.7;
+  }
+
+  .comunidad-list svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .comunidad-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .comunidad-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: var(--color-white);
+    border-radius: 50%;
+  }
+
+  /* Ofertas Section */
+  .ofertas-grid {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .oferta-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+
+  .oferta-header {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .oferta-header h3 {
+    font-size: var(--text-lg);
+    color: var(--color-white);
+    margin: 0;
+  }
+
+  .oferta-body {
+    padding: var(--spacing-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-md);
+  }
+
+  .oferta-body h4 {
+    font-size: var(--text-base);
+    color: var(--color-gray-900);
+    margin: 0;
+  }
+
+  .apply-btn {
+    display: inline-block;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: var(--font-semibold);
+    font-size: var(--text-sm);
+    border-radius: var(--radius-md);
+    transition: background-color var(--transition-fast);
+    text-decoration: none;
+  }
+
+  .apply-btn:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+  /* Aplicar Section */
+  .aplicar-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+    align-items: start;
+  }
+
+  @media (min-width: 1024px) {
+    .aplicar-content {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .aplicar-info h2 {
+    font-size: var(--text-3xl);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .aplicar-info p {
+    font-size: var(--text-lg);
+    color: var(--color-gray-700);
+    line-height: 1.7;
+  }
+
+  .aplicar-form {
+    background-color: var(--color-white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-md);
+  }
+
+  .cv-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+  }
+
+  @media (max-width: 640px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .cv-form label {
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-gray-700);
+  }
+
+  .cv-form input,
+  .cv-form select {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    transition: border-color var(--transition-fast);
+  }
+
+  .cv-form input:focus,
+  .cv-form select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+  }
+
+  .file-upload {
+    position: relative;
+  }
+
+  .file-upload input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  .file-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    border: 2px dashed var(--color-gray-300);
+    border-radius: var(--radius-md);
+    color: var(--color-gray-600);
+    font-size: var(--text-sm);
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+  }
+
+  .file-upload:hover .file-label {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .cv-note {
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+    margin-top: var(--spacing-xs);
+    font-style: italic;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: var(--spacing-md);
+    background-color: #25D366;
+    color: var(--color-white);
+    font-weight: var(--font-semibold);
+    font-size: var(--text-base);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    margin-top: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+  }
+
+  .submit-btn:hover {
+    background-color: #128C7E;
+    transform: translateY(-2px);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-content h1 {
+      font-size: var(--text-3xl);
+    }
+
+    .hero-subtitle {
+      font-size: var(--text-lg);
+    }
+
+    .section-header h2,
+    .comunidad-info h2,
+    .aplicar-info h2 {
+      font-size: var(--text-2xl);
+    }
+
+    .oferta-body {
+      flex-direction: column;
+      text-align: center;
+    }
+
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Comunidad Carousel
+    const comunidadImages = document.querySelectorAll('.comunidad-img');
+    const prevBtn = document.querySelector('.comunidad-btn.prev');
+    const nextBtn = document.querySelector('.comunidad-btn.next');
+    let currentIndex = 0;
+
+    const showImage = (index: number) => {
+      comunidadImages.forEach((img, i) => {
+        img.classList.toggle('active', i === index);
+      });
+    };
+
+    if (prevBtn && nextBtn) {
+      prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + comunidadImages.length) % comunidadImages.length;
+        showImage(currentIndex);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % comunidadImages.length;
+        showImage(currentIndex);
+      });
+    }
+
+    // CV Form - WhatsApp Integration
+    const cvForm = document.getElementById('cv-form') as HTMLFormElement;
+    const fileInput = document.getElementById('cv') as HTMLInputElement;
+    const fileNameSpan = document.getElementById('file-name');
+
+    // Show selected file name
+    fileInput?.addEventListener('change', () => {
+      if (fileInput.files && fileInput.files.length > 0) {
+        const fileName = fileInput.files[0].name;
+        if (fileNameSpan) {
+          fileNameSpan.textContent = fileName;
+        }
+      }
+    });
+
+    // Handle form submission
+    cvForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nombre = (document.getElementById('nombre') as HTMLInputElement).value;
+      const email = (document.getElementById('email') as HTMLInputElement).value;
+      const telefono = (document.getElementById('telefono') as HTMLInputElement).value;
+      const ciudad = (document.getElementById('ciudad') as HTMLInputElement).value;
+      const puesto = (document.getElementById('puesto') as HTMLSelectElement).value;
+      const cvFile = fileInput.files?.[0];
+
+      if (!cvFile) {
+        alert('Por favor, selecciona tu CV antes de enviar.');
+        return;
+      }
+
+      // Build WhatsApp message
+      const message = `*POSTULACIÓN LABORAL - BRIANE*
+
+*Datos del Postulante:*
+━━━━━━━━━━━━━━━━━━
+👤 *Nombre:* ${nombre}
+📧 *Email:* ${email}
+📱 *Teléfono:* ${telefono}
+🏙️ *Ciudad:* ${ciudad}
+💼 *Puesto:* ${puesto}
+📎 *CV:* ${cvFile.name}
+━━━━━━━━━━━━━━━━━━
+
+_Por favor, adjunte su CV en este chat._`;
+
+      // Encode message for URL
+      const encodedMessage = encodeURIComponent(message);
+
+      // WhatsApp number (Peru)
+      const whatsappNumber = '51936636750';
+
+      // Create WhatsApp URL
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+      // Open WhatsApp in new tab
+      window.open(whatsappUrl, '_blank');
+    });
+
+    // Reveal animations on scroll
+    const revealElements = document.querySelectorAll('.reveal, .stagger-children');
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, observerOptions);
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  });
+</script>

@@ -1,0 +1,276 @@
+---
+const academiaImages = [
+  { src: '/images/academia/academia-Briane.jpeg', alt: 'Academia BRIANE' },
+  { src: '/images/academia/academia-Briane2.jpeg', alt: 'Capacitacion BRIANE' },
+  { src: '/images/academia/academia-Briane3.jpeg', alt: 'Formacion profesional' },
+  { src: '/images/academia/academia-Briane4.jpeg', alt: 'Entrenamiento' },
+  { src: '/images/academia/academia-Briane5.jpeg', alt: 'Academia de conductores' },
+  { src: '/images/academia/academia-Briane6.jpeg', alt: 'Certificacion BRIANE' },
+];
+
+const equipoHighlights = [
+  { src: '/images/equipo/equipo-briane.jpeg', alt: 'Equipo BRIANE', title: 'Nuestro Equipo' },
+  { src: '/images/equipo/equipo-briane-monitoreo.jpeg', alt: 'Centro de Monitoreo', title: 'Centro de Monitoreo' },
+  { src: '/images/equipo/equipo-briane-operarios.jpeg', alt: 'Operarios', title: 'Operarios Calificados' },
+];
+---
+
+<section class="academia-section section">
+  <div class="container">
+    <div class="section-header text-center reveal">
+      <span class="section-badge">Formacion Continua</span>
+      <h2>Academia BRIANE</h2>
+      <p class="section-subtitle">Capacitamos constantemente a nuestro equipo para brindar el mejor servicio</p>
+    </div>
+
+    <!-- Video destacado -->
+    <div class="academia-video-container reveal">
+      <video autoplay muted loop playsinline class="academia-video">
+        <source src="/videos/academia-Briane-video1.mp4" type="video/mp4" />
+      </video>
+      <div class="video-overlay-content">
+        <h3>Formacion de Excelencia</h3>
+        <p>Nuestros conductores reciben capacitacion permanente</p>
+      </div>
+    </div>
+
+    <!-- Galeria con scroll dinamico -->
+    <div class="academia-gallery">
+      {academiaImages.map((img) => (
+        <div class="academia-item">
+          <img src={img.src} alt={img.alt} loading="lazy" />
+        </div>
+      ))}
+    </div>
+
+    <!-- Equipo Highlights -->
+    <div class="equipo-highlights stagger-children">
+      {equipoHighlights.map((item) => (
+        <div class="equipo-highlight-card">
+          <div class="highlight-image">
+            <img src={item.src} alt={item.alt} loading="lazy" />
+          </div>
+          <div class="highlight-content">
+            <h4>{item.title}</h4>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .academia-section {
+    background: linear-gradient(180deg, var(--color-white) 0%, var(--color-gray-50) 100%);
+    overflow: hidden;
+  }
+
+  .section-header {
+    margin-bottom: var(--spacing-3xl);
+  }
+
+  .section-badge {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-md);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    border-radius: var(--radius-full);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section-header h2 {
+    font-size: var(--text-4xl);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .section-subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-gray-600);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Video Container */
+  .academia-video-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    border-radius: var(--radius-image);
+    overflow: hidden;
+    margin-bottom: var(--spacing-2xl);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .academia-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-overlay-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-2xl);
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+    color: var(--color-white);
+  }
+
+  .video-overlay-content h3 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-white);
+  }
+
+  .video-overlay-content p {
+    font-size: var(--text-base);
+    opacity: 0.9;
+    margin: 0;
+  }
+
+  /* Academia Gallery */
+  .academia-gallery {
+    display: flex;
+    gap: var(--spacing-md);
+    overflow-x: auto;
+    padding: var(--spacing-md) 0;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin-bottom: var(--spacing-3xl);
+  }
+
+  .academia-gallery::-webkit-scrollbar {
+    display: none;
+  }
+
+  .academia-item {
+    flex: 0 0 280px;
+    height: 200px;
+    scroll-snap-align: start;
+    border-radius: var(--radius-image);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .academia-item:hover {
+    transform: scale(1.03) translateY(-5px);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .academia-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease-out;
+  }
+
+  .academia-item:hover img {
+    transform: scale(1.1);
+  }
+
+  /* Equipo Highlights */
+  .equipo-highlights {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  @media (min-width: 768px) {
+    .equipo-highlights {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .equipo-highlight-card {
+    position: relative;
+    border-radius: var(--radius-image);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    aspect-ratio: 4/3;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .equipo-highlight-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .highlight-image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .highlight-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease-out;
+  }
+
+  .equipo-highlight-card:hover .highlight-image img {
+    transform: scale(1.1);
+  }
+
+  .highlight-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-lg);
+    background: linear-gradient(to top, rgba(227, 39, 29, 0.9) 0%, transparent 100%);
+  }
+
+  .highlight-content h4 {
+    color: var(--color-white);
+    font-size: var(--text-lg);
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  }
+
+  @media (max-width: 768px) {
+    .section-header h2 {
+      font-size: var(--text-3xl);
+    }
+
+    .academia-video-container {
+      height: 280px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const gallery = document.querySelector('.academia-gallery');
+
+    if (gallery) {
+      let scrollDir = 1;
+      let interval;
+
+      const startScroll = () => {
+        interval = setInterval(() => {
+          gallery.scrollLeft += scrollDir * 0.8;
+
+          if (gallery.scrollLeft >= gallery.scrollWidth - gallery.clientWidth - 5) {
+            scrollDir = -1;
+          } else if (gallery.scrollLeft <= 5) {
+            scrollDir = 1;
+          }
+        }, 25);
+      };
+
+      const stopScroll = () => clearInterval(interval);
+
+      gallery.addEventListener('mouseenter', stopScroll);
+      gallery.addEventListener('mouseleave', startScroll);
+      gallery.addEventListener('touchstart', stopScroll);
+      gallery.addEventListener('touchend', () => setTimeout(startScroll, 2000));
+
+      startScroll();
+    }
+  });
+</script>

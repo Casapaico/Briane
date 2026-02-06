@@ -1,0 +1,403 @@
+---
+export interface Props {
+  showService?: boolean;
+}
+
+const { showService = true } = Astro.props;
+---
+
+<form class="contact-form" id="contact-form" novalidate>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="name">Nombre completo *</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        required
+        placeholder="Ingrese su nombre"
+        autocomplete="name"
+      />
+      <span class="error-message" aria-live="polite"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Correo electrónico *</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+        placeholder="correo@ejemplo.com"
+        autocomplete="email"
+      />
+      <span class="error-message" aria-live="polite"></span>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label for="phone">Teléfono *</label>
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        required
+        placeholder="+51 999 999 999"
+        autocomplete="tel"
+      />
+      <span class="error-message" aria-live="polite"></span>
+    </div>
+
+    <div class="form-group">
+      <label for="company">Empresa</label>
+      <input
+        type="text"
+        id="company"
+        name="company"
+        placeholder="Nombre de su empresa"
+        autocomplete="organization"
+      />
+    </div>
+  </div>
+
+  {
+    showService && (
+      <div class="form-group">
+        <label for="service">Servicio de interes</label>
+        <select id="service" name="service">
+          <option value="">Seleccione un servicio</option>
+          <option value="supervan">SUPERVAN - Transporte Logistico</option>
+          <option value="almacenes">Almacenes</option>
+          <option value="ambos">Ambos servicios</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+    )
+  }
+
+  <div class="form-group">
+    <label for="message">Mensaje *</label>
+    <textarea
+      id="message"
+      name="message"
+      rows="5"
+      required
+      placeholder="Describanos su consulta o requerimiento..."
+    ></textarea>
+    <span class="error-message" aria-live="polite"></span>
+  </div>
+
+  <div class="form-group form-checkbox">
+    <input type="checkbox" id="privacy" name="privacy" required />
+    <label for="privacy">
+      Acepto la <a href="/politicas" target="_blank">politica de privacidad</a> *
+    </label>
+    <span class="error-message" aria-live="polite"></span>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary btn-lg">
+      <span class="btn-text">Enviar mensaje</span>
+      <span class="btn-loading" aria-hidden="true">
+        <svg
+          class="spinner"
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+        </svg>
+      </span>
+    </button>
+  </div>
+
+  <div class="form-message" aria-live="polite"></div>
+</form>
+
+<style>
+  .contact-form {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  @media (min-width: 640px) {
+    .form-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .form-group {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: var(--font-medium);
+    color: var(--color-gray-700);
+    font-size: var(--text-sm);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    color: var(--color-gray-800);
+    background-color: var(--color-white);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(227, 39, 29, 0.1);
+  }
+
+  .form-group input.error,
+  .form-group select.error,
+  .form-group textarea.error {
+    border-color: #dc2626;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--color-gray-400);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-checkbox {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  .form-checkbox input {
+    width: auto;
+    margin-top: 4px;
+  }
+
+  .form-checkbox label {
+    flex: 1;
+    margin-bottom: 0;
+    font-weight: var(--font-normal);
+  }
+
+  .form-checkbox a {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .error-message {
+    display: block;
+    font-size: var(--text-sm);
+    color: #dc2626;
+    margin-top: var(--spacing-xs);
+    min-height: 1.25rem;
+  }
+
+  .form-actions {
+    margin-top: var(--spacing-lg);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    font-family: var(--font-primary);
+    font-weight: var(--font-semibold);
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: var(--text-base);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-base);
+  }
+
+  .btn:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+  .btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .btn-loading {
+    display: none;
+  }
+
+  .btn.loading .btn-text {
+    display: none;
+  }
+
+  .btn.loading .btn-loading {
+    display: block;
+  }
+
+  .spinner {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .form-message {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    display: none;
+  }
+
+  .form-message.success {
+    display: block;
+    background-color: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+  }
+
+  .form-message.error {
+    display: block;
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitBtn = form?.querySelector('button[type="submit"]');
+  const formMessage = form?.querySelector('.form-message');
+
+  function validateEmail(email: string): boolean {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function validatePhone(phone: string): boolean {
+    return /^[\d\s\+\-\(\)]{9,}$/.test(phone);
+  }
+
+  function showError(input: HTMLInputElement | HTMLTextAreaElement, message: string) {
+    const errorEl = input.parentElement?.querySelector('.error-message');
+    if (errorEl) errorEl.textContent = message;
+    input.classList.add('error');
+  }
+
+  function clearError(input: HTMLInputElement | HTMLTextAreaElement) {
+    const errorEl = input.parentElement?.querySelector('.error-message');
+    if (errorEl) errorEl.textContent = '';
+    input.classList.remove('error');
+  }
+
+  function validateForm(): boolean {
+    let isValid = true;
+    const name = form.querySelector('#name') as HTMLInputElement;
+    const email = form.querySelector('#email') as HTMLInputElement;
+    const phone = form.querySelector('#phone') as HTMLInputElement;
+    const message = form.querySelector('#message') as HTMLTextAreaElement;
+    const privacy = form.querySelector('#privacy') as HTMLInputElement;
+
+    // Clear previous errors
+    [name, email, phone, message].forEach(clearError);
+
+    if (!name.value.trim()) {
+      showError(name, 'El nombre es requerido');
+      isValid = false;
+    }
+
+    if (!email.value.trim()) {
+      showError(email, 'El correo es requerido');
+      isValid = false;
+    } else if (!validateEmail(email.value)) {
+      showError(email, 'Ingrese un correo valido');
+      isValid = false;
+    }
+
+    if (!phone.value.trim()) {
+      showError(phone, 'El teléfono es requerido');
+      isValid = false;
+    } else if (!validatePhone(phone.value)) {
+      showError(phone, 'Ingrese un teléfono válido');
+      isValid = false;
+    }
+
+    if (!message.value.trim()) {
+      showError(message, 'El mensaje es requerido');
+      isValid = false;
+    }
+
+    if (!privacy.checked) {
+      const errorEl = privacy.parentElement?.querySelector('.error-message');
+      if (errorEl) errorEl.textContent = 'Debe aceptar la politica de privacidad';
+      isValid = false;
+    }
+
+    return isValid;
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) return;
+
+    submitBtn?.classList.add('loading');
+    (submitBtn as HTMLButtonElement).disabled = true;
+
+    // Simulate form submission
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    submitBtn?.classList.remove('loading');
+    (submitBtn as HTMLButtonElement).disabled = false;
+
+    if (formMessage) {
+      formMessage.textContent =
+        'Gracias por contactarnos. Nos comunicaremos con usted pronto.';
+      formMessage.classList.add('success');
+      formMessage.classList.remove('error');
+    }
+
+    form.reset();
+  });
+
+  // Real-time validation on blur
+  const inputs = form?.querySelectorAll('input, textarea');
+  inputs?.forEach((input) => {
+    input.addEventListener('blur', () => {
+      if (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement) {
+        clearError(input);
+      }
+    });
+  });
+</script>

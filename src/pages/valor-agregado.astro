@@ -1,0 +1,399 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Card from '../components/ui/Card.astro';
+import CallToAction from '../components/sections/CallToAction.astro';
+
+const valueProps = [
+  {
+    icon: 'technology',
+    title: 'Tecnología de Punta',
+    image: '/images/tecnologia.png',
+    description:
+      'Implementamos las últimas tecnologías en gestión logística, incluyendo sistemas WMS, GPS tracking y plataformas digitales de seguimiento.',
+    benefits: [
+      'Monitoreo GPS en tiempo real',
+      'Sistema WMS integrado',
+      'App de seguimiento para clientes',
+      'Reportes automatizados',
+    ],
+  },
+  {
+    icon: 'team',
+    title: 'Personal Capacitado',
+    image: '/images/personal_capacitado.png',
+    description:
+      'Nuestro equipo recibe capacitación continua en las mejores prácticas de la industria logística.',
+    benefits: [
+      'Certificaciones especializadas',
+      'Capacitación continua',
+      'Protocolo de atención al cliente',
+      'Experiencia comprobada',
+    ],
+  },
+  {
+    icon: 'security',
+    title: 'Seguridad Integral',
+    image: '/images/seguridad_integral.png',
+    description:
+      'Protegemos su mercadería con múltiples capas de seguridad física y digital.',
+    benefits: [
+      'Seguros de carga completos',
+      'Vigilancia 24/7',
+      'CCTV y control de acceso',
+      'Protocolos de emergencia',
+    ],
+  },
+  {
+    icon: 'flexibility',
+    title: 'Flexibilidad',
+    image: '/images/flexibilidad.png',
+    description:
+      'Nos adaptamos a sus necesidades específicas con soluciones personalizadas.',
+    benefits: [
+      'Horarios flexibles',
+      'Servicios a medida',
+      'Escalabilidad',
+      'Respuesta rápida',
+    ],
+  },
+];
+---
+
+<PageLayout
+  title="Valor Agregado"
+  description="Descubra los diferenciadores que hacen de BRIANE su mejor opción en logística. Tecnología, seguridad y servicio personalizado."
+  heroTitle="Nuestro Valor Agregado"
+  heroSubtitle="Lo que nos diferencia de la competencia"
+>
+  <section class="value-intro section">
+    <div class="container">
+      <div class="intro-content text-center reveal">
+        <p class="intro-text">
+          En BRIANE no solo ofrecemos servicios logísticos, sino soluciones
+          integrales que agregan valor real a su cadena de suministro. Nuestra
+          combinación de tecnología, experiencia y compromiso nos permite
+          superar las expectativas de nuestros clientes.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="value-grid-section section bg-gray-50">
+    <div class="container">
+      <div class="value-grid stagger-children">
+        {
+          valueProps.map((prop) => (
+            <Card variant="elevated" padding="lg" class="value-card">
+              <div class="value-card-image">
+                <img src={prop.image} alt={prop.title} />
+              </div>
+              <div class="value-icon">
+                {prop.icon === 'technology' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                    <line x1="8" y1="21" x2="16" y2="21" />
+                    <line x1="12" y1="17" x2="12" y2="21" />
+                  </svg>
+                )}
+                {prop.icon === 'team' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                )}
+                {prop.icon === 'security' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                )}
+                {prop.icon === 'flexibility' && (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="16 3 21 3 21 8" />
+                    <line x1="4" y1="20" x2="21" y2="3" />
+                    <polyline points="21 16 21 21 16 21" />
+                    <line x1="15" y1="15" x2="21" y2="21" />
+                    <line x1="4" y1="4" x2="9" y2="9" />
+                  </svg>
+                )}
+              </div>
+              <h3>{prop.title}</h3>
+              <p class="value-description">{prop.description}</p>
+              <ul class="value-benefits">
+                {prop.benefits.map((benefit) => (
+                  <li>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    {benefit}
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="commitment-section section">
+    <div class="container">
+      <div class="commitment-grid">
+        <video class="commitment-bg-video" autoplay muted loop playsinline>
+          <source src="/videos/videocamionmoviendo.mp4" type="video/mp4" />
+        </video>
+        <div class="commitment-overlay"></div>
+        <div class="commitment-content reveal">
+          <h2>Nuestro Compromiso</h2>
+          <p>
+            Nos comprometemos a brindar un servicio de excelencia que supere sus
+            expectativas. Cada cliente es único y merece una atención
+            personalizada que entienda sus necesidades específicas.
+          </p>
+          <ul class="commitment-list">
+            <li>Respuesta en menos de 24 horas</li>
+            <li>Cotizaciones transparentes sin costos ocultos</li>
+            <li>Seguimiento proactivo de envíos</li>
+            <li>Resolución rápida de incidencias</li>
+            <li>Mejora continua basada en feedback</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CallToAction
+    title="Experimente la diferencia BRIANE"
+    description="Contáctenos y descubra cómo podemos agregar valor a su operación logística."
+  />
+</PageLayout>
+
+<style>
+  .value-intro {
+    background-color: #facc15;
+  }
+
+  .intro-text {
+    font-size: var(--text-xl);
+    color: var(--color-gray-900, #1a1a1a);
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .value-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  @media (min-width: 768px) {
+    .value-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .value-card {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .value-card-image {
+    width: calc(100% + 2 * var(--spacing-lg, 1.5rem));
+    margin: calc(-1 * var(--spacing-lg, 1.5rem)) calc(-1 * var(--spacing-lg, 1.5rem)) 0;
+    overflow: hidden;
+    border-radius: var(--radius-card, 0.75rem) var(--radius-card, 0.75rem) 0 0;
+  }
+
+  .value-card-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .value-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--radius-card);
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .value-card h3 {
+    font-size: var(--text-xl);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .value-description {
+    color: var(--color-gray-600);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .value-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .value-benefits li {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: var(--text-sm);
+    color: var(--color-gray-700);
+  }
+
+  .value-benefits svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  .commitment-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+    overflow: hidden;
+    border-radius: var(--radius-image, 1rem);
+    padding: var(--spacing-2xl) var(--spacing-2xl) 6rem;
+  }
+
+  .commitment-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    z-index: 0;
+  }
+
+  .commitment-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+
+  .commitment-grid > .commitment-content,
+  .commitment-grid > .commitment-image {
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (min-width: 1024px) {
+    .commitment-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .commitment-content h2 {
+    font-size: var(--text-3xl);
+    color: var(--color-white, #fff);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .commitment-content > p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .commitment-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .commitment-list li {
+    position: relative;
+    padding-left: var(--spacing-lg);
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .commitment-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-primary);
+    border-radius: var(--radius-full);
+  }
+
+  .commitment-image .image-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-image);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+</style>

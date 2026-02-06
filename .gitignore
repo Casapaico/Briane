@@ -1,0 +1,25 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Astro
+.astro/
+dist/
+
+# Netlify (local)
+.netlify/
+
+# Configuración local
+.vscode/
+.claude/
+
+# Entornos (NO subir secretos)
+.env
+.env.*
+!.env.example
+
+# Sistema
+.DS_Store
+Thumbs.db

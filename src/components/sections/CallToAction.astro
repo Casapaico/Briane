@@ -1,0 +1,148 @@
+---
+import Button from '../ui/Button.astro';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  primaryButtonText?: string;
+  primaryButtonHref?: string;
+  secondaryButtonText?: string;
+  secondaryButtonHref?: string;
+}
+
+const {
+  title = '¿Listo para optimizar su logística?',
+  description = 'Contáctenos hoy y descubra cómo BRIANE puede transformar la gestión de su cadena de suministro.',
+  primaryButtonText = 'Solicitar Cotización',
+  primaryButtonHref = '/contactenos',
+  secondaryButtonText = 'Ver Servicios',
+  secondaryButtonHref = '/servicios',
+} = Astro.props;
+---
+
+<section class="cta-section">
+  <div class="cta-background"></div>
+  <div class="container">
+    <div class="cta-content reveal">
+      <h2 class="cta-title">{title}</h2>
+      <p class="cta-description">{description}</p>
+      <div class="cta-actions">
+        <Button href={primaryButtonHref} variant="secondary" size="lg">
+          {primaryButtonText}
+        </Button>
+        {
+          secondaryButtonText && (
+            <Button href={secondaryButtonHref} variant="outline" size="lg">
+              {secondaryButtonText}
+            </Button>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    position: relative;
+    padding: var(--spacing-2xl) 0;
+    overflow: hidden;
+  }
+
+  @media (min-width: 768px) {
+    .cta-section {
+      padding: var(--spacing-4xl) 0;
+    }
+  }
+
+  .cta-background {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      var(--color-primary) 0%,
+      var(--color-primary-dark) 100%
+    );
+    z-index: 0;
+  }
+
+  .cta-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  @media (min-width: 768px) {
+    .cta-content {
+      padding: 0;
+    }
+  }
+
+  .cta-title {
+    color: var(--color-white);
+    font-size: var(--text-2xl);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  @media (min-width: 768px) {
+    .cta-title {
+      font-size: var(--text-5xl);
+      margin-bottom: var(--spacing-md);
+    }
+  }
+
+  .cta-description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: var(--text-base);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  @media (min-width: 768px) {
+    .cta-description {
+      font-size: var(--text-lg);
+      line-height: 1.7;
+      margin-bottom: var(--spacing-xl);
+    }
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  @media (min-width: 480px) {
+    .cta-actions {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--spacing-md);
+    }
+  }
+
+  .cta-actions :global(.btn-outline) {
+    color: var(--color-white);
+    border-color: var(--color-white);
+  }
+
+  .cta-actions :global(.btn-outline:hover) {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+  }
+</style>

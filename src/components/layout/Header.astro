@@ -1,0 +1,275 @@
+---
+import Navbar from './Navbar.astro';
+import MobileMenu from './MobileMenu.astro';
+---
+
+<header class="header" id="header">
+  <div class="header-container">
+    <a href="/" class="logo" aria-label="BRIANE - Ir a inicio">
+      <img src="/images/logo/logo.png" alt="BRIANE" class="logo-img" />
+    </a>
+
+    <Navbar />
+
+    <div class="header-cta-group">
+      <a href="/trabaja-con-nosotros#aplicar" class="header-cta-btn header-cta-white">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20 6H16V4C16 2.89 15.11 2 14 2H10C8.89 2 8 2.89 8 4V6H4C2.89 6 2.01 6.89 2.01 8L2 19C2 20.11 2.89 21 4 21H20C21.11 21 22 20.11 22 19V8C22 6.89 21.11 6 20 6ZM10 4H14V6H10V4ZM20 19H4V8H20V19Z"/>
+        </svg>
+        <span>Trabaja con Nosotros</span>
+      </a>
+      <a href="/contactenos" class="header-cta-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+        <span>Contáctenos</span>
+      </a>
+    </div>
+
+    <button
+      class="mobile-menu-toggle"
+      id="mobile-menu-toggle"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+</header>
+
+<MobileMenu />
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    background-color: var(--color-primary);
+    z-index: var(--z-fixed);
+    transition: height var(--transition-base), box-shadow var(--transition-base), background-color var(--transition-base);
+  }
+
+  /* Header transparente para páginas con Hero */
+  :global(body.has-hero) .header:not(.scrolled) {
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  :global(body.has-hero) .header.scrolled {
+    background-color: var(--color-primary);
+  }
+
+  .header.scrolled {
+    height: var(--header-height-scrolled);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-lg);
+    height: 100%;
+    max-width: var(--container-2xl);
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+  }
+
+  @media (min-width: 768px) {
+    .header-container {
+      padding: 0 var(--spacing-xl);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .header-container {
+      gap: var(--spacing-xl);
+    }
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .logo:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
+
+  .logo-img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    transition: height var(--transition-base);
+  }
+
+  .header.scrolled .logo-img {
+    height: 40px;
+  }
+
+  /* Header CTA Buttons */
+  .header-cta-group {
+    display: none;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  @media (min-width: 1024px) {
+    .header-cta-group {
+      display: flex;
+    }
+  }
+
+  .header-cta-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 10px 20px;
+    background: var(--color-secondary);
+    color: var(--color-gray-900);
+    font-weight: var(--font-bold);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: visible;
+  }
+
+  .header-cta-white {
+    background: var(--color-white);
+    color: var(--color-gray-900);
+  }
+
+  .header-cta-btn::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    background: linear-gradient(
+      45deg,
+      #ffcc00,
+      #ff9500,
+      #e3271d,
+      #ff5500,
+      #ffcc00
+    );
+    background-size: 400% 400%;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+    filter: blur(8px);
+  }
+
+  .header-cta-btn:hover::before {
+    opacity: 1;
+    animation: aurora 3s ease infinite;
+  }
+
+  .header-cta-btn:hover {
+    transform: translateY(-2px);
+    color: var(--color-gray-900);
+  }
+
+  .header-cta-btn:active {
+    transform: scale(0.98) translateY(0);
+  }
+
+  @keyframes aurora {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: calc(var(--z-modal) + 1);
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-menu-toggle {
+      display: none;
+    }
+  }
+
+  .hamburger-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-white);
+    transition: transform var(--transition-base), opacity var(--transition-base);
+  }
+
+  .mobile-menu-toggle[aria-expanded='true'] .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .mobile-menu-toggle[aria-expanded='true'] .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-toggle[aria-expanded='true'] .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+</style>
+
+<script>
+  const header = document.getElementById('header');
+  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  // Scroll behavior
+  let lastScrollY = window.scrollY;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+    lastScrollY = window.scrollY;
+  });
+
+  // Mobile menu toggle
+  mobileMenuToggle?.addEventListener('click', () => {
+    const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+    mobileMenuToggle.setAttribute('aria-expanded', String(!isExpanded));
+    mobileMenu?.classList.toggle('open');
+    document.body.classList.toggle('menu-open');
+  });
+
+  // Close mobile menu on escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu?.classList.contains('open')) {
+      mobileMenuToggle?.setAttribute('aria-expanded', 'false');
+      mobileMenu.classList.remove('open');
+      document.body.classList.remove('menu-open');
+    }
+  });
+</script>

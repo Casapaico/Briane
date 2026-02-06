@@ -1,0 +1,1349 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import CallToAction from '../../components/sections/CallToAction.astro';
+
+const transporteImages = [
+  { src: '/images/transporte/transporte-en-accion-1.jpeg', alt: 'Transporte de carga BRIANE' },
+  { src: '/images/transporte/transporte-en-accion-2.jpeg', alt: 'Camiones BRIANE en ruta' },
+  { src: '/images/transporte/transporte-en-accion-3.jpeg', alt: 'Flota de transporte' },
+  { src: '/images/transporte/transporte-en-accion-4.jpeg', alt: 'Operaciones de carga' },
+  { src: '/images/transporte/transporte-en-accion-5.jpeg', alt: 'Transporte seguro' },
+  { src: '/images/transporte/transporte-en-accion-6.jpeg', alt: 'Logística BRIANE' },
+];
+
+const puertoImages = [
+  { src: '/images/transporte/transporte-en-puerto-1.jpeg', alt: 'Servicios portuarios' },
+  { src: '/images/transporte/transporte-en-puerto-2.jpeg', alt: 'Carga portuaria' },
+  { src: '/images/transporte/transporte-en-puerto-3.jpeg', alt: 'Contenedores' },
+  { src: '/images/transporte/transporte-en-puerto-4.jpeg', alt: 'Operación portuaria' },
+];
+---
+
+<PageLayout
+  title="SUPERVAN"
+  description="Servicios de transporte de carga pesada SUPERVAN - Transportando la mayor carga a los principales sectores del país."
+  heroTitle="SUPERVAN"
+  heroSubtitle="Brindamos servicios de transporte de carga pesada atendiendo a principales sectores del país"
+>
+  <!-- Video Hero Section -->
+  <section class="video-hero-section">
+    <video autoplay muted loop playsinline class="video-bg">
+      <source src="/videos/academia-Briane-video-independiente.mp4" type="video/mp4" />
+    </video>
+    <div class="video-overlay"></div>
+    <div class="video-content">
+      <p>Más de 40 años de experiencia en transporte de carga pesada</p>
+    </div>
+  </section>
+
+  <!-- Seccion Introduccion con galeria dinamica -->
+  <section class="intro-section section">
+    <!-- Lineas dinamicas de fondo -->
+    <div class="dynamic-lines-bg">
+      <svg class="dynamic-line line-1" viewBox="0 0 1200 200" preserveAspectRatio="none">
+        <path class="wave-path" d="M0,100 Q300,50 600,100 T1200,100" />
+      </svg>
+      <svg class="dynamic-line line-2" viewBox="0 0 1200 200" preserveAspectRatio="none">
+        <path class="wave-path" d="M0,100 Q300,150 600,100 T1200,100" />
+      </svg>
+    </div>
+    <div class="container">
+      <div class="intro-content reveal">
+        <div class="intro-text">
+          <h2>Transporte de Carga Pesada</h2>
+          <p class="lead">
+            Brindamos servicios de transporte de carga pesada atendiendo a principales sectores del país.
+          </p>
+          <p class="tagline">Transportando la mayor carga.</p>
+        </div>
+        <div class="intro-visual">
+          <div class="dynamic-grid">
+            <div class="dynamic-grid-item image-reveal">
+              <img src="/images/transporte/transporte1.jpeg" alt="Transporte de carga" loading="lazy" />
+            </div>
+            <div class="dynamic-grid-item image-reveal">
+              <img src="/images/transporte/transporte2.jpeg" alt="Flota SUPERVAN" loading="lazy" />
+            </div>
+            <div class="dynamic-grid-item image-reveal">
+              <img src="/images/transporte/transportes-unidos-1.jpeg" alt="Camiones unidos" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galeria de transporte en movimiento - Carrusel Continuo -->
+  <section class="gallery-section section">
+    <div class="gallery-header-yellow">
+      <div class="container">
+        <div class="section-header text-center reveal">
+        <h2>Nuestra Flota en Acción</h2>
+        <p class="section-subtitle">Conoce nuestra operación de transporte</p>
+      </div>
+      </div>
+    </div>
+    <div class="infinite-carousel-wrapper">
+      <div class="infinite-carousel">
+        <div class="carousel-track">
+          {transporteImages.map((img) => (
+            <div class="carousel-slide">
+              <img src={img.src} alt={img.alt} loading="lazy" />
+            </div>
+          ))}
+          {transporteImages.map((img) => (
+            <div class="carousel-slide">
+              <img src={img.src} alt={img.alt} loading="lazy" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios Portuarios con parallax -->
+  <section class="service-block parallax-section section" id="portuarios">
+    <div class="parallax-bg-container">
+      <img src="/images/transporte/transporte-en-puerto1.jpeg" alt="Servicios Portuarios" class="parallax-img" />
+    </div>
+    <div class="parallax-overlay"></div>
+    <div class="container parallax-content">
+      <div class="service-block-content portuarios-right reveal">
+        <div class="service-block-info glass-card">
+          <h2>Servicios Portuarios</h2>
+          <p class="service-description">
+            Desde 1980 brindamos nuestro servicio especializado del transporte de carga pesada portuaria.
+          </p>
+          <div class="services-list">
+            <h3>Nuestros Servicios:</h3>
+            <ul>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Desde granel</span>
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Contenedores</span>
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Carga suelta</span>
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Sobredimensionada</span>
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Cisterna</span>
+              </li>
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Refrigerados</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galeria de puerto dinamica - Pegada a Servicios Portuarios -->
+  <section class="puerto-gallery">
+    <div class="container">
+      <div class="puerto-grid stagger-children">
+        {puertoImages.map((img, index) => (
+          <div class={`puerto-item puerto-item-${index + 1} image-reveal`} data-lightbox>
+            <img src={img.src} alt={img.alt} loading="lazy" />
+            <div class="puerto-item-overlay">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="Cerrar">&times;</button>
+    <button class="lightbox-prev" aria-label="Anterior">&#10094;</button>
+    <button class="lightbox-next" aria-label="Siguiente">&#10095;</button>
+    <img class="lightbox-img" src="" alt="" />
+  </div>
+
+  <!-- Operacion Minera con imagen real -->
+  <section class="service-block section minera-section" id="minera">
+    <div class="minera-bg-split"></div>
+    <div class="container">
+      <div class="service-block-content reverse reveal">
+        <div class="service-block-info">
+          <h2>Operación Minera</h2>
+          <p class="service-description">
+            Contamos con una flota de camiones ecológicos a GNV.
+          </p>
+          <p class="service-description">
+            Participamos en el sector minero, transportando minerales a las diferentes locaciones.
+          </p>
+          <p class="service-description highlight">
+            Contamos con amplia experiencia y conocimiento de rutas.
+          </p>
+        </div>
+        <div class="service-block-visual">
+          <div class="image-card-stack">
+            <div class="stack-card stack-card-1 image-reveal">
+              <img src="/images/transporte/transporte-en-accion-1.jpeg" alt="Operación Minera" loading="lazy" />
+            </div>
+            <div class="stack-card stack-card-2 image-reveal">
+              <img src="/images/transporte/transporte-en-accion-2.jpeg" alt="Transporte minero" loading="lazy" />
+            </div>
+            <div class="stack-card stack-card-3 image-reveal">
+              <img src="/images/transporte/transporte-en-accion-3.jpeg" alt="Flota ecológica" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ventajas Competitivas -->
+  <section class="service-block section bg-gray-50" id="ventajas">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <h2>Ventajas Competitivas</h2>
+      </div>
+      <div class="advantages-grid stagger-children">
+        <div class="advantage-card">
+          <div class="advantage-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+          <h3>Monitoreo GPS 24/7</h3>
+          <p>Monitoreo vía GPS las 24 horas del día y los 365 días al año.</p>
+        </div>
+        <div class="advantage-card">
+          <div class="advantage-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+          </div>
+          <h3>Permisos IQBF y Matpel</h3>
+          <p>Flota con permisos IQBF y Matpel para transporte especializado.</p>
+        </div>
+        <div class="advantage-card">
+          <div class="advantage-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <h3>Coordinadores en Puntos</h3>
+          <p>Coordinadores en los puntos de carga y descarga.</p>
+        </div>
+        <div class="advantage-card">
+          <div class="advantage-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h3>Seguro de Transporte</h3>
+          <p>Seguro de Transporte con Responsabilidad Civil ante terceros.</p>
+        </div>
+        <div class="advantage-card">
+          <div class="advantage-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="12" y1="18" x2="12" y2="12"></line>
+              <line x1="9" y1="15" x2="15" y2="15"></line>
+            </svg>
+          </div>
+          <h3>Reportes de Servicios</h3>
+          <p>Reportes de Servicios pre y post operaciones.</p>
+        </div>
+      </div>
+      <div class="advantages-image reveal">
+        <div class="advantages-mosaic">
+          <img src="/images/transporte/transporte-en-accion-4.jpeg" alt="Ventajas SUPERVAN" class="mosaic-main" loading="lazy" />
+          <img src="/images/transporte/transporte-en-accion-5.jpeg" alt="Monitoreo GPS" class="mosaic-secondary" loading="lazy" />
+          <img src="/images/transporte/transporte-en-accion-6.jpeg" alt="Seguridad" class="mosaic-tertiary" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CallToAction
+    title="¿Necesita nuestros servicios de transporte?"
+    description="Contáctenos para diseñar una solución de transporte a medida de sus necesidades."
+    primaryButtonText="Solicitar Cotización"
+    primaryButtonHref="/contactenos"
+  />
+</PageLayout>
+
+<style>
+  /* Hero superpuesto al video con animacion de entrada */
+  :global(.page-hero) {
+    position: absolute !important;
+    top: var(--header-height) !important;
+    left: 0 !important;
+    width: 66.666% !important;
+    max-width: 800px !important;
+    margin: 0 !important;
+    padding: var(--spacing-xl) var(--spacing-2xl) !important;
+    background-color: #f7c029 !important;
+    z-index: 10 !important;
+    border-radius: 0 var(--radius-image) var(--radius-image) 0 !important;
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3) !important;
+    transform: translateX(-100%);
+    opacity: 0;
+    animation: slideInBanner 0.8s ease-out 0.3s forwards;
+  }
+
+  @keyframes slideInBanner {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  :global(.page-hero .container) {
+    padding: 0 !important;
+  }
+
+  :global(.page-hero .page-title),
+  :global(.page-hero .page-subtitle),
+  :global(.page-hero .breadcrumb a),
+  :global(.page-hero .breadcrumb li) {
+    color: #000000 !important;
+  }
+
+  :global(.page-hero .page-title) {
+    font-size: var(--text-3xl) !important;
+    margin-bottom: var(--spacing-xs) !important;
+  }
+
+  :global(.page-hero .page-subtitle) {
+    font-size: var(--text-base) !important;
+    line-height: 1.5 !important;
+  }
+
+  :global(.page-hero .breadcrumb) {
+    margin-bottom: var(--spacing-sm) !important;
+  }
+
+  :global(.page-hero .breadcrumb a) {
+    opacity: 0.8;
+  }
+
+  :global(.page-hero .breadcrumb a:hover) {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    :global(.page-hero) {
+      width: 85% !important;
+      padding: var(--spacing-lg) var(--spacing-xl) !important;
+    }
+
+    :global(.page-hero .page-title) {
+      font-size: var(--text-2xl) !important;
+    }
+
+    :global(.page-hero .page-subtitle) {
+      font-size: var(--text-sm) !important;
+    }
+  }
+
+  /* Video Hero Section - Superpuesto con el banner */
+  .video-hero-section {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: 0;
+  }
+
+  .video-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .video-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .video-content {
+    position: absolute;
+    bottom: var(--spacing-2xl);
+    right: var(--spacing-2xl);
+    z-index: 1;
+    text-align: right;
+    padding: var(--spacing-xl);
+    max-width: 500px;
+  }
+
+  .video-content p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 4px 20px rgba(0, 0, 0, 0.5);
+    max-width: 700px;
+    line-height: 1.4;
+  }
+
+  /* Seccion Introduccion */
+  .intro-section {
+    padding-top: var(--spacing-3xl);
+    padding-bottom: var(--spacing-3xl);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Lineas dinamicas de fondo */
+  .dynamic-lines-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .dynamic-line {
+    position: absolute;
+    width: 200%;
+    height: 150px;
+    opacity: 0.5;
+    left: -50%;
+  }
+
+  .dynamic-line .wave-path {
+    fill: none;
+    stroke-width: 4;
+    stroke-linecap: round;
+  }
+
+  .line-1 {
+    top: -5%;
+  }
+  .line-1 .wave-path {
+    stroke: #f7c029;
+  }
+
+  .line-2 {
+    bottom: -5%;
+    top: auto;
+  }
+  .line-2 .wave-path {
+    stroke: #e3271d;
+  }
+
+  .intro-section .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .intro-content {
+    background: rgba(255, 255, 255, 0.9);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-image);
+    backdrop-filter: blur(5px);
+  }
+
+  .intro-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .intro-content {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .intro-text h2 {
+    font-size: var(--text-3xl);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .intro-text .lead {
+    font-size: var(--text-lg);
+    color: var(--color-gray-700);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .intro-text .tagline {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--color-secondary);
+  }
+
+  .intro-visual {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Dynamic Grid for intro */
+  .dynamic-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 150px);
+    gap: var(--spacing-md);
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .dynamic-grid {
+      grid-template-rows: repeat(2, 180px);
+    }
+  }
+
+  .dynamic-grid-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-image);
+    box-shadow: var(--shadow-md);
+  }
+
+  .dynamic-grid-item:first-child {
+    grid-row: span 2;
+  }
+
+  .dynamic-grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease-out;
+  }
+
+  .dynamic-grid-item:hover img {
+    transform: scale(1.1);
+  }
+
+  /* Gallery Section - Carrusel Infinito */
+  .gallery-section {
+    overflow: hidden;
+  }
+
+  .gallery-header-yellow {
+    background-color: #f7c029;
+    padding: var(--spacing-2xl) 0;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .gallery-header-yellow .section-header {
+    margin-bottom: 0;
+  }
+
+  .gallery-header-yellow h2,
+  .gallery-header-yellow .section-subtitle {
+    color: #000000;
+  }
+
+  .infinite-carousel-wrapper {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    overflow: hidden;
+    padding: var(--spacing-lg) 0;
+  }
+
+  .infinite-carousel {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: var(--spacing-md);
+    animation: scroll-infinite 30s linear infinite;
+    width: max-content;
+  }
+
+  .carousel-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll-infinite {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .carousel-slide {
+    flex-shrink: 0;
+    width: 350px;
+    height: 280px;
+    border-radius: var(--radius-image);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .carousel-slide:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .carousel-slide {
+      width: 280px;
+      height: 220px;
+    }
+
+    .carousel-track {
+      animation-duration: 20s;
+    }
+  }
+
+  /* Parallax Section */
+  .parallax-section {
+    position: relative;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .parallax-bg-container {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .parallax-img {
+    width: 100%;
+    height: 120%;
+    object-fit: cover;
+    transform: translateY(-10%);
+    will-change: transform;
+  }
+
+  .parallax-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
+    z-index: 1;
+  }
+
+  .parallax-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-image);
+    box-shadow: var(--shadow-xl);
+    max-width: 600px;
+  }
+
+  .glass-card h2 {
+    color: var(--color-primary);
+  }
+
+  /* Servicios Portuarios - Card en el lateral derecho */
+  .portuarios-right {
+    display: flex !important;
+    justify-content: flex-end !important;
+    width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .portuarios-right {
+      grid-template-columns: 1fr !important;
+      display: flex !important;
+      justify-content: flex-end !important;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .portuarios-right {
+      justify-content: center !important;
+    }
+  }
+
+  /* Puerto Gallery Grid - Pegada a Servicios Portuarios */
+  .puerto-gallery {
+    padding: var(--spacing-md) 0 var(--spacing-2xl);
+    margin-top: -var(--spacing-xl);
+  }
+
+  .puerto-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 200px);
+    gap: var(--spacing-sm);
+  }
+
+  @media (min-width: 768px) {
+    .puerto-grid {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 250px;
+      gap: var(--spacing-md);
+    }
+  }
+
+  .puerto-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-image);
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+  }
+
+  .puerto-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease-out;
+  }
+
+  .puerto-item:hover img {
+    transform: scale(1.1);
+  }
+
+  .puerto-item-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: white;
+  }
+
+  .puerto-item:hover .puerto-item-overlay {
+    opacity: 1;
+  }
+
+  /* Lightbox Styles */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox.active {
+    display: flex;
+  }
+
+  .lightbox-img {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 50px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+    z-index: 10000;
+  }
+
+  .lightbox-close:hover {
+    color: var(--color-primary);
+    transform: scale(1.1);
+  }
+
+  .lightbox-prev,
+  .lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 40px;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    cursor: pointer;
+    padding: 15px 20px;
+    border-radius: var(--radius-md);
+    transition: background 0.3s ease, color 0.3s ease;
+    z-index: 10000;
+  }
+
+  .lightbox-prev:hover,
+  .lightbox-next:hover {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .lightbox-prev {
+    left: 20px;
+  }
+
+  .lightbox-next {
+    right: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .lightbox-close {
+      top: 10px;
+      right: 15px;
+      font-size: 35px;
+    }
+
+    .lightbox-prev,
+    .lightbox-next {
+      font-size: 25px;
+      padding: 10px 15px;
+    }
+
+    .lightbox-prev {
+      left: 10px;
+    }
+
+    .lightbox-next {
+      right: 10px;
+    }
+  }
+
+  /* Image Card Stack */
+  .image-card-stack {
+    position: relative;
+    width: 100%;
+    height: 400px;
+  }
+
+  .stack-card {
+    position: absolute;
+    width: 280px;
+    height: 200px;
+    border-radius: var(--radius-image);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
+  }
+
+  .stack-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .stack-card-1 {
+    top: 0;
+    left: 0;
+    z-index: 3;
+  }
+
+  .stack-card-2 {
+    top: 60px;
+    left: 80px;
+    z-index: 2;
+  }
+
+  .stack-card-3 {
+    top: 120px;
+    left: 160px;
+    z-index: 1;
+  }
+
+  .stack-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+    z-index: 10;
+  }
+
+  @media (max-width: 768px) {
+    .image-card-stack {
+      height: 300px;
+    }
+
+    .stack-card {
+      width: 200px;
+      height: 140px;
+    }
+
+    .stack-card-2 {
+      top: 40px;
+      left: 50px;
+    }
+
+    .stack-card-3 {
+      top: 80px;
+      left: 100px;
+    }
+  }
+
+  /* Advantages Mosaic */
+  .advantages-mosaic {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 180px);
+    gap: var(--spacing-md);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .advantages-mosaic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-image);
+    box-shadow: var(--shadow-md);
+    transition: transform 0.4s ease-out;
+  }
+
+  .advantages-mosaic img:hover {
+    transform: scale(1.05);
+  }
+
+  .mosaic-main {
+    grid-row: span 2;
+  }
+
+  .intro-placeholder {
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 16/9;
+  }
+
+  /* Operacion Minera - Fondo dividido amarillo/blanco */
+  .minera-section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .minera-bg-split {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(to right, #f7c029 50%, #ffffff 50%);
+  }
+
+  .minera-section .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Service Block Styles */
+  .service-block {
+    padding-top: var(--spacing-3xl);
+    padding-bottom: var(--spacing-3xl);
+  }
+
+  .service-block-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .service-block-content {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .service-block-content.reverse {
+      direction: rtl;
+    }
+
+    .service-block-content.reverse > * {
+      direction: ltr;
+    }
+  }
+
+  .service-block-info h2 {
+    font-size: var(--text-3xl);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .service-description {
+    font-size: var(--text-lg);
+    color: var(--color-gray-700);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .service-description.highlight {
+    color: var(--color-primary);
+    font-weight: var(--font-semibold);
+  }
+
+  .services-list h3 {
+    font-size: var(--text-lg);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .services-list ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .services-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    color: var(--color-gray-700);
+    font-size: var(--text-base);
+  }
+
+  .services-list svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .service-block-visual {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Visual Placeholder */
+  .visual-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 450px;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--color-gray-100), var(--color-gray-200));
+    border-radius: var(--radius-image);
+    color: var(--color-gray-400);
+    gap: var(--spacing-md);
+    border: 2px dashed var(--color-gray-300);
+  }
+
+  .visual-placeholder.large {
+    max-width: 800px;
+    aspect-ratio: 16/9;
+    margin: var(--spacing-2xl) auto 0;
+  }
+
+  .placeholder-text {
+    font-size: var(--text-sm);
+    color: var(--color-gray-500);
+    font-weight: var(--font-medium);
+  }
+
+  /* Section Header */
+  .section-header {
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .section-header h2 {
+    font-size: var(--text-3xl);
+    color: var(--color-gray-900);
+  }
+
+  /* Advantages Grid */
+  .advantages-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  @media (min-width: 640px) {
+    .advantages-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .advantages-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .advantages-grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+
+  .advantage-card {
+    background-color: var(--color-white);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-card);
+    text-align: center;
+    border: 1px solid var(--color-gray-200);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+  }
+
+  .advantage-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .advantage-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--radius-card);
+    margin: 0 auto var(--spacing-md);
+  }
+
+  .advantage-card h3 {
+    font-size: var(--text-base);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .advantage-card p {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .advantages-image {
+    margin-top: var(--spacing-2xl);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .intro-text h2,
+    .service-block-info h2,
+    .section-header h2 {
+      font-size: var(--text-2xl);
+    }
+
+    .intro-text .tagline {
+      font-size: var(--text-xl);
+    }
+
+    .video-content h2 {
+      font-size: var(--text-2xl);
+    }
+
+    .video-content p {
+      font-size: var(--text-base);
+    }
+  }
+</style>
+
+<!-- Google Fonts - Tipografia Moderna -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script>
+  // Parallax effect on scroll
+  document.addEventListener('DOMContentLoaded', () => {
+    const parallaxImages = document.querySelectorAll('.parallax-img');
+
+    const handleParallax = () => {
+      parallaxImages.forEach(img => {
+        const section = img.closest('.parallax-section');
+        if (!section) return;
+
+        const rect = section.getBoundingClientRect();
+        const scrollPercent = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+        const translateY = (scrollPercent - 0.5) * 100;
+
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          img.style.transform = `translateY(${translateY}px)`;
+        }
+      });
+    };
+
+    // Image reveal on scroll
+    const imageReveals = document.querySelectorAll('.image-reveal');
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, observerOptions);
+
+    imageReveals.forEach(el => revealObserver.observe(el));
+
+    // Scroll event listener with throttle
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleParallax();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Lineas dinamicas con movimiento armonico y cuadratico
+    const dynamicLines = document.querySelectorAll('.dynamic-line');
+    const introSection = document.querySelector('.intro-section');
+
+    const animateLines = () => {
+      if (!introSection) return;
+
+      const rect = introSection.getBoundingClientRect();
+      const scrollProgress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        dynamicLines.forEach((line, index) => {
+          // Funciones armonicas y cuadraticas para cada linea
+          const frequency = 0.5 + (index * 0.2);
+          const amplitude = 30 + (index * 10);
+          const phase = index * Math.PI / 4;
+
+          // Movimiento horizontal con funcion cuadratica
+          const quadraticOffset = Math.pow(scrollProgress, 2) * 100;
+
+          // Movimiento armonico (sinusoidal)
+          const harmonicOffset = Math.sin(scrollProgress * Math.PI * frequency + phase) * amplitude;
+
+          // Combinacion de ambos movimientos
+          const translateX = quadraticOffset + harmonicOffset;
+
+          // Aplicar transformacion
+          line.style.transform = `translateX(${translateX}px)`;
+        });
+      }
+    };
+
+    // Agregar al evento de scroll existente
+    window.addEventListener('scroll', () => {
+      requestAnimationFrame(animateLines);
+    });
+
+    // Ejecutar al cargar
+    animateLines();
+
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('.lightbox-img');
+    const lightboxClose = lightbox.querySelector('.lightbox-close');
+    const lightboxPrev = lightbox.querySelector('.lightbox-prev');
+    const lightboxNext = lightbox.querySelector('.lightbox-next');
+    const puertoItems = document.querySelectorAll('.puerto-item[data-lightbox]');
+
+    let currentIndex = 0;
+    const images = Array.from(puertoItems).map(item => item.querySelector('img').src);
+
+    const openLightbox = (index) => {
+      currentIndex = index;
+      lightboxImg.src = images[currentIndex];
+      lightboxImg.alt = puertoItems[currentIndex].querySelector('img').alt;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeLightbox = () => {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+
+    const showPrev = () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = images[currentIndex];
+    };
+
+    const showNext = () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = images[currentIndex];
+    };
+
+    puertoItems.forEach((item, index) => {
+      item.addEventListener('click', () => openLightbox(index));
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', showPrev);
+    lightboxNext.addEventListener('click', showNext);
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'ArrowRight') showNext();
+    });
+  });
+</script>

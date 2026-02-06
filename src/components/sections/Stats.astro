@@ -1,0 +1,137 @@
+---
+import { stats } from '../../data/company';
+
+export interface Props {
+  title?: string;
+  variant?: 'default' | 'primary';
+}
+
+const { title = 'BRIANE en Números', variant = 'default' } = Astro.props;
+---
+
+<section class={`stats-section section ${variant === 'primary' ? 'stats-primary' : ''}`}>
+  <div class="container">
+    {title && <h2 class="stats-title reveal">{title}</h2>}
+
+    <div class="stats-grid stagger-children">
+      {
+        stats.map((stat) => (
+          <div class="stat-card">
+            <span class="stat-value" data-value={stat.value}>
+              0{stat.suffix}
+            </span>
+            <span class="stat-label">{stat.label}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .stats-section {
+    padding: var(--spacing-3xl) 0;
+    background-color: var(--color-gray-50);
+  }
+
+  .stats-primary {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  }
+
+  .stats-primary .stats-title,
+  .stats-primary .stat-value,
+  .stats-primary .stat-label {
+    color: var(--color-white);
+  }
+
+  .stats-primary .stat-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .stats-title {
+    text-align: center;
+    font-size: var(--text-3xl);
+    margin-bottom: var(--spacing-2xl);
+    color: var(--color-gray-900);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  @media (min-width: 768px) {
+    .stats-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .stat-card {
+    text-align: center;
+    padding: var(--spacing-xl);
+    background-color: var(--color-white);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-gray-200);
+  }
+
+  .stat-value {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  @media (min-width: 768px) {
+    .stat-value {
+      font-size: var(--text-5xl);
+    }
+  }
+
+  .stat-label {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+  }
+</style>
+
+<script>
+  // Number counter animation
+  const statValues = document.querySelectorAll('.stat-value[data-value]');
+
+  const animateValue = (element: Element, start: number, end: number, duration: number) => {
+    const suffix = element.textContent?.replace(/[\d,]/g, '') || '';
+    let startTimestamp: number | null = null;
+
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      const value = Math.floor(progress * (end - start) + start);
+      element.textContent = value.toLocaleString() + suffix;
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    };
+
+    window.requestAnimationFrame(step);
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const element = entry.target;
+          const value = parseInt(element.getAttribute('data-value') || '0', 10);
+          animateValue(element, 0, value, 2000);
+          observer.unobserve(element);
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  statValues.forEach((stat) => observer.observe(stat));
+</script>
