@@ -1,8 +1,9 @@
 from rest_framework import serializers
 
 from .models import (
-    ContactSubmission, JobPosition, JobApplication,
+    ContactSubmission, JobPosition,
     FullJobApplication, WorkExperience, AcademicFormation,
+    NewsletterSubscription,
 )
 
 
@@ -19,12 +20,6 @@ class JobPositionSerializer(serializers.ModelSerializer):
     class Meta:
         model = JobPosition
         fields = ['id', 'title', 'description']
-
-
-class JobApplicationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = JobApplication
-        fields = ['name', 'email', 'phone', 'city', 'position', 'cv_file']
 
 
 class WorkExperienceSerializer(serializers.ModelSerializer):
@@ -89,3 +84,24 @@ class FullJobApplicationSerializer(serializers.ModelSerializer):
         for af_data in academic_formations_data:
             AcademicFormation.objects.create(application=application, **af_data)
         return application
+
+
+class NewsletterSubscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NewsletterSubscription
+        fields = ['email']
+        extra_kwargs = {
+            'email': {'validators': []},
+        }
+
+    def validate_email(self, value):
+        if NewsletterSubscription.objects.filter(email=value, is_active=True).exists():
+            raise serializers.ValidationError('Este correo ya esta suscrito al boletin.')
+        return value
+
+    def create(self, validated_data):
+        sub, created = NewsletterSubscription.objects.update_or_create(
+            email=validated_data['email'],
+            defaults={'is_active': True},
+        )
+        return sub

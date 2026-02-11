@@ -196,12 +196,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <!-- Puesto -->
           <fieldset class="form-fieldset">
             <legend>Puesto de interes</legend>
-            <div class="form-group">
-              <label for="position">Puesto</label>
-              <select id="position" name="position">
-                <option value="">Seleccionar puesto (opcional)</option>
-              </select>
+            <div class="position-dropdown" id="position-dropdown">
+              <button type="button" class="position-dropdown-trigger" id="position-trigger">
+                <span class="position-dropdown-text">Selecciona el puesto al que deseas postular</span>
+                <svg class="position-dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="position-dropdown-options" id="position-options">
+                <!-- JS populates from API -->
+              </div>
             </div>
+            <input type="hidden" id="position" name="position" value="" />
           </fieldset>
 
           <div class="step-buttons">
@@ -241,12 +245,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </fieldset>
             <fieldset class="form-fieldset">
               <legend>Puesto de interes</legend>
-              <div class="form-group">
-                <label for="cv_position">Puesto</label>
-                <select id="cv_position">
-                  <option value="">Seleccionar puesto (opcional)</option>
-                </select>
+              <div class="position-dropdown" id="cv-position-dropdown">
+                <button type="button" class="position-dropdown-trigger" id="cv-position-trigger">
+                  <span class="position-dropdown-text">Selecciona el puesto al que deseas postular</span>
+                  <svg class="position-dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+                <div class="position-dropdown-options" id="cv-position-options">
+                  <!-- JS populates from API -->
+                </div>
               </div>
+              <input type="hidden" id="cv_position" value="" />
             </fieldset>
           </div>
 
@@ -613,6 +621,176 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     padding: 2px var(--spacing-sm);
     border-radius: var(--radius-md);
     word-break: break-all;
+  }
+
+  /* Position Dropdown */
+  .position-dropdown {
+    position: relative;
+  }
+
+  .position-dropdown-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+    padding: 14px var(--spacing-lg);
+    border: 2px solid var(--color-gray-200);
+    border-radius: 12px;
+    background-color: var(--color-white);
+    cursor: pointer;
+    font-family: var(--font-primary);
+    font-size: var(--text-base);
+    transition: all 0.25s ease;
+  }
+
+  .position-dropdown-trigger:hover {
+    border-color: var(--color-gray-400);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .position-dropdown.open .position-dropdown-trigger {
+    border-color: var(--color-primary);
+    box-shadow: 0 2px 12px rgba(227, 39, 29, 0.12);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .position-dropdown-text {
+    color: var(--color-gray-400);
+    font-size: var(--text-sm);
+  }
+
+  .position-dropdown-text.has-value {
+    color: var(--color-gray-900);
+    font-weight: var(--font-semibold);
+    font-size: var(--text-base);
+  }
+
+  .position-dropdown-arrow {
+    color: var(--color-gray-400);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .position-dropdown.open .position-dropdown-arrow {
+    transform: rotate(180deg);
+    color: var(--color-primary);
+  }
+
+  .position-dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--color-white);
+    border: 2px solid var(--color-primary);
+    border-top: none;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    z-index: 10;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.2s ease;
+    pointer-events: none;
+  }
+
+  .position-dropdown.open .position-dropdown-options {
+    max-height: 400px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .position-option {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: 14px var(--spacing-lg);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid var(--color-gray-100);
+  }
+
+  .position-option:last-child {
+    border-bottom: none;
+  }
+
+  .position-option:hover {
+    background-color: #fef2f2;
+    padding-left: calc(var(--spacing-lg) + 4px);
+  }
+
+  .position-option.selected {
+    background-color: #fef2f2;
+  }
+
+  .position-option-icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 10px;
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .position-option:hover .position-option-icon {
+    background-color: rgba(227, 39, 29, 0.1);
+    color: var(--color-primary);
+  }
+
+  .position-option.selected .position-option-icon {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .position-option-label {
+    flex: 1;
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-gray-600);
+    transition: all 0.2s ease;
+  }
+
+  .position-option:hover .position-option-label {
+    color: var(--color-gray-900);
+  }
+
+  .position-option.selected .position-option-label {
+    color: var(--color-gray-900);
+    font-weight: var(--font-bold);
+  }
+
+  .position-option-check {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--color-gray-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    margin-left: auto;
+  }
+
+  .position-option.selected .position-option-check {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+  }
+
+  .position-option-check-icon {
+    display: none;
+  }
+
+  .position-option.selected .position-option-check-icon {
+    display: block;
+    color: var(--color-white);
   }
 
   /* Form Fieldsets */
@@ -1156,7 +1334,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         fd.append('last_name', (document.getElementById('cv_last_name') as HTMLInputElement).value);
         fd.append('email', (document.getElementById('cv_email') as HTMLInputElement).value);
         fd.append('phone', (document.getElementById('cv_phone') as HTMLInputElement).value);
-        fd.append('position', (document.getElementById('cv_position') as HTMLSelectElement).value);
+        fd.append('position', (document.getElementById('cv_position') as HTMLInputElement).value);
 
         // CV file (cargado desde paso 1)
         if (hiddenFileInput?.files && hiddenFileInput.files.length > 0) {
@@ -1280,25 +1458,76 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
     }
 
-    // --- Load positions from API ---
+    // --- Position Dropdown ---
+    const positionIcons: Record<string, string> = {
+      'conductor': '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>',
+      'mecánico': '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>',
+      'planificación': '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>',
+      'almacén': '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>',
+    };
+
+    function getIconForJob(title: string): string {
+      const lower = title.toLowerCase();
+      for (const [key, svg] of Object.entries(positionIcons)) {
+        if (lower.includes(key)) return svg;
+      }
+      return '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>';
+    }
+
+    function setupPositionDropdown(
+      dropdownId: string, triggerId: string, optionsId: string, hiddenId: string, jobs: any[]
+    ) {
+      const dropdown = document.getElementById(dropdownId)!;
+      const trigger = document.getElementById(triggerId)!;
+      const optionsContainer = document.getElementById(optionsId)!;
+      const hiddenInput = document.getElementById(hiddenId) as HTMLInputElement;
+      const textEl = trigger.querySelector('.position-dropdown-text')!;
+
+      optionsContainer.innerHTML = '';
+      jobs.forEach((job: any) => {
+        const opt = document.createElement('div');
+        opt.className = 'position-option';
+        opt.dataset.value = job.id;
+        opt.innerHTML = `
+          <div class="position-option-icon">${getIconForJob(job.title)}</div>
+          <span class="position-option-label">${job.title}</span>
+          <div class="position-option-check">
+            <svg class="position-option-check-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+        `;
+        opt.addEventListener('click', () => {
+          optionsContainer.querySelectorAll('.position-option').forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          hiddenInput.value = job.id;
+          textEl.textContent = job.title;
+          textEl.classList.add('has-value');
+          dropdown.classList.remove('open');
+        });
+        optionsContainer.appendChild(opt);
+      });
+
+      trigger.addEventListener('click', () => {
+        // Close other open dropdowns
+        document.querySelectorAll('.position-dropdown.open').forEach(d => {
+          if (d !== dropdown) d.classList.remove('open');
+        });
+        dropdown.classList.toggle('open');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!dropdown.contains(e.target as Node)) {
+          dropdown.classList.remove('open');
+        }
+      });
+    }
+
     fetch(`${API_URL}/api/jobs/`)
       .then(r => r.json())
       .then((data: any) => {
         const items = data.results || data;
-        const selects = [
-          document.getElementById('position') as HTMLSelectElement,
-          document.getElementById('cv_position') as HTMLSelectElement,
-        ];
         if (Array.isArray(items)) {
-          selects.forEach(select => {
-            if (!select) return;
-            items.forEach((job: any) => {
-              const opt = document.createElement('option');
-              opt.value = job.id;
-              opt.textContent = job.title;
-              select.appendChild(opt);
-            });
-          });
+          setupPositionDropdown('position-dropdown', 'position-trigger', 'position-options', 'position', items);
+          setupPositionDropdown('cv-position-dropdown', 'cv-position-trigger', 'cv-position-options', 'cv_position', items);
         }
       })
       .catch(() => {});

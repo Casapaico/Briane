@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from .models import JobPosition
 from .serializers import (
     ContactSubmissionSerializer, JobPositionSerializer,
-    JobApplicationSerializer, FullJobApplicationSerializer,
+    FullJobApplicationSerializer, NewsletterSubscriptionSerializer,
 )
 
 
@@ -28,19 +28,6 @@ class JobPositionListView(generics.ListAPIView):
     serializer_class = JobPositionSerializer
     pagination_class = None
     queryset = JobPosition.objects.filter(is_active=True)
-
-
-class JobApplicationCreateView(generics.CreateAPIView):
-    serializer_class = JobApplicationSerializer
-
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(
-            {'message': 'Postulacion enviada correctamente.'},
-            status=status.HTTP_201_CREATED,
-        )
 
 
 class FullJobApplicationCreateView(generics.CreateAPIView):
@@ -88,5 +75,18 @@ class FullJobApplicationCreateView(generics.CreateAPIView):
         serializer.save()
         return Response(
             {'message': 'Postulacion enviada correctamente.'},
+            status=status.HTTP_201_CREATED,
+        )
+
+
+class NewsletterSubscriptionCreateView(generics.CreateAPIView):
+    serializer_class = NewsletterSubscriptionSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(
+            {'message': 'Suscripcion realizada correctamente.'},
             status=status.HTTP_201_CREATED,
         )

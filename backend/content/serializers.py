@@ -1,18 +1,6 @@
 from rest_framework import serializers
 
-from .models import PageContent, PageImage, GalleryImage
-
-
-class PageContentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PageContent
-        fields = ['id', 'page_slug', 'section_key', 'title', 'content', 'order']
-
-
-class PageImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PageImage
-        fields = ['id', 'page_slug', 'section_key', 'image', 'alt_text', 'caption', 'order']
+from .models import GalleryImage
 
 
 class GalleryImageSerializer(serializers.ModelSerializer):

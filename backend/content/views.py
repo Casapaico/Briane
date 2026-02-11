@@ -1,25 +1,7 @@
 from rest_framework import generics
 
-from .models import PageContent, PageImage, GalleryImage
-from .serializers import PageContentSerializer, PageImageSerializer, GalleryImageSerializer
-
-
-class PageContentListView(generics.ListAPIView):
-    serializer_class = PageContentSerializer
-    pagination_class = None
-
-    def get_queryset(self):
-        slug = self.kwargs['slug']
-        return PageContent.objects.filter(page_slug=slug, is_active=True)
-
-
-class PageImageListView(generics.ListAPIView):
-    serializer_class = PageImageSerializer
-    pagination_class = None
-
-    def get_queryset(self):
-        slug = self.kwargs['slug']
-        return PageImage.objects.filter(page_slug=slug, is_active=True)
+from .models import GalleryImage
+from .serializers import GalleryImageSerializer
 
 
 class GalleryImageListView(generics.ListAPIView):

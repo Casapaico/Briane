@@ -261,3 +261,17 @@ class AcademicFormation(models.Model):
 
     def __str__(self):
         return f'{self.subject} - {self.university}'
+
+
+class NewsletterSubscription(models.Model):
+    email = models.EmailField('Correo electronico', unique=True)
+    is_active = models.BooleanField('Activo', default=True)
+    created_at = models.DateTimeField('Fecha de suscripcion', auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Suscripcion al boletin'
+        verbose_name_plural = 'Suscripciones al boletin'
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.email

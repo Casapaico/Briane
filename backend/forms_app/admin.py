@@ -1,8 +1,9 @@
 from django.contrib import admin
 
 from .models import (
-    ContactSubmission, JobPosition, JobApplication,
+    ContactSubmission, JobPosition,
     FullJobApplication, WorkExperience, AcademicFormation,
+    NewsletterSubscription,
 )
 
 
@@ -38,30 +39,6 @@ class JobPositionAdmin(admin.ModelAdmin):
     list_editable = ['is_active', 'order']
     search_fields = ['title']
 
-
-@admin.register(JobApplication)
-class JobApplicationAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email', 'position', 'is_reviewed', 'created_at']
-    list_filter = ['is_reviewed', 'position', 'created_at']
-    search_fields = ['name', 'email', 'city']
-    list_editable = ['is_reviewed']
-    readonly_fields = [
-        'name', 'email', 'phone', 'city', 'position', 'cv_file', 'created_at',
-    ]
-    fieldsets = [
-        ('Datos del postulante', {
-            'fields': ['name', 'email', 'phone', 'city'],
-        }),
-        ('Postulacion', {
-            'fields': ['position', 'cv_file'],
-        }),
-        ('Gestion interna', {
-            'fields': ['is_reviewed', 'notes', 'created_at'],
-        }),
-    ]
-
-    def has_add_permission(self, request):
-        return False
 
 
 class WorkExperienceInline(admin.TabularInline):
@@ -146,6 +123,17 @@ class FullJobApplicationAdmin(admin.ModelAdmin):
     @admin.display(description='Nombre completo')
     def full_name_display(self, obj):
         return obj.full_name
+
+    def has_add_permission(self, request):
+        return False
+
+
+@admin.register(NewsletterSubscription)
+class NewsletterSubscriptionAdmin(admin.ModelAdmin):
+    list_display = ['email', 'is_active', 'created_at']
+    list_filter = ['is_active', 'created_at']
+    search_fields = ['email']
+    list_editable = ['is_active']
 
     def has_add_permission(self, request):
         return False

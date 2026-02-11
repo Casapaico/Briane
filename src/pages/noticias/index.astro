@@ -57,15 +57,17 @@ import PageLayout from '../../layouts/PageLayout.astro';
           Recibe las últimas noticias y novedades de BRIANE directamente en tu
           correo.
         </p>
-        <form class="newsletter-form">
+        <form class="newsletter-form" id="newsletter-form">
           <input
             type="email"
+            id="newsletter-email"
             placeholder="Tu correo electrónico"
             required
             aria-label="Correo electrónico"
           />
-          <button type="submit">Suscribirse</button>
+          <button type="submit" id="newsletter-btn">Suscribirse</button>
         </form>
+        <p class="newsletter-message" id="newsletter-message" style="display:none;"></p>
       </div>
     </div>
   </section>
@@ -370,6 +372,25 @@ import PageLayout from '../../layouts/PageLayout.astro';
   .newsletter-form button:hover {
     background-color: var(--color-primary-dark);
   }
+
+  .newsletter-form button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .newsletter-message {
+    margin-top: var(--spacing-sm);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+  }
+
+  .newsletter-message.success {
+    color: #155724;
+  }
+
+  .newsletter-message.error {
+    color: var(--color-primary);
+  }
 </style>
 
 <script>
@@ -521,4 +542,50 @@ import PageLayout from '../../layouts/PageLayout.astro';
 
   // Load on page ready
   loadNews();
+
+  // --- Newsletter ---
+  const newsletterForm = document.getElementById('newsletter-form') as HTMLFormElement;
+  const newsletterEmail = document.getElementById('newsletter-email') as HTMLInputElement;
+  const newsletterBtn = document.getElementById('newsletter-btn') as HTMLButtonElement;
+  const newsletterMsg = document.getElementById('newsletter-message')!;
+
+  newsletterForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = newsletterEmail.value.trim();
+    if (!email) return;
+
+    newsletterBtn.disabled = true;
+    newsletterBtn.textContent = 'Enviando...';
+    newsletterMsg.style.display = 'none';
+
+    try {
+      const res = await fetch(`${API_URL}/newsletter/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      if (res.ok) {
+        newsletterMsg.className = 'newsletter-message success';
+        newsletterMsg.textContent = '¡Suscripcion exitosa! Recibiras nuestras novedades.';
+        newsletterMsg.style.display = 'block';
+        newsletterEmail.value = '';
+      } else {
+        const data = await res.json();
+        const errorMsg = data.email
+          ? (Array.isArray(data.email) ? data.email[0] : data.email)
+          : 'Error al suscribirse. Intente nuevamente.';
+        newsletterMsg.className = 'newsletter-message error';
+        newsletterMsg.textContent = errorMsg;
+        newsletterMsg.style.display = 'block';
+      }
+    } catch {
+      newsletterMsg.className = 'newsletter-message error';
+      newsletterMsg.textContent = 'Error de conexion. Intente nuevamente.';
+      newsletterMsg.style.display = 'block';
+    } finally {
+      newsletterBtn.disabled = false;
+      newsletterBtn.textContent = 'Suscribirse';
+    }
+  });
 </script>
