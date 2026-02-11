@@ -67,11 +67,25 @@ const { showService = true } = Astro.props;
         <label for="service">Servicio de interes</label>
         <select id="service" name="service">
           <option value="">Seleccione un servicio</option>
-          <option value="supervan">SUPERVAN - Transporte Logistico</option>
-          <option value="almacenes">Almacenes</option>
-          <option value="ambos">Ambos servicios</option>
-          <option value="otro">Otro</option>
+          <option value="transporte">TRANSPORTE</option>
+          <option value="almacen">ALMACEN</option>
+          <option value="alquiler">ALQUILER</option>
+          <option value="otros">OTROS</option>
         </select>
+      </div>
+    )
+  }
+
+  {
+    showService && (
+      <div class="form-group otros-field" id="otros-field" style="display: none;">
+        <label for="otros-detalle">Especifique el servicio</label>
+        <input
+          type="text"
+          id="otros-detalle"
+          name="otros-detalle"
+          placeholder="Describa el servicio que necesita"
+        />
       </div>
     )
   }
@@ -367,6 +381,8 @@ const { showService = true } = Astro.props;
     return isValid;
   }
 
+  const API_URL = 'http://localhost:8000/api';
+
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -375,20 +391,65 @@ const { showService = true } = Astro.props;
     submitBtn?.classList.add('loading');
     (submitBtn as HTMLButtonElement).disabled = true;
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    submitBtn?.classList.remove('loading');
-    (submitBtn as HTMLButtonElement).disabled = false;
-
     if (formMessage) {
-      formMessage.textContent =
-        'Gracias por contactarnos. Nos comunicaremos con usted pronto.';
-      formMessage.classList.add('success');
-      formMessage.classList.remove('error');
+      formMessage.classList.remove('success', 'error');
+      formMessage.style.display = 'none';
     }
 
-    form.reset();
+    const formData = new FormData(form);
+    const data: Record<string, string | boolean> = {};
+    formData.forEach((value, key) => {
+      if (key === 'privacy') {
+        data['privacy_accepted'] = true;
+      } else if (key === 'otros-detalle') {
+        data['other_service_detail'] = value as string;
+      } else {
+        data[key] = value as string;
+      }
+    });
+    if (!data['privacy_accepted']) {
+      data['privacy_accepted'] = false;
+    }
+
+    try {
+      const response = await fetch(`${API_URL}/contact/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        if (formMessage) {
+          formMessage.textContent =
+            'Gracias por contactarnos. Nos comunicaremos con usted pronto.';
+          formMessage.classList.add('success');
+          formMessage.classList.remove('error');
+        }
+        form.reset();
+      } else {
+        throw new Error('Error en el envio');
+      }
+    } catch {
+      if (formMessage) {
+        formMessage.textContent =
+          'Hubo un error al enviar el mensaje. Por favor, intente nuevamente.';
+        formMessage.classList.add('error');
+        formMessage.classList.remove('success');
+      }
+    } finally {
+      submitBtn?.classList.remove('loading');
+      (submitBtn as HTMLButtonElement).disabled = false;
+    }
+  });
+
+  // Show/hide "otros" field based on select
+  const serviceSelect = form?.querySelector('#service') as HTMLSelectElement;
+  const otrosField = document.getElementById('otros-field');
+
+  serviceSelect?.addEventListener('change', () => {
+    if (otrosField) {
+      otrosField.style.display = serviceSelect.value === 'otros' ? 'block' : 'none';
+    }
   });
 
   // Real-time validation on blur

@@ -244,7 +244,7 @@ const eventosImages = [
           </div>
           <div class="oferta-body">
             <h4>Conductor de Semi Trailer - Prueba</h4>
-            <a href="#aplicar" class="apply-btn">APLICAR</a>
+            <a href="/aplicar" class="apply-btn">APLICAR</a>
           </div>
         </div>
       </div>
@@ -953,6 +953,11 @@ const eventosImages = [
 </style>
 
 <script>
+  // Redirect #aplicar to /aplicar page
+  if (window.location.hash === '#aplicar') {
+    window.location.replace('/aplicar');
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     // Comunidad Carousel
     const comunidadImages = document.querySelectorAll('.comunidad-img');
@@ -1053,5 +1058,65 @@ _Por favor, adjunte su CV en este chat._`;
     }, observerOptions);
 
     revealElements.forEach(el => revealObserver.observe(el));
+
+    // --- API Integration: Update gallery images from backend ---
+    const API_URL = 'http://localhost:8000';
+
+    // Update Equipo gallery
+    fetch(`${API_URL}/api/gallery/equipo/`)
+      .then(res => res.json())
+      .then(data => {
+        const items = data.results || data;
+        if (!items.length) return;
+        const galleryItems = document.querySelectorAll('.equipo-gallery-item');
+        // Items are duplicated for infinite scroll, so update both halves
+        const half = galleryItems.length / 2;
+        items.forEach((item: any, i: number) => {
+          if (i >= half) return;
+          const el = galleryItems[i];
+          const elDupe = galleryItems[i + half];
+          const img = el?.querySelector('img');
+          const imgDupe = elDupe?.querySelector('img');
+          const nombre = el?.querySelector('.equipo-nombre');
+          const nombreDupe = elDupe?.querySelector('.equipo-nombre');
+          const comentario = el?.querySelector('.equipo-comentario');
+          const comentarioDupe = elDupe?.querySelector('.equipo-comentario');
+          if (img) { img.src = item.image; img.alt = item.title || img.alt; }
+          if (imgDupe) { imgDupe.src = item.image; imgDupe.alt = item.title || imgDupe.alt; }
+          if (nombre) nombre.textContent = item.person_name || nombre.textContent;
+          if (nombreDupe) nombreDupe.textContent = item.person_name || nombreDupe.textContent;
+          if (comentario) comentario.textContent = `"${item.person_comment || ''}"`;
+          if (comentarioDupe) comentarioDupe.textContent = `"${item.person_comment || ''}"`;
+        });
+      })
+      .catch(() => {});
+
+    // Update Eventos gallery
+    fetch(`${API_URL}/api/gallery/eventos/`)
+      .then(res => res.json())
+      .then(data => {
+        const items = data.results || data;
+        if (!items.length) return;
+        const eventoItems = document.querySelectorAll('.evento-item img');
+        items.forEach((item: any, i: number) => {
+          const img = eventoItems[i] as HTMLImageElement;
+          if (img) { img.src = item.image; img.alt = item.title || img.alt; }
+        });
+      })
+      .catch(() => {});
+
+    // Update Comunidad carousel
+    fetch(`${API_URL}/api/gallery/comunidad/`)
+      .then(res => res.json())
+      .then(data => {
+        const items = data.results || data;
+        if (!items.length) return;
+        const comunidadImgs = document.querySelectorAll('.comunidad-img');
+        items.forEach((item: any, i: number) => {
+          const img = comunidadImgs[i] as HTMLImageElement;
+          if (img) { img.src = item.image; img.alt = item.title || img.alt; }
+        });
+      })
+      .catch(() => {});
   });
 </script>

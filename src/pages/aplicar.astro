@@ -1,0 +1,1306 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Aplicar - Postulacion Completa"
+  description="Completa tu postulacion para trabajar en BRIANE. Formulario de 3 pasos para enviar tu informacion."
+>
+  <!-- Hero -->
+  <section class="wizard-hero">
+    <div class="container">
+      <h1>Postulacion Laboral</h1>
+      <p>Completa el formulario en 3 simples pasos</p>
+    </div>
+  </section>
+
+  <!-- Wizard -->
+  <section class="wizard-section section">
+    <div class="wizard-container">
+      <!-- Progress Bar -->
+      <div class="wizard-progress">
+        <div class="progress-step active" data-step="1">
+          <div class="step-circle">1</div>
+          <span class="step-label">Inicio</span>
+        </div>
+        <div class="progress-line"></div>
+        <div class="progress-step" data-step="2">
+          <div class="step-circle">2</div>
+          <span class="step-label">Informacion</span>
+        </div>
+        <div class="progress-line"></div>
+        <div class="progress-step" data-step="3">
+          <div class="step-circle">3</div>
+          <span class="step-label">Preguntas</span>
+        </div>
+      </div>
+
+      <!-- Wizard Content -->
+      <form id="wizard-form" enctype="multipart/form-data">
+        <!-- Step 1: Inicio -->
+        <div class="wizard-step" id="step-1">
+          <h2 class="step-title">¿Tienes curriculum?</h2>
+          <p class="step-description">Selecciona una opcion para comenzar tu postulacion</p>
+          <div class="start-cards">
+            <button type="button" class="start-card" data-has-cv="false">
+              <div class="start-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="8.5" cy="7" r="4"></circle>
+                  <line x1="20" y1="8" x2="20" y2="14"></line>
+                  <line x1="23" y1="11" x2="17" y2="11"></line>
+                </svg>
+              </div>
+              <h3>Sin CV</h3>
+              <p>Completare mi informacion manualmente</p>
+            </button>
+            <button type="button" class="start-card" data-has-cv="true" id="card-upload-cv">
+              <div class="start-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="12" y1="18" x2="12" y2="12"></line>
+                  <line x1="9" y1="15" x2="15" y2="15"></line>
+                </svg>
+              </div>
+              <h3>Cargar curriculum</h3>
+              <p>Adjuntare mi CV y completare la informacion</p>
+              <span class="cv-file-name" id="cv-selected-name" style="display:none;"></span>
+            </button>
+            <input type="file" id="cv-upload-hidden" accept=".pdf,.doc,.docx" style="display:none;" />
+          </div>
+        </div>
+
+        <!-- Step 2: Informacion Personal -->
+        <div class="wizard-step" id="step-2" style="display:none;">
+          <h2 class="step-title">Informacion Personal</h2>
+
+          <!-- Contacto -->
+          <fieldset class="form-fieldset">
+            <legend>Datos de Contacto</legend>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="title">Titulo</label>
+                <select id="title" name="title">
+                  <option value="">Seleccionar</option>
+                  <option value="Sr">Sr.</option>
+                  <option value="Sra">Sra.</option>
+                  <option value="Srta">Srta.</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="preferred_language">Idioma preferido</label>
+                <select id="preferred_language" name="preferred_language">
+                  <option value="es">Espanol</option>
+                  <option value="en">Ingles</option>
+                  <option value="pt">Portugues</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="first_name">Nombres <span class="required">*</span></label>
+                <input type="text" id="first_name" name="first_name" required />
+              </div>
+              <div class="form-group">
+                <label for="last_name">Apellidos <span class="required">*</span></label>
+                <input type="text" id="last_name" name="last_name" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Correo electronico <span class="required">*</span></label>
+                <input type="email" id="email" name="email" required />
+              </div>
+              <div class="form-group">
+                <label for="phone">Telefono <span class="required">*</span></label>
+                <input type="tel" id="phone" name="phone" required />
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Direccion -->
+          <fieldset class="form-fieldset">
+            <legend>Direccion</legend>
+            <div class="form-group">
+              <label for="address">Direccion</label>
+              <input type="text" id="address" name="address" />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="postal_code">Codigo postal</label>
+                <input type="text" id="postal_code" name="postal_code" />
+              </div>
+              <div class="form-group">
+                <label for="city">Ciudad</label>
+                <input type="text" id="city" name="city" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="state">Departamento / Estado</label>
+                <input type="text" id="state" name="state" />
+              </div>
+              <div class="form-group">
+                <label for="country">Pais</label>
+                <input type="text" id="country" name="country" />
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Experiencia Profesional (repeatable) -->
+          <fieldset class="form-fieldset">
+            <legend>Experiencia Profesional</legend>
+            <div id="work-experiences-container">
+              <!-- JS adds entries here -->
+            </div>
+            <button type="button" class="add-entry-btn" id="add-work-exp">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Agregar experiencia
+            </button>
+          </fieldset>
+
+          <!-- Formacion Academica (repeatable) -->
+          <fieldset class="form-fieldset">
+            <legend>Formacion Academica</legend>
+            <div id="academic-formations-container">
+              <!-- JS adds entries here -->
+            </div>
+            <button type="button" class="add-entry-btn" id="add-academic">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Agregar formacion
+            </button>
+          </fieldset>
+
+          <!-- Archivos -->
+          <fieldset class="form-fieldset" id="files-fieldset">
+            <legend>Archivos</legend>
+            <div class="form-group" id="cv-file-group">
+              <label for="cv_file">Curriculum Vitae <span class="required" id="cv-required" style="display:none;">*</span></label>
+              <input type="file" id="cv_file" name="cv_file" accept=".pdf,.doc,.docx" />
+            </div>
+            <div class="form-group">
+              <label for="cover_letter">Carta de presentacion</label>
+              <input type="file" id="cover_letter" name="cover_letter" accept=".pdf,.doc,.docx" />
+            </div>
+            <div class="form-group">
+              <label for="certificates">Certificados</label>
+              <input type="file" id="certificates" name="certificates" accept=".pdf,.doc,.docx,.jpg,.png" />
+            </div>
+            <div class="form-group">
+              <label for="other_files">Otros archivos</label>
+              <input type="file" id="other_files" name="other_files" accept=".pdf,.doc,.docx,.jpg,.png" />
+            </div>
+          </fieldset>
+
+          <!-- Puesto -->
+          <fieldset class="form-fieldset">
+            <legend>Puesto de interes</legend>
+            <div class="form-group">
+              <label for="position">Puesto</label>
+              <select id="position" name="position">
+                <option value="">Seleccionar puesto (opcional)</option>
+              </select>
+            </div>
+          </fieldset>
+
+          <div class="step-buttons">
+            <button type="button" class="btn-secondary" id="btn-back-1">Cancelar</button>
+            <button type="button" class="btn-primary" id="btn-next-2">Guardar y avanzar</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Preguntas Especificas -->
+        <div class="wizard-step" id="step-3" style="display:none;">
+          <h2 class="step-title">Preguntas Especificas</h2>
+
+          <!-- Contacto rapido + CV (solo visible con "Cargar curriculum") -->
+          <div id="cv-quick-section" style="display:none;">
+            <fieldset class="form-fieldset">
+              <legend>Datos de Contacto</legend>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="cv_first_name">Nombres <span class="required">*</span></label>
+                  <input type="text" id="cv_first_name" />
+                </div>
+                <div class="form-group">
+                  <label for="cv_last_name">Apellidos <span class="required">*</span></label>
+                  <input type="text" id="cv_last_name" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="cv_email">Correo electronico <span class="required">*</span></label>
+                  <input type="email" id="cv_email" />
+                </div>
+                <div class="form-group">
+                  <label for="cv_phone">Telefono <span class="required">*</span></label>
+                  <input type="tel" id="cv_phone" />
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="form-fieldset">
+              <legend>Puesto de interes</legend>
+              <div class="form-group">
+                <label for="cv_position">Puesto</label>
+                <select id="cv_position">
+                  <option value="">Seleccionar puesto (opcional)</option>
+                </select>
+              </div>
+            </fieldset>
+          </div>
+
+          <fieldset class="form-fieldset">
+            <legend>Disponibilidad</legend>
+            <div class="radio-group-row">
+              <div class="radio-question">
+                <span class="radio-label">¿Tiene disponibilidad inmediata?</span>
+                <div class="radio-options">
+                  <label><input type="radio" name="available_immediately" value="true" /> Si</label>
+                  <label><input type="radio" name="available_immediately" value="false" checked /> No</label>
+                </div>
+              </div>
+              <div class="radio-question">
+                <span class="radio-label">¿Disponible para viajar?</span>
+                <div class="radio-options">
+                  <label><input type="radio" name="available_travel" value="true" /> Si</label>
+                  <label><input type="radio" name="available_travel" value="false" checked /> No</label>
+                </div>
+              </div>
+              <div class="radio-question">
+                <span class="radio-label">¿Disponible para reubicacion?</span>
+                <div class="radio-options">
+                  <label><input type="radio" name="available_relocate" value="true" /> Si</label>
+                  <label><input type="radio" name="available_relocate" value="false" checked /> No</label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-fieldset">
+            <legend>Licencia y Vehiculo</legend>
+            <div class="radio-question">
+              <span class="radio-label">¿Tiene licencia de conducir?</span>
+              <div class="radio-options">
+                <label><input type="radio" name="has_driver_license" value="true" /> Si</label>
+                <label><input type="radio" name="has_driver_license" value="false" checked /> No</label>
+              </div>
+            </div>
+            <div class="conditional-field" id="driver-license-detail" style="display:none;">
+              <div class="form-group">
+                <label for="driver_license_category">Categoria de licencia</label>
+                <input type="text" id="driver_license_category" name="driver_license_category" placeholder="Ej: A-I, A-IIb, A-IIIc" />
+              </div>
+            </div>
+            <div class="radio-question">
+              <span class="radio-label">¿Tiene vehiculo propio?</span>
+              <div class="radio-options">
+                <label><input type="radio" name="has_own_vehicle" value="true" /> Si</label>
+                <label><input type="radio" name="has_own_vehicle" value="false" checked /> No</label>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-fieldset">
+            <legend>Antecedentes y Salud</legend>
+            <div class="radio-question">
+              <span class="radio-label">¿Tiene antecedentes penales?</span>
+              <div class="radio-options">
+                <label><input type="radio" name="has_criminal_record" value="true" /> Si</label>
+                <label><input type="radio" name="has_criminal_record" value="false" checked /> No</label>
+              </div>
+            </div>
+            <div class="conditional-field" id="criminal-record-detail" style="display:none;">
+              <div class="form-group">
+                <label for="criminal_record_detail">Detalle</label>
+                <input type="text" id="criminal_record_detail" name="criminal_record_detail" />
+              </div>
+            </div>
+            <div class="radio-question">
+              <span class="radio-label">¿Tiene problemas de salud relevantes?</span>
+              <div class="radio-options">
+                <label><input type="radio" name="has_health_issues" value="true" /> Si</label>
+                <label><input type="radio" name="has_health_issues" value="false" checked /> No</label>
+              </div>
+            </div>
+            <div class="conditional-field" id="health-issues-detail" style="display:none;">
+              <div class="form-group">
+                <label for="health_issues_detail">Detalle</label>
+                <input type="text" id="health_issues_detail" name="health_issues_detail" />
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-fieldset">
+            <legend>Habilidades y Experiencia</legend>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="english_level">Nivel de ingles</label>
+                <select id="english_level" name="english_level">
+                  <option value="none">Ninguno</option>
+                  <option value="basic">Basico</option>
+                  <option value="intermediate">Intermedio</option>
+                  <option value="advanced">Avanzado</option>
+                  <option value="native">Nativo</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="excel_level">Nivel de Excel</label>
+                <select id="excel_level" name="excel_level">
+                  <option value="none">Ninguno</option>
+                  <option value="basic">Basico</option>
+                  <option value="intermediate">Intermedio</option>
+                  <option value="advanced">Avanzado</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="logistics_experience">Experiencia en logistica</label>
+              <select id="logistics_experience" name="logistics_experience">
+                <option value="none">Ninguna</option>
+                <option value="less_1">Menos de 1 ano</option>
+                <option value="1_3">1 a 3 anos</option>
+                <option value="3_5">3 a 5 anos</option>
+                <option value="more_5">Mas de 5 anos</option>
+              </select>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-fieldset">
+            <legend>Expectativas Salariales</legend>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="current_salary">Salario actual (S/.)</label>
+                <input type="number" id="current_salary" name="current_salary" min="0" placeholder="Opcional" />
+              </div>
+              <div class="form-group">
+                <label for="expected_salary">Salario esperado (S/.)</label>
+                <input type="number" id="expected_salary" name="expected_salary" min="0" placeholder="Opcional" />
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-fieldset">
+            <legend>Informacion Adicional</legend>
+            <div class="form-group">
+              <label for="how_found">¿Como se entero de nosotros?</label>
+              <select id="how_found" name="how_found">
+                <option value="">Seleccionar</option>
+                <option value="web">Pagina web</option>
+                <option value="social">Redes sociales</option>
+                <option value="referral">Referido</option>
+                <option value="job_portal">Portal de empleo</option>
+                <option value="other">Otro</option>
+              </select>
+            </div>
+            <div class="conditional-field" id="how-found-detail" style="display:none;">
+              <div class="form-group">
+                <label for="how_found_detail">Especifique</label>
+                <input type="text" id="how_found_detail" name="how_found_detail" />
+              </div>
+            </div>
+            <div class="radio-question">
+              <span class="radio-label">¿Ha trabajado en BRIANE antes?</span>
+              <div class="radio-options">
+                <label><input type="radio" name="has_worked_here_before" value="true" /> Si</label>
+                <label><input type="radio" name="has_worked_here_before" value="false" checked /> No</label>
+              </div>
+            </div>
+            <div class="conditional-field" id="worked-here-detail" style="display:none;">
+              <div class="form-group">
+                <label for="worked_here_detail">Detalle (puesto, fechas)</label>
+                <input type="text" id="worked_here_detail" name="worked_here_detail" />
+              </div>
+            </div>
+            <div class="radio-question">
+              <span class="radio-label">¿Tiene familiares en la empresa?</span>
+              <div class="radio-options">
+                <label><input type="radio" name="has_relatives_here" value="true" /> Si</label>
+                <label><input type="radio" name="has_relatives_here" value="false" checked /> No</label>
+              </div>
+            </div>
+            <div class="conditional-field" id="relatives-detail" style="display:none;">
+              <div class="form-group">
+                <label for="relatives_detail">Nombre y parentesco</label>
+                <input type="text" id="relatives_detail" name="relatives_detail" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="additional_info">Informacion adicional</label>
+              <textarea id="additional_info" name="additional_info" rows="3" placeholder="Algo mas que quiera contarnos..."></textarea>
+            </div>
+          </fieldset>
+
+          <div class="step-buttons">
+            <button type="button" class="btn-secondary" id="btn-back-2">Volver</button>
+            <button type="button" class="btn-primary" id="btn-submit">Enviar postulacion</button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Messages -->
+      <div class="form-message" id="form-message" style="display:none;"></div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .wizard-hero {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-2xl) 0;
+    margin-top: var(--header-height);
+    text-align: center;
+  }
+
+  .wizard-hero h1 {
+    font-size: var(--text-3xl);
+    color: var(--color-white);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .wizard-hero p {
+    font-size: var(--text-lg);
+    opacity: 0.9;
+    margin: 0;
+  }
+
+  .wizard-section {
+    padding: var(--spacing-3xl) var(--spacing-md);
+  }
+
+  .wizard-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Progress Bar */
+  .wizard-progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-3xl);
+    gap: 0;
+  }
+
+  .progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+    position: relative;
+  }
+
+  .step-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--color-gray-300);
+    color: var(--color-gray-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: var(--font-bold);
+    font-size: var(--text-base);
+    transition: all var(--transition-base);
+  }
+
+  .progress-step.active .step-circle,
+  .progress-step.completed .step-circle {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .step-label {
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+    font-weight: var(--font-medium);
+    transition: color var(--transition-base);
+  }
+
+  .progress-step.active .step-label,
+  .progress-step.completed .step-label {
+    color: var(--color-primary);
+    font-weight: var(--font-semibold);
+  }
+
+  .progress-line {
+    flex: 1;
+    height: 3px;
+    background-color: var(--color-gray-300);
+    margin: 0 var(--spacing-sm);
+    margin-bottom: 20px;
+    max-width: 120px;
+    transition: background-color var(--transition-base);
+  }
+
+  .progress-line.active {
+    background-color: var(--color-primary);
+  }
+
+  /* Step Titles */
+  .step-title {
+    font-size: var(--text-2xl);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-sm);
+    text-align: center;
+  }
+
+  .step-description {
+    text-align: center;
+    color: var(--color-gray-600);
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  /* Start Cards (Step 1) */
+  .start-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 500px) {
+    .start-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .start-card {
+    background-color: var(--color-white);
+    border: 2px solid var(--color-gray-200);
+    border-radius: var(--radius-card);
+    padding: var(--spacing-xl);
+    text-align: center;
+    cursor: pointer;
+    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .start-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-primary);
+  }
+
+  .start-card-icon {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .start-card h3 {
+    font-size: var(--text-lg);
+    color: var(--color-gray-900);
+    margin: 0;
+  }
+
+  .start-card p {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .cv-file-name {
+    font-size: var(--text-xs);
+    color: var(--color-primary);
+    font-weight: var(--font-semibold);
+    background-color: rgba(227, 39, 29, 0.08);
+    padding: 2px var(--spacing-sm);
+    border-radius: var(--radius-md);
+    word-break: break-all;
+  }
+
+  /* Form Fieldsets */
+  .form-fieldset {
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--radius-card);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .form-fieldset legend {
+    font-family: var(--font-heading);
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    color: var(--color-primary);
+    padding: 0 var(--spacing-sm);
+  }
+
+  /* Form Groups */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .form-group:last-child {
+    margin-bottom: 0;
+  }
+
+  .form-group label {
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-gray-700);
+  }
+
+  .required {
+    color: var(--color-primary);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    font-family: var(--font-primary);
+    transition: border-color var(--transition-fast);
+    width: 100%;
+    background-color: var(--color-white);
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(227, 39, 29, 0.1);
+  }
+
+  .form-group input.error,
+  .form-group select.error {
+    border-color: var(--color-primary);
+  }
+
+  .form-group input[type="file"] {
+    padding: var(--spacing-sm);
+    border-style: dashed;
+    cursor: pointer;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+  }
+
+  @media (max-width: 640px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Radio Groups */
+  .radio-group-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .radio-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--color-gray-100);
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+  }
+
+  .radio-question:last-child {
+    border-bottom: none;
+  }
+
+  .radio-label {
+    font-size: var(--text-sm);
+    color: var(--color-gray-700);
+    font-weight: var(--font-medium);
+  }
+
+  .radio-options {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+
+  .radio-options label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--text-sm);
+    color: var(--color-gray-700);
+    cursor: pointer;
+  }
+
+  .radio-options input[type="radio"] {
+    accent-color: var(--color-primary);
+  }
+
+  .conditional-field {
+    padding-left: var(--spacing-md);
+    border-left: 3px solid var(--color-primary-light);
+    margin-bottom: var(--spacing-md);
+  }
+
+  /* Repeatable Entries */
+  .repeatable-entry {
+    background-color: var(--color-gray-50);
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    position: relative;
+  }
+
+  .remove-entry-btn {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: var(--color-gray-200);
+    color: var(--color-gray-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    font-size: var(--text-lg);
+    line-height: 1;
+    transition: all var(--transition-fast);
+  }
+
+  .remove-entry-btn:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .add-entry-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 1px dashed var(--color-primary);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .add-entry-btn:hover {
+    background-color: rgba(227, 39, 29, 0.05);
+  }
+
+  /* Step Buttons */
+  .step-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-2xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--color-gray-200);
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: var(--spacing-sm) var(--spacing-xl);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-secondary {
+    background-color: var(--color-gray-200);
+    color: var(--color-gray-700);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--color-gray-300);
+  }
+
+  /* Form Message */
+  .form-message {
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    text-align: center;
+    font-weight: var(--font-medium);
+  }
+
+  .form-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+
+  .form-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .wizard-hero h1 {
+      font-size: var(--text-2xl);
+    }
+
+    .step-title {
+      font-size: var(--text-xl);
+    }
+
+    .step-label {
+      font-size: 0.65rem;
+    }
+
+    .step-circle {
+      width: 34px;
+      height: 34px;
+      font-size: var(--text-sm);
+    }
+
+    .step-buttons {
+      flex-direction: column-reverse;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const API_URL = 'http://localhost:8000';
+    let hasCV = false;
+    let currentStep = 1;
+
+    // Elements
+    const steps = document.querySelectorAll('.wizard-step');
+    const progressSteps = document.querySelectorAll('.progress-step');
+    const progressLines = document.querySelectorAll('.progress-line');
+    const formMessage = document.getElementById('form-message')!;
+    const form = document.getElementById('wizard-form') as HTMLFormElement;
+
+    // --- Navigation ---
+    function goToStep(n: number) {
+      steps.forEach(s => (s as HTMLElement).style.display = 'none');
+      const target = document.getElementById(`step-${n}`);
+      if (target) target.style.display = 'block';
+
+      progressSteps.forEach((ps, i) => {
+        const stepNum = i + 1;
+        ps.classList.remove('active', 'completed');
+        if (stepNum < n) ps.classList.add('completed');
+        if (stepNum === n) ps.classList.add('active');
+      });
+
+      progressLines.forEach((pl, i) => {
+        pl.classList.toggle('active', i < n - 1);
+      });
+
+      currentStep = n;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // --- Step 1: Start Cards ---
+    const cvQuickSection = document.getElementById('cv-quick-section')!;
+    const hiddenFileInput = document.getElementById('cv-upload-hidden') as HTMLInputElement;
+    const cvSelectedName = document.getElementById('cv-selected-name')!;
+
+    // "Sin CV" card
+    document.querySelector('.start-card[data-has-cv="false"]')?.addEventListener('click', () => {
+      hasCV = false;
+      cvQuickSection.style.display = 'none';
+      goToStep(2);
+    });
+
+    // "Cargar curriculum" card → abre file picker
+    document.getElementById('card-upload-cv')?.addEventListener('click', () => {
+      hiddenFileInput.click();
+    });
+
+    // Al seleccionar archivo → avanza a paso 3
+    hiddenFileInput?.addEventListener('change', () => {
+      if (hiddenFileInput.files && hiddenFileInput.files.length > 0) {
+        hasCV = true;
+        cvQuickSection.style.display = 'block';
+        cvSelectedName.textContent = hiddenFileInput.files[0].name;
+        cvSelectedName.style.display = 'inline-block';
+        goToStep(3);
+      }
+    });
+
+    // --- Step 2 buttons ---
+    document.getElementById('btn-back-1')?.addEventListener('click', () => goToStep(1));
+    document.getElementById('btn-next-2')?.addEventListener('click', () => {
+      if (validateStep2()) goToStep(3);
+    });
+
+    // --- Step 3 buttons ---
+    document.getElementById('btn-back-2')?.addEventListener('click', () => {
+      goToStep(hasCV ? 1 : 2);
+    });
+    document.getElementById('btn-submit')?.addEventListener('click', () => {
+      if (hasCV && !validateCVQuick()) return;
+      submitApplication();
+    });
+
+    // --- Validation ---
+    function validateStep2(): boolean {
+      let valid = true;
+      const requiredFields = ['first_name', 'last_name', 'email', 'phone'];
+      requiredFields.forEach(id => {
+        const input = document.getElementById(id) as HTMLInputElement;
+        if (!input.value.trim()) {
+          input.classList.add('error');
+          valid = false;
+        } else {
+          input.classList.remove('error');
+        }
+      });
+
+      const emailInput = document.getElementById('email') as HTMLInputElement;
+      if (emailInput.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+        emailInput.classList.add('error');
+        valid = false;
+      }
+
+      if (hasCV) {
+        const cvFile = document.getElementById('cv_file') as HTMLInputElement;
+        if (!cvFile.files || cvFile.files.length === 0) {
+          cvFile.classList.add('error');
+          valid = false;
+        } else {
+          cvFile.classList.remove('error');
+        }
+      }
+
+      if (!valid) {
+        const firstError = document.querySelector('.error') as HTMLElement;
+        if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return valid;
+    }
+
+    // --- Validation: CV Quick section (step 3 when hasCV) ---
+    function validateCVQuick(): boolean {
+      let valid = true;
+      ['cv_first_name', 'cv_last_name', 'cv_email', 'cv_phone'].forEach(id => {
+        const input = document.getElementById(id) as HTMLInputElement;
+        if (!input.value.trim()) {
+          input.classList.add('error');
+          valid = false;
+        } else {
+          input.classList.remove('error');
+        }
+      });
+
+      const emailInput = document.getElementById('cv_email') as HTMLInputElement;
+      if (emailInput.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+        emailInput.classList.add('error');
+        valid = false;
+      }
+
+      if (!valid) {
+        const firstError = document.querySelector('#cv-quick-section .error') as HTMLElement;
+        if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return valid;
+    }
+
+    // --- Repeatable: Work Experiences ---
+    const workContainer = document.getElementById('work-experiences-container')!;
+    document.getElementById('add-work-exp')?.addEventListener('click', () => {
+      const entry = document.createElement('div');
+      entry.className = 'repeatable-entry';
+      entry.innerHTML = `
+        <button type="button" class="remove-entry-btn">&times;</button>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Empresa</label>
+            <input type="text" class="we-company" />
+          </div>
+          <div class="form-group">
+            <label>Puesto</label>
+            <input type="text" class="we-position" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Fecha inicio</label>
+            <input type="date" class="we-start" />
+          </div>
+          <div class="form-group">
+            <label>Fecha fin</label>
+            <input type="date" class="we-end" />
+          </div>
+        </div>
+      `;
+      entry.querySelector('.remove-entry-btn')!.addEventListener('click', () => entry.remove());
+      workContainer.appendChild(entry);
+    });
+
+    // --- Repeatable: Academic Formations ---
+    const academicContainer = document.getElementById('academic-formations-container')!;
+    document.getElementById('add-academic')?.addEventListener('click', () => {
+      const entry = document.createElement('div');
+      entry.className = 'repeatable-entry';
+      entry.innerHTML = `
+        <button type="button" class="remove-entry-btn">&times;</button>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Especialidad</label>
+            <input type="text" class="af-subject" />
+          </div>
+          <div class="form-group">
+            <label>Grado</label>
+            <select class="af-degree">
+              <option value="">Seleccionar</option>
+              <option value="secondary">Secundaria</option>
+              <option value="technical">Tecnico</option>
+              <option value="bachelor">Bachiller</option>
+              <option value="licentiate">Licenciatura</option>
+              <option value="master">Maestria</option>
+              <option value="doctorate">Doctorado</option>
+              <option value="other">Otro</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Universidad / Instituto</label>
+            <input type="text" class="af-university" />
+          </div>
+          <div class="form-group">
+            <label>Fecha de graduacion</label>
+            <input type="date" class="af-graduation" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Nota / Promedio</label>
+          <input type="text" class="af-grade" />
+        </div>
+      `;
+      entry.querySelector('.remove-entry-btn')!.addEventListener('click', () => entry.remove());
+      academicContainer.appendChild(entry);
+    });
+
+    // --- Conditional Fields ---
+    function setupConditional(radioName: string, detailId: string) {
+      document.querySelectorAll(`input[name="${radioName}"]`).forEach(radio => {
+        radio.addEventListener('change', () => {
+          const detail = document.getElementById(detailId);
+          if (detail) {
+            detail.style.display = (radio as HTMLInputElement).value === 'true' ? 'block' : 'none';
+          }
+        });
+      });
+    }
+
+    setupConditional('has_driver_license', 'driver-license-detail');
+    setupConditional('has_criminal_record', 'criminal-record-detail');
+    setupConditional('has_health_issues', 'health-issues-detail');
+    setupConditional('has_worked_here_before', 'worked-here-detail');
+    setupConditional('has_relatives_here', 'relatives-detail');
+
+    // how_found conditional
+    const howFoundSelect = document.getElementById('how_found') as HTMLSelectElement;
+    howFoundSelect?.addEventListener('change', () => {
+      const detail = document.getElementById('how-found-detail');
+      if (detail) {
+        detail.style.display = howFoundSelect.value === 'other' ? 'block' : 'none';
+      }
+    });
+
+    // --- Collect Form Data ---
+    function collectFormData(): FormData {
+      const fd = new FormData();
+
+      fd.append('has_cv', String(hasCV));
+
+      if (hasCV) {
+        // Flujo CV: datos de contacto desde seccion rapida
+        fd.append('first_name', (document.getElementById('cv_first_name') as HTMLInputElement).value);
+        fd.append('last_name', (document.getElementById('cv_last_name') as HTMLInputElement).value);
+        fd.append('email', (document.getElementById('cv_email') as HTMLInputElement).value);
+        fd.append('phone', (document.getElementById('cv_phone') as HTMLInputElement).value);
+        fd.append('position', (document.getElementById('cv_position') as HTMLSelectElement).value);
+
+        // CV file (cargado desde paso 1)
+        if (hiddenFileInput?.files && hiddenFileInput.files.length > 0) {
+          fd.append('cv_file', hiddenFileInput.files[0]);
+        }
+      } else {
+        // Flujo sin CV: datos completos del paso 2
+        const step2Fields = [
+          'title', 'first_name', 'last_name', 'email', 'phone',
+          'address', 'postal_code', 'city', 'state', 'country',
+          'preferred_language', 'position',
+        ];
+        step2Fields.forEach(id => {
+          const el = document.getElementById(id) as HTMLInputElement | HTMLSelectElement;
+          if (el) fd.append(id, el.value);
+        });
+
+        // Files del paso 2
+        const fileFields = ['cv_file', 'cover_letter', 'certificates', 'other_files'];
+        fileFields.forEach(id => {
+          const input = document.getElementById(id) as HTMLInputElement;
+          if (input?.files && input.files.length > 0) {
+            fd.append(id, input.files[0]);
+          }
+        });
+
+        // Work experiences (nested JSON)
+        const workExps: any[] = [];
+        workContainer.querySelectorAll('.repeatable-entry').forEach(entry => {
+          const company = (entry.querySelector('.we-company') as HTMLInputElement)?.value || '';
+          const position = (entry.querySelector('.we-position') as HTMLInputElement)?.value || '';
+          const start_date = (entry.querySelector('.we-start') as HTMLInputElement)?.value || null;
+          const end_date = (entry.querySelector('.we-end') as HTMLInputElement)?.value || null;
+          if (company || position) {
+            workExps.push({ company, position, start_date, end_date });
+          }
+        });
+        fd.append('work_experiences', JSON.stringify(workExps));
+
+        // Academic formations (nested JSON)
+        const academics: any[] = [];
+        academicContainer.querySelectorAll('.repeatable-entry').forEach(entry => {
+          const subject = (entry.querySelector('.af-subject') as HTMLInputElement)?.value || '';
+          const degree = (entry.querySelector('.af-degree') as HTMLSelectElement)?.value || '';
+          const graduation_date = (entry.querySelector('.af-graduation') as HTMLInputElement)?.value || null;
+          const university = (entry.querySelector('.af-university') as HTMLInputElement)?.value || '';
+          const grade = (entry.querySelector('.af-grade') as HTMLInputElement)?.value || '';
+          if (subject || university) {
+            academics.push({ subject, degree, graduation_date, university, grade });
+          }
+        });
+        fd.append('academic_formations', JSON.stringify(academics));
+      }
+
+      // Campos comunes del paso 3 (preguntas)
+      const step3Fields = [
+        'driver_license_category', 'criminal_record_detail',
+        'health_issues_detail', 'how_found', 'how_found_detail',
+        'worked_here_detail', 'relatives_detail', 'additional_info',
+        'english_level', 'excel_level', 'logistics_experience',
+        'expected_salary', 'current_salary',
+      ];
+      step3Fields.forEach(id => {
+        const el = document.getElementById(id) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+        if (el) fd.append(id, el.value);
+      });
+
+      // Radio fields (siempre en paso 3)
+      const radioFields = [
+        'available_immediately', 'available_travel', 'available_relocate',
+        'has_driver_license', 'has_own_vehicle',
+        'has_criminal_record', 'has_health_issues',
+        'has_worked_here_before', 'has_relatives_here',
+      ];
+      radioFields.forEach(name => {
+        const checked = document.querySelector(`input[name="${name}"]:checked`) as HTMLInputElement;
+        fd.append(name, checked ? checked.value : 'false');
+      });
+
+      return fd;
+    }
+
+    // --- Submit ---
+    async function submitApplication() {
+      const submitBtn = document.getElementById('btn-submit') as HTMLButtonElement;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+      formMessage.style.display = 'none';
+
+      try {
+        const fd = collectFormData();
+        const res = await fetch(`${API_URL}/api/apply-full/`, {
+          method: 'POST',
+          body: fd,
+        });
+
+        if (res.ok) {
+          formMessage.className = 'form-message success';
+          formMessage.textContent = '¡Postulacion enviada correctamente! Nos pondremos en contacto contigo pronto.';
+          formMessage.style.display = 'block';
+          form.style.display = 'none';
+          document.querySelector('.wizard-progress')!.remove();
+        } else {
+          const data = await res.json();
+          let errorMsg = 'Error al enviar la postulacion.';
+          if (data && typeof data === 'object') {
+            const errors = Object.entries(data).map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(', ') : v}`);
+            if (errors.length) errorMsg = errors.join('\n');
+          }
+          formMessage.className = 'form-message error';
+          formMessage.textContent = errorMsg;
+          formMessage.style.display = 'block';
+        }
+      } catch {
+        formMessage.className = 'form-message error';
+        formMessage.textContent = 'Error de conexion. Intente nuevamente.';
+        formMessage.style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar postulacion';
+      }
+    }
+
+    // --- Load positions from API ---
+    fetch(`${API_URL}/api/jobs/`)
+      .then(r => r.json())
+      .then((data: any) => {
+        const items = data.results || data;
+        const selects = [
+          document.getElementById('position') as HTMLSelectElement,
+          document.getElementById('cv_position') as HTMLSelectElement,
+        ];
+        if (Array.isArray(items)) {
+          selects.forEach(select => {
+            if (!select) return;
+            items.forEach((job: any) => {
+              const opt = document.createElement('option');
+              opt.value = job.id;
+              opt.textContent = job.title;
+              select.appendChild(opt);
+            });
+          });
+        }
+      })
+      .catch(() => {});
+  });
+</script>

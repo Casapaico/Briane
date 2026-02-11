@@ -1,107 +1,47 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
-import NewsCard from '../../components/ui/NewsCard.astro';
-import type { NewsItem } from '../../types';
-
-const news: NewsItem[] = [
-  {
-    title: 'BRIANE amplia su flota con 20 nuevas unidades',
-    slug: 'briane-amplia-flota-nuevas-unidades',
-    excerpt:
-      'Con el objetivo de mejorar nuestra capacidad operativa, hemos incorporado 20 nuevos vehiculos a nuestra flota de transporte.',
-    date: '2024-01-15',
-    category: 'Empresa',
-  },
-  {
-    title: 'Renovamos nuestra certificacion ISO 9001:2015',
-    slug: 'renovacion-certificacion-iso-9001',
-    excerpt:
-      'Por tercer ano consecutivo, BRIANE renueva su certificacion de calidad ISO 9001:2015, reafirmando nuestro compromiso con la excelencia.',
-    date: '2024-01-10',
-    category: 'Certificaciones',
-  },
-  {
-    title: 'Nuevo centro de distribucion en Arequipa',
-    slug: 'nuevo-centro-distribucion-arequipa',
-    excerpt:
-      'Inauguramos un moderno centro de distribucion en Arequipa para mejorar nuestra cobertura en el sur del pais.',
-    date: '2024-01-05',
-    category: 'Expansion',
-  },
-  {
-    title: 'Implementamos sistema de tracking en tiempo real',
-    slug: 'implementacion-sistema-tracking',
-    excerpt:
-      'Lanzamos nuestra nueva plataforma de seguimiento que permite a los clientes monitorear sus envios en tiempo real.',
-    date: '2023-12-20',
-    category: 'Tecnologia',
-  },
-  {
-    title: 'BRIANE recibe premio a la excelencia logistica',
-    slug: 'premio-excelencia-logistica',
-    excerpt:
-      'Fuimos reconocidos por la Camara de Comercio de Lima con el premio a la Excelencia Logistica 2023.',
-    date: '2023-12-15',
-    category: 'Reconocimientos',
-  },
-  {
-    title: 'Programa de capacitacion para conductores',
-    slug: 'programa-capacitacion-conductores',
-    excerpt:
-      'Mas de 100 conductores completaron nuestro programa de capacitacion en seguridad vial y atencion al cliente.',
-    date: '2023-12-10',
-    category: 'Recursos Humanos',
-  },
-];
 ---
 
 <PageLayout
   title="Noticias"
-  description="Ultimas noticias y novedades de BRIANE. Mantente informado sobre nuestra empresa y el sector logistico."
+  description="Últimas noticias y novedades de BRIANE. Mantente informado sobre nuestra empresa y el sector logístico."
   heroTitle="Noticias"
   heroSubtitle="Mantente informado sobre BRIANE"
 >
   <section class="news-section section">
     <div class="container">
-      <div class="news-grid stagger-children">
-        {news.map((item) => <NewsCard news={item} />)}
+      <!-- Loading state -->
+      <div class="news-loading" id="news-loading">
+        <div class="loading-spinner"></div>
+        <p>Cargando noticias...</p>
       </div>
 
-      <div class="pagination reveal">
-        <button class="pagination-btn" disabled>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+      <!-- Error state -->
+      <div class="news-error" id="news-error" style="display:none;">
+        <p>No se pudieron cargar las noticias. Intente nuevamente.</p>
+        <button class="retry-btn" id="retry-btn">Reintentar</button>
+      </div>
+
+      <!-- Empty state -->
+      <div class="news-empty" id="news-empty" style="display:none;">
+        <p>No hay noticias publicadas por el momento.</p>
+      </div>
+
+      <!-- News grid (populated by JS) -->
+      <div class="news-grid stagger-children" id="news-grid" style="display:none;"></div>
+
+      <!-- Pagination -->
+      <div class="pagination" id="pagination" style="display:none;">
+        <button class="pagination-btn" id="prev-btn" disabled>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
           Anterior
         </button>
-        <div class="pagination-numbers">
-          <button class="pagination-number active">1</button>
-          <button class="pagination-number">2</button>
-          <button class="pagination-number">3</button>
-        </div>
-        <button class="pagination-btn">
+        <div class="pagination-numbers" id="pagination-numbers"></div>
+        <button class="pagination-btn" id="next-btn">
           Siguiente
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
         </button>
@@ -112,9 +52,9 @@ const news: NewsItem[] = [
   <section class="newsletter-section section bg-gray-50">
     <div class="container">
       <div class="newsletter-content reveal">
-        <h2>Suscribete a nuestro boletin</h2>
+        <h2>Suscríbete a nuestro boletín</h2>
         <p>
-          Recibe las ultimas noticias y novedades de BRIANE directamente en tu
+          Recibe las últimas noticias y novedades de BRIANE directamente en tu
           correo.
         </p>
         <form class="newsletter-form">
@@ -122,7 +62,7 @@ const news: NewsItem[] = [
             type="email"
             placeholder="Tu correo electrónico"
             required
-            aria-label="Correo electronico"
+            aria-label="Correo electrónico"
           />
           <button type="submit">Suscribirse</button>
         </form>
@@ -151,6 +91,170 @@ const news: NewsItem[] = [
     }
   }
 
+  .news-loading,
+  .news-error,
+  .news-empty {
+    text-align: center;
+    padding: var(--spacing-3xl) 0;
+    color: var(--color-gray-500);
+  }
+
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--color-gray-200);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto var(--spacing-md);
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .retry-btn {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-xl);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: var(--font-semibold);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+  }
+
+  .retry-btn:hover {
+    background-color: var(--color-primary-dark);
+  }
+
+  /* News card styles (rendered by JS) */
+  .news-grid :global(.news-card) {
+    background-color: var(--color-white);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-gray-100);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .news-grid :global(.news-card:hover) {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .news-grid :global(.news-image) {
+    position: relative;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background-color: var(--color-gray-100);
+  }
+
+  .news-grid :global(.news-image img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .news-grid :global(.news-card:hover .news-image img) {
+    transform: scale(1.05);
+  }
+
+  .news-grid :global(.image-placeholder) {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gray-300);
+  }
+
+  .news-grid :global(.news-category) {
+    position: absolute;
+    top: var(--spacing-sm);
+    left: var(--spacing-sm);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .news-grid :global(.news-content) {
+    padding: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .news-grid :global(.news-date) {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--text-sm);
+    color: var(--color-gray-500);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .news-grid :global(.news-title) {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    line-height: 1.4;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .news-grid :global(.news-title a) {
+    color: var(--color-gray-900);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .news-grid :global(.news-title a:hover) {
+    color: var(--color-primary);
+  }
+
+  .news-grid :global(.news-excerpt) {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .news-grid :global(.news-link) {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-primary);
+    text-decoration: none;
+    margin-top: auto;
+  }
+
+  .news-grid :global(.news-link:hover) {
+    color: var(--color-primary-dark);
+  }
+
+  .news-grid :global(.news-link:hover svg) {
+    transform: translateX(4px);
+  }
+
+  .news-grid :global(.news-link svg) {
+    transition: transform 0.2s ease;
+  }
+
   .pagination {
     display: flex;
     justify-content: center;
@@ -170,6 +274,7 @@ const news: NewsItem[] = [
     background-color: var(--color-white);
     border: 1px solid var(--color-gray-200);
     border-radius: var(--radius-md);
+    cursor: pointer;
     transition: all var(--transition-fast);
   }
 
@@ -188,7 +293,7 @@ const news: NewsItem[] = [
     gap: var(--spacing-xs);
   }
 
-  .pagination-number {
+  .pagination :global(.pagination-number) {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -200,15 +305,16 @@ const news: NewsItem[] = [
     background-color: var(--color-white);
     border: 1px solid var(--color-gray-200);
     border-radius: var(--radius-md);
+    cursor: pointer;
     transition: all var(--transition-fast);
   }
 
-  .pagination-number:hover {
+  .pagination :global(.pagination-number:hover) {
     background-color: var(--color-gray-50);
     border-color: var(--color-gray-300);
   }
 
-  .pagination-number.active {
+  .pagination :global(.pagination-number.active) {
     background-color: var(--color-primary);
     border-color: var(--color-primary);
     color: var(--color-white);
@@ -265,3 +371,154 @@ const news: NewsItem[] = [
     background-color: var(--color-primary-dark);
   }
 </style>
+
+<script>
+  const API_URL = 'http://localhost:8000/api';
+
+  const newsGrid = document.getElementById('news-grid')!;
+  const newsLoading = document.getElementById('news-loading')!;
+  const newsError = document.getElementById('news-error')!;
+  const newsEmpty = document.getElementById('news-empty')!;
+  const pagination = document.getElementById('pagination')!;
+  const paginationNumbers = document.getElementById('pagination-numbers')!;
+  const prevBtn = document.getElementById('prev-btn') as HTMLButtonElement;
+  const nextBtn = document.getElementById('next-btn') as HTMLButtonElement;
+  const retryBtn = document.getElementById('retry-btn')!;
+
+  let currentPage = 1;
+
+  function formatDate(dateStr: string): string {
+    return new Date(dateStr).toLocaleDateString('es-PE', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  }
+
+  function renderNewsCard(item: {
+    title: string;
+    slug: string;
+    excerpt: string;
+    date: string;
+    image: string | null;
+    category: string;
+  }): string {
+    const imageSrc = item.image
+      ? (item.image.startsWith('http') ? item.image : `http://localhost:8000${item.image}`)
+      : '';
+
+    const imageHtml = imageSrc
+      ? `<img src="${imageSrc}" alt="${item.title}" loading="lazy" />`
+      : `<div class="image-placeholder">
+           <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+           </svg>
+         </div>`;
+
+    const categoryHtml = item.category
+      ? `<span class="news-category">${item.category}</span>`
+      : '';
+
+    return `
+      <article class="news-card hover-lift">
+        <div class="news-image">
+          ${imageHtml}
+          ${categoryHtml}
+        </div>
+        <div class="news-content">
+          <time class="news-date" datetime="${item.date}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            ${formatDate(item.date)}
+          </time>
+          <h3 class="news-title">
+            <a href="/noticias/${item.slug}">${item.title}</a>
+          </h3>
+          <p class="news-excerpt">${item.excerpt}</p>
+          <a href="/noticias/${item.slug}" class="news-link">
+            Leer más
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      </article>
+    `;
+  }
+
+  function renderPagination(totalPages: number) {
+    paginationNumbers.innerHTML = '';
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement('button');
+      btn.className = `pagination-number${i === currentPage ? ' active' : ''}`;
+      btn.textContent = String(i);
+      btn.addEventListener('click', () => {
+        currentPage = i;
+        loadNews();
+      });
+      paginationNumbers.appendChild(btn);
+    }
+
+    prevBtn.disabled = currentPage <= 1;
+    nextBtn.disabled = currentPage >= totalPages;
+  }
+
+  async function loadNews() {
+    newsLoading.style.display = '';
+    newsGrid.style.display = 'none';
+    newsError.style.display = 'none';
+    newsEmpty.style.display = 'none';
+    pagination.style.display = 'none';
+
+    try {
+      const response = await fetch(`${API_URL}/news/?page=${currentPage}`);
+      if (!response.ok) throw new Error('Error al cargar noticias');
+
+      const data = await response.json();
+      const results = data.results || [];
+      const count = data.count || 0;
+      const pageSize = 12;
+      const totalPages = Math.ceil(count / pageSize);
+
+      newsLoading.style.display = 'none';
+
+      if (results.length === 0) {
+        newsEmpty.style.display = '';
+        return;
+      }
+
+      newsGrid.innerHTML = results.map(renderNewsCard).join('');
+      newsGrid.style.display = '';
+
+      if (totalPages > 1) {
+        renderPagination(totalPages);
+        pagination.style.display = '';
+      }
+    } catch {
+      newsLoading.style.display = 'none';
+      newsError.style.display = '';
+    }
+  }
+
+  prevBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      loadNews();
+    }
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentPage++;
+    loadNews();
+  });
+
+  retryBtn.addEventListener('click', () => loadNews());
+
+  // Load on page ready
+  loadNews();
+</script>
