@@ -50,18 +50,13 @@ export const companyInfo: CompanyInfo = {
   social: [
     {
       platform: 'Facebook',
-      url: 'https://facebook.com/brianeperu',
+      url: 'https://www.facebook.com/transportesbriane?ref=embed_page',
       icon: 'facebook',
     },
     {
       platform: 'LinkedIn',
       url: 'https://linkedin.com/company/brianeperu',
       icon: 'linkedin',
-    },
-    {
-      platform: 'Instagram',
-      url: 'https://instagram.com/brianeperu',
-      icon: 'instagram',
     },
   ],
 };

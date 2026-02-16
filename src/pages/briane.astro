@@ -2,6 +2,7 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import Stats from '../components/sections/Stats.astro';
 import CallToAction from '../components/sections/CallToAction.astro';
+import DynamicLines from '../components/ui/DynamicLines.astro';
 
 const nosotrosImages = [
   '/images/nosotros/nosotros1.jpg',
@@ -21,82 +22,76 @@ const valores = [
 
 const historiaData = [
   {
-    year: '1980',
+    year: '1982',
     title: 'Origen de la Compañía',
     description: 'Se fusionan las empresas Transportes Caravana y Considex S.A., dedicadas al transporte de minerales y alquiler de maquinarias; dando origen a la Compañía Minera San Martín. Continúan las actividades en la operación de Cemento Andino en Tarma y transporte de yeso para Cemento Lima. Cementos Lima y Cemento Andino, actualmente llamado Unacem, nos contrató para operar la cantera de Atocongo y como resultado de una buena operación nos amplió el contrato a otras canteras, como las ubicadas en Pucará.',
     image: '/images/historia/1980.jpg'
   },
   {
     year: '1985',
-    title: 'Expansión Inicial',
-    description: 'Descripción del año 1985 - Por completar.',
+    title: 'Ampliación de Servicios',
+    description: 'Expansión de nuestra flota vehicular para atender la creciente demanda del sector minero. Incorporación de 15 nuevos camiones de carga pesada y establecimiento de rutas regulares entre Lima y las principales ciudades del interior del país.',
     image: '/images/historia/1985.jpg'
   },
   {
     year: '1990',
-    title: 'Consolidación',
-    description: 'Descripción del año 1990 - Por completar.',
+    title: 'Consolidación Regional',
+    description: 'Apertura de nuestra primera oficina regional en Arequipa, consolidando nuestra presencia en el sur del Perú. Inicio de operaciones de transporte especializado para el sector industrial y construcción.',
     image: '/images/historia/1990.jpg'
   },
   {
     year: '1995',
-    title: 'Crecimiento',
-    description: 'Descripción del año 1995 - Por completar.',
+    title: 'Modernización de Flota',
+    description: 'Renovación completa de la flota con vehículos de última generación. Implementación de sistemas de rastreo satelital GPS para todas nuestras unidades, siendo pioneros en tecnología de seguimiento en tiempo real.',
     image: '/images/historia/1995.jpg'
   },
   {
     year: '2000',
-    title: 'Nuevo Milenio',
-    description: 'Descripción del año 2000 - Por completar.',
+    title: 'Nuevo Milenio - Almacenamiento',
+    description: 'Inauguración de nuestro primer centro de almacenamiento en el Callao con 5,000 m². Certificación ISO 9001 en sistemas de gestión de calidad, reafirmando nuestro compromiso con la excelencia operativa.',
     image: '/images/historia/2000.jpg'
   },
   {
     year: '2005',
-    title: 'Diversificación',
-    description: 'Descripción del año 2005 - Por completar.',
+    title: 'Diversificación de Servicios',
+    description: 'Lanzamiento de SUPERVAN, nuestra división especializada en transporte de carga pesada y servicios portuarios. Ampliación de almacenes a 10,000 m² con tecnología WMS para gestión de inventarios.',
     image: '/images/historia/2005.jpg'
   },
   {
     year: '2010',
-    title: 'Modernización',
-    description: 'Descripción del año 2010 - Por completar.',
+    title: 'Flota Ecológica',
+    description: 'Incorporación de camiones a GNV (Gas Natural Vehicular) a nuestra flota, reduciendo emisiones y contribuyendo al cuidado del medio ambiente. Obtención de certificación BASC en seguridad comercial internacional.',
     image: '/images/historia/2010.jpg'
   },
   {
     year: '2015',
-    title: 'Innovación Tecnológica',
-    description: 'Descripción del año 2015 - Por completar.',
+    title: 'Transformación Digital',
+    description: 'Implementación de plataforma digital para seguimiento de envíos en línea. Lanzamiento de app móvil para clientes, permitiendo trazabilidad 24/7 de su carga y consulta de documentación en tiempo real.',
     image: '/images/historia/2015.jpg'
   },
   {
-    year: '2016',
-    title: 'Nuevos Proyectos',
-    description: 'Descripción del año 2016 - Por completar.',
-    image: '/images/historia/2016.jpg'
-  },
-  {
     year: '2018',
-    title: 'Expansión Nacional',
-    description: 'Descripción del año 2018 - Por completar.',
+    title: 'Expansión Logística Integral',
+    description: 'Ampliación de almacenes a 15,000 m² con áreas especializadas climatizadas y de alta seguridad. Incorporación de 50 nuevas unidades a nuestra flota, llegando a 300 colaboradores en toda la organización.',
     image: '/images/historia/2018.jpg'
   },
   {
     year: '2020',
-    title: 'Adaptación y Resiliencia',
-    description: 'Descripción del año 2020 - Por completar.',
+    title: 'Resiliencia ante la Pandemia',
+    description: 'Durante la pandemia COVID-19, mantuvimos operaciones ininterrumpidas como servicio esencial, transportando alimentos, medicinas y productos de primera necesidad. Implementación de protocolos sanitarios certificados.',
     image: '/images/historia/2020.jpg'
   },
   {
-    year: '2021',
-    title: 'Recuperación',
-    description: 'Descripción del año 2021 - Por completar.',
-    image: '/images/historia/2021.jpg'
+    year: '2022',
+    title: 'Compromiso Sostenible',
+    description: 'Lanzamiento de programa de sostenibilidad ambiental con metas de reducción de huella de carbono. Renovación del 40% de la flota con vehículos Euro V y tecnología de bajo consumo.',
+    image: '/images/historia/2022.jpg'
   },
   {
-    year: '2022',
-    title: 'Sostenibilidad',
-    description: 'Descripción del año 2022 - Por completar.',
-    image: '/images/historia/2022.jpg'
+    year: '2024',
+    title: 'Innovación Continua',
+    description: 'Implementación de sistemas de inteligencia artificial para optimización de rutas y predictivo de mantenimiento. Inauguración de Academia BRIANE para capacitación continua de nuestros colaboradores.',
+    image: '/images/historia/2024.jpg'
   },
   {
     year: '2023',
@@ -196,6 +191,8 @@ const clientesHomologados = [
     </div>
   </section>
 
+  <DynamicLines lineNumber={1} />
+
   <!-- Mission, Vision, Values Section -->
   <section class="mvv-section">
     <div class="mvv-background">
@@ -259,6 +256,8 @@ const clientesHomologados = [
       </div>
     </div>
   </section>
+
+  <DynamicLines lineNumber={2} />
 
   <!-- Historia Section -->
   <section class="historia-section section">
@@ -338,6 +337,8 @@ const clientesHomologados = [
     </div>
   </section>
 
+  <DynamicLines lineNumber={3} />
+
   <!-- Cultura BRIANE Section -->
   <section class="cultura-section">
     <div class="cultura-container">
@@ -386,6 +387,8 @@ const clientesHomologados = [
     </div>
   </section>
 
+  <DynamicLines lineNumber={1} />
+
   <!-- Certificaciones Section -->
   <section class="certificaciones-section section">
     <div class="container">
@@ -418,6 +421,8 @@ const clientesHomologados = [
     </div>
   </section>
 
+  <DynamicLines lineNumber={2} />
+
   <!-- Homologaciones Section -->
   <section class="homologaciones-section section">
     <div class="container">
@@ -443,6 +448,133 @@ const clientesHomologados = [
   </section>
 
   <Stats variant="primary" />
+
+  <DynamicLines lineNumber={1} />
+
+  <!-- Academia BRIANE Section -->
+  <section class="academia-section section">
+    <div class="container">
+      <div class="academia-header text-center reveal">
+        <span class="academia-badge">Formación Continua</span>
+        <h2>Universidad BRIANE</h2>
+        <p class="academia-intro">
+          Nuestro compromiso con la excelencia comienza con la capacitación permanente
+          de nuestros colaboradores. Academia BRIANE es nuestro programa integral de
+          formación que garantiza los más altos estándares de calidad en cada servicio.
+        </p>
+      </div>
+
+      <div class="academia-image-container text-center reveal">
+        <img src="/images/academia.png" alt="Academia BRIANE" class="academia-image" />
+      </div>
+
+      <div class="academia-grid stagger-children">
+        <div class="academia-pillar">
+          <div class="pillar-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+            </svg>
+          </div>
+          <h3>Capacitación Técnica</h3>
+          <p>
+            Programas especializados en manejo de equipos, seguridad vial,
+            transporte de materiales peligrosos y operaciones logísticas avanzadas.
+          </p>
+          <ul class="pillar-features">
+            <li>Certificación en manejo defensivo</li>
+            <li>Uso de equipos tecnológicos</li>
+            <li>Protocolos de seguridad</li>
+          </ul>
+        </div>
+
+        <div class="academia-pillar">
+          <div class="pillar-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <h3>Desarrollo Personal</h3>
+          <p>
+            Fortalecemos habilidades blandas, liderazgo y trabajo en equipo
+            para crear una cultura organizacional sólida y colaborativa.
+          </p>
+          <ul class="pillar-features">
+            <li>Liderazgo y gestión</li>
+            <li>Comunicación efectiva</li>
+            <li>Trabajo en equipo</li>
+          </ul>
+        </div>
+
+        <div class="academia-pillar">
+          <div class="pillar-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h3>Seguridad y Calidad</h3>
+          <p>
+            Certificaciones internacionales en sistemas de gestión de calidad,
+            seguridad ocupacional y medio ambiente.
+          </p>
+          <ul class="pillar-features">
+            <li>ISO 9001 - Gestión de Calidad</li>
+            <li>BASC - Seguridad Comercial</li>
+            <li>Defensa Civil</li>
+          </ul>
+        </div>
+
+        <div class="academia-pillar">
+          <div class="pillar-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+          </div>
+          <h3>Innovación Digital</h3>
+          <p>
+            Formación en nuevas tecnologías, digitalización de procesos y
+            uso de plataformas de gestión logística.
+          </p>
+          <ul class="pillar-features">
+            <li>Sistemas WMS y TMS</li>
+            <li>Plataformas digitales</li>
+            <li>Automatización de procesos</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="academia-stats reveal">
+        <div class="stat-box">
+          <div class="stat-number">300+</div>
+          <div class="stat-label">Colaboradores capacitados anualmente</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Horas de formación al año</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">95%</div>
+          <div class="stat-label">Índice de satisfacción</div>
+        </div>
+      </div>
+
+      <div class="academia-cta reveal">
+        <p class="academia-cta-text">
+          <strong>¿Interesado en formar parte de nuestro equipo?</strong><br/>
+          En BRIANE invertimos en el desarrollo profesional de nuestros colaboradores
+          porque creemos que el éxito de la empresa depende del crecimiento de su gente.
+        </p>
+        <a href="/trabaja-con-nosotros" class="btn btn-primary btn-lg">
+          Ver Oportunidades Laborales
+        </a>
+      </div>
+    </div>
+  </section>
 
   <CallToAction
     title="¿Quiere conocer más sobre nosotros?"
@@ -595,7 +727,7 @@ const clientesHomologados = [
     position: relative;
     padding: var(--spacing-4xl) 0 var(--spacing-4xl);
     overflow: hidden;
-    background: var(--color-secondary);
+    background: linear-gradient(135deg, #e3271d 0%, #c41e3a 50%, #8b0000 100%);
   }
 
   .mvv-background {
@@ -608,21 +740,43 @@ const clientesHomologados = [
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-      linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-    background-size: 60px 60px;
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: patternMove 20s linear infinite;
+  }
+
+  @keyframes patternMove {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(50px, 50px);
+    }
   }
 
   .mvv-background::before {
     content: '';
     position: absolute;
-    top: 0;
+    top: -10%;
     left: 50%;
     transform: translateX(-50%);
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(247, 192, 41, 0.2) 0%, transparent 70%);
     border-radius: 50%;
+    animation: pulse 8s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: translateX(-50%) scale(1);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translateX(-50%) scale(1.1);
+      opacity: 0.5;
+    }
   }
 
   .mvv-header {
@@ -635,17 +789,31 @@ const clientesHomologados = [
   .mvv-section-title {
     font-size: var(--text-3xl);
     font-weight: var(--font-bold);
-    color: var(--color-black);
+    color: #ffffff;
     margin-bottom: var(--spacing-md);
     letter-spacing: -0.02em;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
   }
 
   .mvv-section-line {
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    width: 100px;
+    height: 5px;
+    background: linear-gradient(90deg, #f7c029 0%, #ffd700 50%, #f7c029 100%);
     margin: 0 auto;
-    border-radius: 2px;
+    border-radius: 3px;
+    box-shadow: 0 2px 10px rgba(247, 192, 41, 0.5);
+    animation: linePulse 3s ease-in-out infinite;
+  }
+
+  @keyframes linePulse {
+    0%, 100% {
+      width: 100px;
+      opacity: 1;
+    }
+    50% {
+      width: 120px;
+      opacity: 0.8;
+    }
   }
 
   .mvv-grid {
@@ -664,19 +832,36 @@ const clientesHomologados = [
   }
 
   .mvv-card {
-    background: var(--color-white);
+    background: linear-gradient(145deg, #ffffff 0%, #fafafa 100%);
     border-radius: var(--radius-image);
     padding: var(--spacing-2xl) var(--spacing-xl);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    border: 1px solid var(--color-gray-100);
-    transition: all var(--transition-base);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    border: 2px solid rgba(247, 192, 41, 0.3);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mvv-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(247, 192, 41, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .mvv-card:hover::before {
+    left: 100%;
   }
 
   .mvv-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(227, 39, 29, 0.12);
-    border-color: rgba(227, 39, 29, 0.2);
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(247, 192, 41, 0.3), 0 10px 30px rgba(227, 39, 29, 0.2);
+    border-color: #f7c029;
   }
 
   .mvv-letter-wrapper {
@@ -745,15 +930,17 @@ const clientesHomologados = [
 
   .mvv-divider {
     width: 40px;
-    height: 3px;
-    background-color: var(--color-secondary);
+    height: 4px;
+    background: linear-gradient(90deg, #e3271d, #f7c029);
     margin: 0 auto var(--spacing-lg);
-    border-radius: 2px;
-    transition: width var(--transition-base);
+    border-radius: 3px;
+    box-shadow: 0 2px 8px rgba(227, 39, 29, 0.3);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
   .mvv-card:hover .mvv-divider {
-    width: 60px;
+    width: 80px;
+    box-shadow: 0 4px 15px rgba(247, 192, 41, 0.6);
   }
 
   .mvv-text {
@@ -1535,6 +1722,203 @@ const clientesHomologados = [
     text-align: center;
   }
 
+  /* Academia BRIANE Section */
+  .academia-section {
+    background: linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%);
+    padding: var(--spacing-4xl) 0;
+  }
+
+  .academia-header {
+    margin-bottom: var(--spacing-3xl);
+  }
+
+  .academia-badge {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-lg);
+    background: linear-gradient(135deg, #f7c029, #ffd700);
+    color: #1a1a1a;
+    font-size: var(--text-sm);
+    font-weight: var(--font-bold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: var(--radius-full);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .academia-header h2 {
+    font-size: var(--text-4xl);
+    color: #c41e3a;
+    font-weight: var(--font-bold);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .academia-intro {
+    font-size: var(--text-lg);
+    color: var(--color-gray-600);
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .academia-image-container {
+    margin: var(--spacing-3xl) 0;
+  }
+
+  .academia-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .academia-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-3xl);
+  }
+
+  @media (min-width: 768px) {
+    .academia-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .academia-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-lg);
+    }
+  }
+
+  .academia-pillar {
+    background: white;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-card);
+    border: 2px solid #f0f0f0;
+    transition: all 0.3s ease;
+  }
+
+  .academia-pillar:hover {
+    border-color: #f7c029;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(247, 192, 41, 0.2);
+  }
+
+  .pillar-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, #c41e3a, #e3271d);
+    color: white;
+    border-radius: var(--radius-card);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .academia-pillar h3 {
+    font-size: var(--text-xl);
+    color: var(--color-gray-900);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .academia-pillar > p {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .pillar-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .pillar-features li {
+    font-size: var(--text-sm);
+    color: var(--color-gray-700);
+    padding: var(--spacing-xs) 0;
+    padding-left: var(--spacing-md);
+    position: relative;
+  }
+
+  .pillar-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #f7c029;
+    font-weight: bold;
+  }
+
+  .academia-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-3xl);
+    padding: var(--spacing-2xl);
+    background: linear-gradient(135deg, #f7c029, #ffd700);
+    border-radius: var(--radius-image);
+  }
+
+  .stat-box {
+    text-align: center;
+    padding: var(--spacing-md);
+  }
+
+  .stat-number {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    color: #1a1a1a;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .stat-label {
+    font-size: var(--text-sm);
+    color: #4a5568;
+    font-weight: var(--font-medium);
+  }
+
+  .academia-cta {
+    text-align: center;
+    padding: var(--spacing-2xl);
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    border-radius: var(--radius-image);
+    border: 2px solid #f0f0f0;
+  }
+
+  .academia-cta-text {
+    font-size: var(--text-lg);
+    color: var(--color-gray-700);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .academia-cta-text strong {
+    color: #c41e3a;
+    font-size: var(--text-xl);
+  }
+
+  .btn-lg {
+    padding: var(--spacing-md) var(--spacing-2xl);
+    font-size: var(--text-lg);
+  }
+
+  @media (max-width: 767px) {
+    .academia-header h2 {
+      font-size: var(--text-2xl);
+    }
+
+    .academia-intro {
+      font-size: var(--text-base);
+    }
+
+    .stat-number {
+      font-size: var(--text-3xl);
+    }
+  }
 </style>
 
 <script>

@@ -1,0 +1,958 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import DynamicLines from '../components/ui/DynamicLines.astro';
+---
+
+<PageLayout
+  title="Libro de Reclamaciones"
+  description="Libro de Reclamaciones de BRIANE. Realice su reclamo o queja conforme al Codigo de Proteccion y Defensa del Consumidor."
+  heroTitle="Libro de Reclamaciones"
+  heroSubtitle="Conforme al Codigo de Proteccion y Defensa del Consumidor"
+>
+  <section class="claim-section section">
+    <div class="container">
+      <div class="claim-wrapper">
+        <!-- Info Legal -->
+        <div class="legal-info reveal">
+          <div class="legal-box">
+            <div class="legal-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="12" y1="18" x2="12" y2="12"></line>
+                <line x1="9" y1="15" x2="15" y2="15"></line>
+              </svg>
+            </div>
+            <h3>Informacion Legal</h3>
+            <p>
+              Conforme a lo establecido en el Codigo de Proteccion y Defensa del Consumidor (Ley N° 29571),
+              BRIANE pone a su disposicion el presente Libro de Reclamaciones Virtual.
+            </p>
+            <ul class="legal-points">
+              <li>
+                <strong>RECLAMO:</strong> Disconformidad relacionada con los servicios de transporte y logistica.
+              </li>
+              <li>
+                <strong>QUEJA:</strong> Disconformidad no relacionada con los servicios, sino con la atencion al cliente.
+              </li>
+              <li>
+                La empresa dara respuesta a su reclamo o queja en un plazo maximo de 30 dias calendario.
+              </li>
+              <li>
+                Recibira un numero de reclamo que le permitira hacer seguimiento.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Formulario -->
+        <div class="claim-form-wrapper reveal-right">
+          <h2>Registrar Reclamo o Queja</h2>
+          <p class="form-intro">Por favor, complete todos los campos marcados con (*)</p>
+
+          <form class="claim-form" id="claim-form" novalidate>
+            <!-- IDENTIFICACION DEL CONSUMIDOR -->
+            <fieldset class="form-section">
+              <legend>1. Identificacion del Consumidor</legend>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="consumer_name">Nombre completo *</label>
+                  <input
+                    type="text"
+                    id="consumer_name"
+                    name="consumer_name"
+                    required
+                    placeholder="Nombres y apellidos completos"
+                    autocomplete="name"
+                  />
+                  <span class="error-message" aria-live="polite"></span>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="consumer_document_type">Tipo de documento *</label>
+                  <select id="consumer_document_type" name="consumer_document_type" required>
+                    <option value="dni" selected>DNI</option>
+                    <option value="ce">Carnet de Extranjeria</option>
+                    <option value="pasaporte">Pasaporte</option>
+                    <option value="ruc">RUC</option>
+                  </select>
+                  <span class="error-message" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="consumer_document_number">Numero de documento *</label>
+                  <input
+                    type="text"
+                    id="consumer_document_number"
+                    name="consumer_document_number"
+                    required
+                    placeholder="Ej: 12345678"
+                  />
+                  <span class="error-message" aria-live="polite"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="consumer_address">Domicilio *</label>
+                <input
+                  type="text"
+                  id="consumer_address"
+                  name="consumer_address"
+                  required
+                  placeholder="Direccion completa"
+                  autocomplete="street-address"
+                />
+                <span class="error-message" aria-live="polite"></span>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="consumer_phone">Telefono *</label>
+                  <input
+                    type="tel"
+                    id="consumer_phone"
+                    name="consumer_phone"
+                    required
+                    placeholder="+51 999 999 999"
+                    autocomplete="tel"
+                  />
+                  <span class="error-message" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="consumer_email">Correo electronico *</label>
+                  <input
+                    type="email"
+                    id="consumer_email"
+                    name="consumer_email"
+                    required
+                    placeholder="correo@ejemplo.com"
+                    autocomplete="email"
+                  />
+                  <span class="error-message" aria-live="polite"></span>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- IDENTIFICACION DEL BIEN CONTRATADO -->
+            <fieldset class="form-section">
+              <legend>2. Identificacion del Bien Contratado</legend>
+
+              <div class="form-group">
+                <label for="service_type">Tipo de servicio *</label>
+                <select id="service_type" name="service_type" required>
+                  <option value="">Seleccione un servicio</option>
+                  <option value="transporte_carga">Transporte de Carga</option>
+                  <option value="transporte_personal">Transporte de Personal</option>
+                  <option value="logistica">Servicios Logisticos</option>
+                  <option value="almacenaje">Almacenaje</option>
+                  <option value="distribucion">Distribucion</option>
+                  <option value="otro">Otro</option>
+                </select>
+                <span class="error-message" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="service_description">Descripcion del servicio contratado *</label>
+                <textarea
+                  id="service_description"
+                  name="service_description"
+                  rows="3"
+                  required
+                  placeholder="Describa el servicio que contrato con BRIANE..."
+                ></textarea>
+                <span class="error-message" aria-live="polite"></span>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="service_date">Fecha del servicio</label>
+                  <input
+                    type="date"
+                    id="service_date"
+                    name="service_date"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="service_amount">Monto de la transaccion (S/.)</label>
+                  <input
+                    type="number"
+                    id="service_amount"
+                    name="service_amount"
+                    step="0.01"
+                    min="0"
+                    placeholder="0.00"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="invoice_number">Numero de factura/boleta</label>
+                <input
+                  type="text"
+                  id="invoice_number"
+                  name="invoice_number"
+                  placeholder="Ej: F001-00001234"
+                />
+              </div>
+            </fieldset>
+
+            <!-- DETALLE DE LA RECLAMACION -->
+            <fieldset class="form-section">
+              <legend>3. Detalle de la Reclamacion</legend>
+
+              <div class="form-group">
+                <label>Tipo *</label>
+                <div class="radio-group">
+                  <div class="radio-option">
+                    <input
+                      type="radio"
+                      id="type_reclamo"
+                      name="complaint_type"
+                      value="reclamo"
+                      required
+                    />
+                    <label for="type_reclamo">
+                      <strong>RECLAMO</strong>
+                      <span class="radio-description">
+                        Disconformidad relacionada con los productos o servicios
+                      </span>
+                    </label>
+                  </div>
+                  <div class="radio-option">
+                    <input
+                      type="radio"
+                      id="type_queja"
+                      name="complaint_type"
+                      value="queja"
+                    />
+                    <label for="type_queja">
+                      <strong>QUEJA</strong>
+                      <span class="radio-description">
+                        Disconformidad no relacionada con productos/servicios
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                <span class="error-message" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="complaint_detail">Detalle del reclamo/queja *</label>
+                <textarea
+                  id="complaint_detail"
+                  name="complaint_detail"
+                  rows="6"
+                  required
+                  placeholder="Describa de manera clara y detallada su reclamo o queja. Incluya fechas, lugares, nombres de personal involucrado y cualquier otro dato relevante..."
+                ></textarea>
+                <span class="error-message" aria-live="polite"></span>
+                <small class="field-hint">Minimo 20 caracteres</small>
+              </div>
+
+              <div class="form-group">
+                <label for="consumer_request">Pedido del consumidor *</label>
+                <textarea
+                  id="consumer_request"
+                  name="consumer_request"
+                  rows="4"
+                  required
+                  placeholder="Indique que solicita como solucion a su reclamo o queja (devolucion, cambio, compensacion, disculpa, etc.)..."
+                ></textarea>
+                <span class="error-message" aria-live="polite"></span>
+                <small class="field-hint">Minimo 10 caracteres</small>
+              </div>
+            </fieldset>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary btn-lg">
+                <span class="btn-text">Enviar Reclamo</span>
+                <span class="btn-loading" aria-hidden="true">
+                  <svg
+                    class="spinner"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                  </svg>
+                </span>
+              </button>
+            </div>
+
+            <div class="form-message" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success Modal -->
+  <div id="success-modal" class="modal" aria-hidden="true" role="dialog">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="success-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+        <h2>Reclamo Registrado Exitosamente</h2>
+      </div>
+      <div class="modal-body">
+        <p class="modal-lead">Su reclamo ha sido registrado con el siguiente numero:</p>
+        <div class="claim-number-display">
+          <span id="claim-number-result"></span>
+        </div>
+        <p class="modal-text">
+          Hemos enviado una copia de su reclamo a su correo electronico.
+          Le daremos respuesta en un plazo maximo de <strong>30 dias calendario</strong>.
+        </p>
+        <p class="modal-text">
+          Guarde su numero de reclamo para hacer seguimiento.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button id="modal-close" class="btn btn-primary">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</PageLayout>
+
+<style>
+  .claim-section {
+    background-color: var(--color-gray-50);
+  }
+
+  .claim-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-3xl);
+  }
+
+  @media (min-width: 1024px) {
+    .claim-wrapper {
+      grid-template-columns: 380px 1fr;
+    }
+  }
+
+  /* Legal Info */
+  .legal-info {
+    position: relative;
+  }
+
+  @media (min-width: 1024px) {
+    .legal-info {
+      position: sticky;
+      top: 100px;
+      align-self: flex-start;
+    }
+  }
+
+  .legal-box {
+    background-color: #c41e3a;
+    color: white;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-image);
+    box-shadow: 0 4px 12px rgba(196, 30, 58, 0.2);
+  }
+
+  .legal-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .legal-box h3 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--spacing-md);
+    color: white;
+  }
+
+  .legal-box p {
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-lg);
+    opacity: 0.95;
+  }
+
+  .legal-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .legal-points li {
+    font-size: var(--text-sm);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-md);
+    position: relative;
+    opacity: 0.95;
+  }
+
+  .legal-points li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+
+  .legal-points strong {
+    color: #f7c029;
+  }
+
+  /* Claim Form */
+  .claim-form-wrapper {
+    background-color: white;
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-image);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .claim-form-wrapper h2 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-gray-900);
+  }
+
+  .form-intro {
+    color: var(--color-gray-600);
+    margin-bottom: var(--spacing-2xl);
+    font-size: var(--text-sm);
+  }
+
+  .claim-form {
+    width: 100%;
+  }
+
+  .form-section {
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--radius-card);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .form-section legend {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    color: #c41e3a;
+    padding: 0 var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  @media (min-width: 640px) {
+    .form-row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .form-group {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: var(--font-medium);
+    color: var(--color-gray-700);
+    font-size: var(--text-sm);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--color-gray-300);
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    color: var(--color-gray-800);
+    background-color: var(--color-white);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    font-family: var(--font-primary);
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #c41e3a;
+    box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.1);
+  }
+
+  .form-group input.error,
+  .form-group select.error,
+  .form-group textarea.error {
+    border-color: #dc2626;
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .field-hint {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--color-gray-500);
+    margin-top: var(--spacing-xs);
+  }
+
+  /* Radio Group */
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .radio-option {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    border: 2px solid var(--color-gray-200);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .radio-option:hover {
+    border-color: #c41e3a;
+    background-color: rgba(196, 30, 58, 0.02);
+  }
+
+  .radio-option input[type="radio"] {
+    margin-top: 4px;
+    width: auto;
+    cursor: pointer;
+  }
+
+  .radio-option input[type="radio"]:checked + label {
+    color: #c41e3a;
+  }
+
+  .radio-option:has(input:checked) {
+    border-color: #c41e3a;
+    background-color: rgba(196, 30, 58, 0.05);
+  }
+
+  .radio-option label {
+    flex: 1;
+    cursor: pointer;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .radio-description {
+    font-size: var(--text-xs);
+    font-weight: var(--font-normal);
+    color: var(--color-gray-600);
+  }
+
+  .error-message {
+    display: block;
+    font-size: var(--text-sm);
+    color: #dc2626;
+    margin-top: var(--spacing-xs);
+    min-height: 1.25rem;
+  }
+
+  .form-actions {
+    margin-top: var(--spacing-xl);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    font-family: var(--font-primary);
+    font-weight: var(--font-semibold);
+    padding: var(--spacing-md) var(--spacing-2xl);
+    font-size: var(--text-base);
+    background-color: #c41e3a;
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-base);
+  }
+
+  .btn:hover {
+    background-color: #a01828;
+  }
+
+  .btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .btn-loading {
+    display: none;
+  }
+
+  .btn.loading .btn-text {
+    display: none;
+  }
+
+  .btn.loading .btn-loading {
+    display: block;
+  }
+
+  .spinner {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .form-message {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    display: none;
+  }
+
+  .form-message.error {
+    display: block;
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+  }
+
+  /* Modal */
+  .modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg);
+  }
+
+  .modal.active {
+    display: flex;
+  }
+
+  .modal-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-content {
+    position: relative;
+    background-color: white;
+    border-radius: var(--radius-image);
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease-out;
+  }
+
+  @keyframes modalSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .modal-header {
+    padding: var(--spacing-2xl) var(--spacing-2xl) var(--spacing-lg);
+    text-align: center;
+  }
+
+  .success-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background-color: #dcfce7;
+    color: #16a34a;
+    border-radius: var(--radius-full);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .modal-header h2 {
+    font-size: var(--text-xl);
+    color: var(--color-gray-900);
+    margin: 0;
+  }
+
+  .modal-body {
+    padding: 0 var(--spacing-2xl) var(--spacing-xl);
+    text-align: center;
+  }
+
+  .modal-lead {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .claim-number-display {
+    background-color: #f7c029;
+    color: #1a1a1a;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+  }
+
+  .modal-text {
+    font-size: var(--text-sm);
+    color: var(--color-gray-600);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .modal-footer {
+    padding: var(--spacing-lg) var(--spacing-2xl) var(--spacing-2xl);
+    text-align: center;
+  }
+</style>
+
+<script>
+  const form = document.getElementById('claim-form') as HTMLFormElement;
+  const submitBtn = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
+  const formMessage = form?.querySelector('.form-message');
+  const modal = document.getElementById('success-modal');
+  const modalClose = document.getElementById('modal-close');
+  const claimNumberResult = document.getElementById('claim-number-result');
+
+  function validateEmail(email: string): boolean {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function validatePhone(phone: string): boolean {
+    return /^[\d\s\+\-\(\)]{9,}$/.test(phone);
+  }
+
+  function showError(input: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement, message: string) {
+    const errorEl = input.parentElement?.querySelector('.error-message');
+    if (errorEl) errorEl.textContent = message;
+    input.classList.add('error');
+  }
+
+  function clearError(input: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement) {
+    const errorEl = input.parentElement?.querySelector('.error-message');
+    if (errorEl) errorEl.textContent = '';
+    input.classList.remove('error');
+  }
+
+  function validateForm(): boolean {
+    let isValid = true;
+
+    // Identificacion del consumidor
+    const consumerName = form.querySelector('#consumer_name') as HTMLInputElement;
+    const consumerDocType = form.querySelector('#consumer_document_type') as HTMLSelectElement;
+    const consumerDocNumber = form.querySelector('#consumer_document_number') as HTMLInputElement;
+    const consumerAddress = form.querySelector('#consumer_address') as HTMLInputElement;
+    const consumerPhone = form.querySelector('#consumer_phone') as HTMLInputElement;
+    const consumerEmail = form.querySelector('#consumer_email') as HTMLInputElement;
+
+    // Identificacion del bien contratado
+    const serviceType = form.querySelector('#service_type') as HTMLSelectElement;
+    const serviceDescription = form.querySelector('#service_description') as HTMLTextAreaElement;
+
+    // Detalle de la reclamacion
+    const complaintType = form.querySelector('input[name="complaint_type"]:checked') as HTMLInputElement;
+    const complaintDetail = form.querySelector('#complaint_detail') as HTMLTextAreaElement;
+    const consumerRequest = form.querySelector('#consumer_request') as HTMLTextAreaElement;
+
+    // Clear previous errors
+    [consumerName, consumerDocType, consumerDocNumber, consumerAddress, consumerPhone, consumerEmail,
+     serviceType, serviceDescription, complaintDetail, consumerRequest].forEach(clearError);
+
+    // Validate consumer info
+    if (!consumerName.value.trim()) {
+      showError(consumerName, 'El nombre completo es requerido');
+      isValid = false;
+    }
+
+    if (!consumerDocNumber.value.trim()) {
+      showError(consumerDocNumber, 'El numero de documento es requerido');
+      isValid = false;
+    }
+
+    if (!consumerAddress.value.trim()) {
+      showError(consumerAddress, 'El domicilio es requerido');
+      isValid = false;
+    }
+
+    if (!consumerPhone.value.trim()) {
+      showError(consumerPhone, 'El telefono es requerido');
+      isValid = false;
+    } else if (!validatePhone(consumerPhone.value)) {
+      showError(consumerPhone, 'Ingrese un telefono valido');
+      isValid = false;
+    }
+
+    if (!consumerEmail.value.trim()) {
+      showError(consumerEmail, 'El correo es requerido');
+      isValid = false;
+    } else if (!validateEmail(consumerEmail.value)) {
+      showError(consumerEmail, 'Ingrese un correo valido');
+      isValid = false;
+    }
+
+    // Validate service info
+    if (!serviceType.value) {
+      showError(serviceType, 'Seleccione un tipo de servicio');
+      isValid = false;
+    }
+
+    if (!serviceDescription.value.trim()) {
+      showError(serviceDescription, 'La descripcion del servicio es requerida');
+      isValid = false;
+    }
+
+    // Validate complaint info
+    if (!complaintType) {
+      const radioGroup = form.querySelector('.radio-group')?.nextElementSibling;
+      if (radioGroup && radioGroup.classList.contains('error-message')) {
+        radioGroup.textContent = 'Debe seleccionar el tipo de reclamo o queja';
+      }
+      isValid = false;
+    }
+
+    if (!complaintDetail.value.trim()) {
+      showError(complaintDetail, 'El detalle del reclamo es requerido');
+      isValid = false;
+    } else if (complaintDetail.value.trim().length < 20) {
+      showError(complaintDetail, 'El detalle debe tener al menos 20 caracteres');
+      isValid = false;
+    }
+
+    if (!consumerRequest.value.trim()) {
+      showError(consumerRequest, 'El pedido del consumidor es requerido');
+      isValid = false;
+    } else if (consumerRequest.value.trim().length < 10) {
+      showError(consumerRequest, 'El pedido debe tener al menos 10 caracteres');
+      isValid = false;
+    }
+
+    return isValid;
+  }
+
+  const API_URL = 'http://localhost:8000/api';
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      // Scroll to first error
+      const firstError = form.querySelector('.error');
+      firstError?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
+
+    if (formMessage) {
+      formMessage.classList.remove('error');
+      formMessage.style.display = 'none';
+    }
+
+    const formData = new FormData(form);
+    const data: Record<string, string | number> = {};
+
+    formData.forEach((value, key) => {
+      if (key === 'service_amount' && value) {
+        data[key] = parseFloat(value as string);
+      } else {
+        data[key] = value as string;
+      }
+    });
+
+    try {
+      const response = await fetch(`${API_URL}/claim-book/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        // Show success modal
+        if (claimNumberResult && result.claim_number) {
+          claimNumberResult.textContent = result.claim_number;
+        }
+        modal?.classList.add('active');
+        modal?.setAttribute('aria-hidden', 'false');
+        form.reset();
+      } else {
+        throw new Error(result.message || 'Error en el envio');
+      }
+    } catch (error) {
+      if (formMessage) {
+        formMessage.textContent =
+          'Hubo un error al registrar el reclamo. Por favor, intente nuevamente.';
+        formMessage.classList.add('error');
+      }
+    } finally {
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
+    }
+  });
+
+  // Close modal
+  modalClose?.addEventListener('click', () => {
+    modal?.classList.remove('active');
+    modal?.setAttribute('aria-hidden', 'true');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Real-time validation on blur
+  const inputs = form?.querySelectorAll('input, textarea, select');
+  inputs?.forEach((input) => {
+    input.addEventListener('blur', () => {
+      if (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement || input instanceof HTMLSelectElement) {
+        clearError(input);
+      }
+    });
+  });
+</script>

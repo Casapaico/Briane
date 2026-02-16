@@ -3,7 +3,7 @@ from django.contrib import admin
 from .models import (
     ContactSubmission, JobPosition,
     FullJobApplication, WorkExperience, AcademicFormation,
-    NewsletterSubscription,
+    NewsletterSubscription, ClaimBook,
 )
 
 
@@ -137,3 +137,94 @@ class NewsletterSubscriptionAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request):
         return False
+
+
+@admin.register(ClaimBook)
+class ClaimBookAdmin(admin.ModelAdmin):
+    list_display = [
+        'claim_number', 'consumer_name', 'complaint_type',
+        'status', 'created_at', 'response_date'
+    ]
+    list_filter = [
+        'complaint_type', 'status', 'service_type',
+        'consumer_document_type', 'created_at'
+    ]
+    search_fields = [
+        'claim_number', 'consumer_name', 'consumer_document_number',
+        'consumer_email', 'complaint_detail'
+    ]
+    list_editable = ['status']
+    date_hierarchy = 'created_at'
+
+    readonly_fields = [
+        'claim_number',
+        # Datos del consumidor
+        'consumer_name', 'consumer_document_type', 'consumer_document_number',
+        'consumer_address', 'consumer_phone', 'consumer_email',
+        # Datos del servicio
+        'service_type', 'service_description', 'service_date',
+        'service_amount', 'invoice_number',
+        # Detalle del reclamo
+        'complaint_type', 'complaint_detail', 'consumer_request',
+        # Metadata
+        'created_at', 'updated_at', 'ip_address',
+    ]
+
+    fieldsets = [
+        ('Numero de Reclamo', {
+            'fields': ['claim_number', 'created_at'],
+            'classes': ['wide'],
+        }),
+        ('Identificacion del Consumidor', {
+            'fields': [
+                'consumer_name',
+                ('consumer_document_type', 'consumer_document_number'),
+                'consumer_address',
+                ('consumer_phone', 'consumer_email'),
+            ],
+        }),
+        ('Identificacion del Bien Contratado', {
+            'fields': [
+                'service_type',
+                'service_description',
+                ('service_date', 'service_amount'),
+                'invoice_number',
+            ],
+        }),
+        ('Detalle de la Reclamacion', {
+            'fields': [
+                'complaint_type',
+                'complaint_detail',
+                'consumer_request',
+            ],
+        }),
+        ('Gestion Interna', {
+            'fields': [
+                'status',
+                'assigned_to',
+                'internal_notes',
+                'response',
+                'response_date',
+            ],
+            'classes': ['wide'],
+        }),
+        ('Metadata', {
+            'fields': ['ip_address', 'updated_at'],
+            'classes': ['collapse'],
+        }),
+    ]
+
+    def has_add_permission(self, request):
+        """No permitir crear reclamos desde el admin, solo desde el formulario web"""
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        """No permitir eliminar reclamos por requisitos legales"""
+        return False
+
+    def save_model(self, request, obj, form, change):
+        """Auto-actualizar fecha de respuesta cuando se agrega una respuesta"""
+        if obj.response and not obj.response_date:
+            from django.utils import timezone
+            obj.response_date = timezone.now()
+        super().save_model(request, obj, form, change)

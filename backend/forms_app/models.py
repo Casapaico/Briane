@@ -3,12 +3,10 @@ from django.db import models
 
 class ContactSubmission(models.Model):
     SERVICE_CHOICES = [
-        ('seguridad-electronica', 'Seguridad Electronica'),
-        ('seguridad-fisica', 'Seguridad Fisica'),
-        ('limpieza', 'Limpieza y Mantenimiento'),
-        ('saneamiento', 'Saneamiento Ambiental'),
-        ('consultoria', 'Consultoria'),
-        ('otro', 'Otro'),
+        ('transporte', 'Transporte'),
+        ('almacen', 'Almacén'),
+        ('alquiler', 'Alquiler'),
+        ('otros', 'Otros'),
     ]
 
     name = models.CharField('Nombre', max_length=200)
@@ -275,3 +273,139 @@ class NewsletterSubscription(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class ClaimBook(models.Model):
+    """
+    Modelo para el Libro de Reclamaciones conforme al Codigo de Proteccion
+    y Defensa del Consumidor (Ley N° 29571) de Peru.
+    """
+
+    COMPLAINT_TYPE_CHOICES = [
+        ('reclamo', 'RECLAMO - Disconformidad relacionada con productos o servicios'),
+        ('queja', 'QUEJA - Disconformidad no relacionada con productos/servicios'),
+    ]
+
+    DOCUMENT_TYPE_CHOICES = [
+        ('dni', 'DNI'),
+        ('ce', 'Carnet de Extranjeria'),
+        ('pasaporte', 'Pasaporte'),
+        ('ruc', 'RUC'),
+    ]
+
+    SERVICE_TYPE_CHOICES = [
+        ('transporte_carga', 'Transporte de Carga'),
+        ('transporte_personal', 'Transporte de Personal'),
+        ('logistica', 'Servicios Logisticos'),
+        ('almacenaje', 'Almacenaje'),
+        ('distribucion', 'Distribucion'),
+        ('otro', 'Otro'),
+    ]
+
+    STATUS_CHOICES = [
+        ('pendiente', 'Pendiente'),
+        ('en_proceso', 'En Proceso'),
+        ('respondido', 'Respondido'),
+        ('resuelto', 'Resuelto'),
+        ('cerrado', 'Cerrado'),
+    ]
+
+    # Numero de reclamo (auto-generado)
+    claim_number = models.CharField(
+        'Numero de reclamo',
+        max_length=20,
+        unique=True,
+        editable=False,
+        db_index=True
+    )
+
+    # === IDENTIFICACION DEL CONSUMIDOR ===
+    consumer_name = models.CharField('Nombre completo', max_length=200)
+    consumer_document_type = models.CharField(
+        'Tipo de documento',
+        max_length=20,
+        choices=DOCUMENT_TYPE_CHOICES,
+        default='dni'
+    )
+    consumer_document_number = models.CharField('Numero de documento', max_length=20)
+    consumer_address = models.CharField('Domicilio', max_length=300)
+    consumer_phone = models.CharField('Telefono', max_length=20)
+    consumer_email = models.EmailField('Correo electronico')
+
+    # === IDENTIFICACION DEL BIEN CONTRATADO ===
+    service_type = models.CharField(
+        'Tipo de servicio',
+        max_length=50,
+        choices=SERVICE_TYPE_CHOICES
+    )
+    service_description = models.TextField('Descripcion del servicio contratado')
+    service_date = models.DateField('Fecha del servicio', null=True, blank=True)
+    service_amount = models.DecimalField(
+        'Monto de la transaccion (S/.)',
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True
+    )
+    invoice_number = models.CharField(
+        'Numero de factura/boleta',
+        max_length=50,
+        blank=True
+    )
+
+    # === DETALLE DE LA RECLAMACION ===
+    complaint_type = models.CharField(
+        'Tipo',
+        max_length=20,
+        choices=COMPLAINT_TYPE_CHOICES
+    )
+    complaint_detail = models.TextField('Detalle del reclamo/queja')
+    consumer_request = models.TextField('Pedido del consumidor')
+
+    # === GESTION INTERNA ===
+    status = models.CharField(
+        'Estado',
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='pendiente'
+    )
+    assigned_to = models.CharField('Asignado a', max_length=200, blank=True)
+    internal_notes = models.TextField('Notas internas', blank=True)
+    response = models.TextField('Respuesta al consumidor', blank=True)
+    response_date = models.DateTimeField('Fecha de respuesta', null=True, blank=True)
+
+    # === METADATOS ===
+    created_at = models.DateTimeField('Fecha de presentacion', auto_now_add=True)
+    updated_at = models.DateTimeField('Ultima actualizacion', auto_now=True)
+    ip_address = models.GenericIPAddressField('Direccion IP', null=True, blank=True)
+
+    class Meta:
+        verbose_name = 'Reclamo'
+        verbose_name_plural = 'Libro de Reclamaciones'
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['-created_at']),
+            models.Index(fields=['status']),
+            models.Index(fields=['claim_number']),
+        ]
+
+    def __str__(self):
+        return f'{self.claim_number} - {self.consumer_name} ({self.get_complaint_type_display()})'
+
+    def save(self, *args, **kwargs):
+        # Auto-generar numero de reclamo si no existe
+        if not self.claim_number:
+            # Formato: LR-YYYYMMDD-XXXX (LR = Libro Reclamaciones)
+            from django.utils import timezone
+            today = timezone.now()
+            date_str = today.strftime('%Y%m%d')
+
+            # Contar cuantos reclamos hay hoy
+            today_claims = ClaimBook.objects.filter(
+                created_at__date=today.date()
+            ).count()
+
+            sequence = str(today_claims + 1).zfill(4)
+            self.claim_number = f'LR-{date_str}-{sequence}'
+
+        super().save(*args, **kwargs)

@@ -3,7 +3,7 @@ from rest_framework import serializers
 from .models import (
     ContactSubmission, JobPosition,
     FullJobApplication, WorkExperience, AcademicFormation,
-    NewsletterSubscription,
+    NewsletterSubscription, ClaimBook,
 )
 
 
@@ -105,3 +105,51 @@ class NewsletterSubscriptionSerializer(serializers.ModelSerializer):
             defaults={'is_active': True},
         )
         return sub
+
+
+class ClaimBookSerializer(serializers.ModelSerializer):
+    """Serializer para el Libro de Reclamaciones"""
+
+    class Meta:
+        model = ClaimBook
+        fields = [
+            # Identificacion del consumidor
+            'consumer_name',
+            'consumer_document_type',
+            'consumer_document_number',
+            'consumer_address',
+            'consumer_phone',
+            'consumer_email',
+            # Identificacion del bien contratado
+            'service_type',
+            'service_description',
+            'service_date',
+            'service_amount',
+            'invoice_number',
+            # Detalle de la reclamacion
+            'complaint_type',
+            'complaint_detail',
+            'consumer_request',
+        ]
+
+    def validate_consumer_document_number(self, value):
+        """Validar formato basico del numero de documento"""
+        if not value or not value.strip():
+            raise serializers.ValidationError('El numero de documento es requerido.')
+        return value.strip()
+
+    def validate_complaint_detail(self, value):
+        """Validar que el detalle tenga contenido suficiente"""
+        if len(value.strip()) < 20:
+            raise serializers.ValidationError(
+                'El detalle del reclamo debe tener al menos 20 caracteres.'
+            )
+        return value.strip()
+
+    def validate_consumer_request(self, value):
+        """Validar que el pedido tenga contenido suficiente"""
+        if len(value.strip()) < 10:
+            raise serializers.ValidationError(
+                'El pedido debe tener al menos 10 caracteres.'
+            )
+        return value.strip()

@@ -8,6 +8,7 @@ from .models import JobPosition
 from .serializers import (
     ContactSubmissionSerializer, JobPositionSerializer,
     FullJobApplicationSerializer, NewsletterSubscriptionSerializer,
+    ClaimBookSerializer,
 )
 
 
@@ -88,5 +89,32 @@ class NewsletterSubscriptionCreateView(generics.CreateAPIView):
         serializer.save()
         return Response(
             {'message': 'Suscripcion realizada correctamente.'},
+            status=status.HTTP_201_CREATED,
+        )
+
+
+class ClaimBookCreateView(generics.CreateAPIView):
+    """Vista para crear reclamos en el Libro de Reclamaciones"""
+    serializer_class = ClaimBookSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        # Obtener IP del cliente
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip_address = x_forwarded_for.split(',')[0]
+        else:
+            ip_address = request.META.get('REMOTE_ADDR')
+
+        # Guardar con IP
+        claim = serializer.save(ip_address=ip_address)
+
+        return Response(
+            {
+                'message': 'Reclamo registrado correctamente.',
+                'claim_number': claim.claim_number,
+            },
             status=status.HTTP_201_CREATED,
         )

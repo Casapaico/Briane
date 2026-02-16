@@ -78,6 +78,13 @@ const valueProps = [
     </div>
   </section>
 
+  <!-- Líneas dinámicas decorativas -->
+  <div class="dynamic-lines-separator">
+    <svg class="dynamic-line line-1" viewBox="0 0 1200 200" preserveAspectRatio="none">
+      <path class="wave-path" d="M0,100 Q300,50 600,100 T1200,100" />
+    </svg>
+  </div>
+
   <section class="value-grid-section section bg-gray-50">
     <div class="container">
       <div class="value-grid stagger-children">
@@ -213,6 +220,13 @@ const valueProps = [
     </div>
   </section>
 
+  <!-- Líneas dinámicas decorativas -->
+  <div class="dynamic-lines-separator">
+    <svg class="dynamic-line line-3" viewBox="0 0 1200 200" preserveAspectRatio="none">
+      <path class="wave-path" d="M0,100 Q300,50 600,100 T1200,100" />
+    </svg>
+  </div>
+
   <CallToAction
     title="Experimente la diferencia BRIANE"
     description="Contáctenos y descubra cómo podemos agregar valor a su operación logística."
@@ -220,6 +234,42 @@ const valueProps = [
 </PageLayout>
 
 <style>
+  /* Líneas dinámicas decorativas */
+  .dynamic-lines-separator {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+    margin: var(--spacing-lg) 0;
+  }
+
+  .dynamic-line {
+    position: absolute;
+    width: 200%;
+    height: 100%;
+    left: -50%;
+    top: 0;
+    opacity: 0.6;
+  }
+
+  .dynamic-line .wave-path {
+    fill: none;
+    stroke-width: 4;
+    stroke-linecap: round;
+  }
+
+  .line-1 .wave-path {
+    stroke: #f7c029;
+  }
+
+  .line-2 .wave-path {
+    stroke: #e3271d;
+  }
+
+  .line-3 .wave-path {
+    stroke: #f7c029;
+  }
+
   .value-intro {
     background-color: #facc15;
   }
@@ -397,3 +447,45 @@ const valueProps = [
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Animación de líneas dinámicas con movimiento armónico
+    const dynamicLines = document.querySelectorAll('.dynamic-line');
+
+    const animateLines = () => {
+      const scrollY = window.scrollY;
+
+      dynamicLines.forEach((line, index) => {
+        const lineRect = line.getBoundingClientRect();
+        const lineTop = lineRect.top + scrollY;
+        const scrollProgress = (scrollY - lineTop + window.innerHeight) / (window.innerHeight + lineRect.height);
+
+        if (scrollProgress >= 0 && scrollProgress <= 1) {
+          const frequency = 0.5 + (index * 0.2);
+          const amplitude = 30 + (index * 10);
+          const phase = index * Math.PI / 4;
+
+          const quadraticOffset = Math.pow(scrollProgress, 2) * 100;
+          const harmonicOffset = Math.sin(scrollProgress * Math.PI * frequency + phase) * amplitude;
+          const translateX = quadraticOffset + harmonicOffset;
+
+          line.style.transform = `translateX(${translateX}px)`;
+        }
+      });
+    };
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          animateLines();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    animateLines();
+  });
+</script>

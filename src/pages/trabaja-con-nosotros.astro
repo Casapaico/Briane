@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import DynamicLines from '../components/ui/DynamicLines.astro';
 
 const equipoImages = [
   { src: '/images/equipo/equipo-briane.jpeg', alt: 'Equipo BRIANE', nombre: 'Carlos Mendoza', comentario: 'Orgulloso de ser parte de esta gran familia' },
@@ -21,7 +22,7 @@ const eventosImages = [
 
 <BaseLayout
   title="Trabaja con Nosotros"
-  description="Unete al equipo BRIANE. Somos 300 colaboradores comprometidos con el transporte de carga. Conoce nuestras ofertas laborales."
+  description="Únete al equipo BRIANE. Somos 300 colaboradores comprometidos con el transporte de carga. Conoce nuestras ofertas laborales."
 >
   <!-- Hero con imagen de fondo -->
   <section class="hero-trabajo">
@@ -29,11 +30,13 @@ const eventosImages = [
     <div class="hero-overlay"></div>
     <div class="container">
       <div class="hero-content">
-        <h1>UNETE AL EQUIPO BRIANE</h1>
+        <h1>ÚNETE AL EQUIPO BRIANE</h1>
         <p class="hero-subtitle">Somos los 300 colaboradores que hacen que cumplan tus pedidos a tiempo.</p>
       </div>
     </div>
   </section>
+
+  <DynamicLines lineNumber={1} />
 
   <!-- Galeria del equipo con scroll dinamico -->
   <section class="equipo-gallery-section section">
@@ -67,11 +70,13 @@ const eventosImages = [
     </div>
   </section>
 
+  <DynamicLines lineNumber={2} />
+
   <!-- Por que elegir BRIANE -->
   <section class="porque-section section">
     <div class="container">
       <div class="section-header text-center reveal">
-        <h2>¿Por que elegir BRIANE?</h2>
+        <h2>¿Por qué elegir BRIANE?</h2>
         <p class="section-subtitle">Profesional del Transporte</p>
       </div>
 
@@ -83,8 +88,8 @@ const eventosImages = [
               <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
             </svg>
           </div>
-          <h3>Planilla desde el primer dia</h3>
-          <p>Ingresas a planillas desde el primer dia de trabajo.</p>
+          <h3>Planilla desde el primer día</h3>
+          <p>Ingresas a planillas desde el primer día de trabajo.</p>
         </div>
 
         <div class="benefit-card">
@@ -107,8 +112,8 @@ const eventosImages = [
               <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
             </svg>
           </div>
-          <h3>Viaticos asegurados</h3>
-          <p>Contamos con viaticos asegurados en cada jornada.</p>
+          <h3>Viáticos asegurados</h3>
+          <p>Contamos con viáticos asegurados en cada jornada.</p>
         </div>
 
         <div class="benefit-card">
@@ -128,8 +133,8 @@ const eventosImages = [
               <polyline points="17 6 23 6 23 12"></polyline>
             </svg>
           </div>
-          <h3>Linea de carrera</h3>
-          <p>Contamos con linea de carrera para poder asegurar tu crecimiento profesional.</p>
+          <h3>Línea de carrera</h3>
+          <p>Contamos con línea de carrera para poder asegurar tu crecimiento profesional.</p>
         </div>
 
         <div class="benefit-card">
@@ -139,8 +144,8 @@ const eventosImages = [
               <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
             </svg>
           </div>
-          <h3>Capacitacion constante</h3>
-          <p>Capacitacion constante para tu desarrollo profesional.</p>
+          <h3>Capacitación constante</h3>
+          <p>Capacitación constante para tu desarrollo profesional.</p>
         </div>
 
         <div class="benefit-card">
@@ -152,11 +157,13 @@ const eventosImages = [
             </svg>
           </div>
           <h3>Mayores ingresos</h3>
-          <p>Mayores ingresos asegurados gracias a nuestro almacen que asegura la carga.</p>
+          <p>Mayores ingresos asegurados gracias a nuestro almacén que asegura la carga.</p>
         </div>
       </div>
     </div>
   </section>
+
+  <DynamicLines lineNumber={3} />
 
   <!-- Juntos con nuestra Comunidad -->
   <section class="comunidad-section section">
@@ -212,6 +219,8 @@ const eventosImages = [
     </div>
   </section>
 
+  <DynamicLines lineNumber={1} />
+
   <!-- Galeria de Eventos con efecto dinamico -->
   <section class="eventos-section section">
     <div class="container">
@@ -229,6 +238,8 @@ const eventosImages = [
       </div>
     </div>
   </section>
+
+  <DynamicLines lineNumber={2} />
 
   <!-- Ofertas Laborales -->
   <section class="ofertas-section section">
@@ -251,14 +262,16 @@ const eventosImages = [
     </div>
   </section>
 
-  <!-- Formulario Unete a Nosotros -->
+  <DynamicLines lineNumber={3} />
+
+  <!-- Formulario Únete a Nosotros -->
   <section class="aplicar-section section bg-gray-50" id="aplicar">
     <div class="container">
       <div class="aplicar-content">
         <div class="aplicar-info reveal">
-          <h2>Unete a Nosotros</h2>
+          <h2>Únete a Nosotros</h2>
           <p>
-            Buscamos tu talento. Si deseas ser parte de nuestro equipo, envia tu curriculum online si quieres trabajar:
+            Buscamos tu talento. Si deseas ser parte de nuestro equipo, envia tu currículum online si quieres trabajar:
           </p>
         </div>
         <div class="aplicar-form reveal-right">
@@ -461,7 +474,8 @@ const eventosImages = [
     position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
-    overflow: visible;
+    overflow: hidden;
+    border-radius: var(--radius-image);
   }
 
   .comunidad-img {
@@ -476,7 +490,7 @@ const eventosImages = [
     cursor: pointer;
     opacity: 0;
     transition: opacity 0.6s ease,
-                transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
                 box-shadow 0.6s ease;
     pointer-events: none;
   }
@@ -488,13 +502,19 @@ const eventosImages = [
 
   .comunidad-img.active:hover {
     z-index: 20;
-    transform: scale(1.3) translateX(-15%);
-    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.35);
+    transform: scale(1.15);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
   }
 
   @media (max-width: 1024px) {
     .comunidad-img.active:hover {
-      transform: scale(1.2);
+      transform: scale(1.1);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .comunidad-img.active:hover {
+      transform: scale(1.08);
     }
   }
 
@@ -524,18 +544,24 @@ const eventosImages = [
     transform: scale(1.1);
   }
 
-  /* Eventos Grid */
+  /* Eventos Grid - Galeria Estática */
   .eventos-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 200px);
-    gap: var(--spacing-md);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   @media (min-width: 768px) {
     .eventos-grid {
       grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(2, 250px);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .eventos-grid {
+      grid-template-columns: repeat(5, 1fr);
     }
   }
 
@@ -544,35 +570,20 @@ const eventosImages = [
     overflow: hidden;
     border-radius: var(--radius-image);
     box-shadow: var(--shadow-md);
+    aspect-ratio: 1 / 1;
   }
 
   .evento-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease-out;
-  }
-
-  .evento-item:hover img {
-    transform: scale(1.1);
   }
 
   .evento-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(227, 39, 29, 0.6) 0%, transparent 60%);
-    opacity: 0;
-    transition: opacity var(--transition-base);
-  }
-
-  .evento-item:hover .evento-overlay {
-    opacity: 1;
-  }
-
-  @media (min-width: 768px) {
-    .evento-item-1 {
-      grid-row: span 2;
-    }
+    background: linear-gradient(to top, rgba(227, 39, 29, 0.3) 0%, transparent 50%);
+    pointer-events: none;
   }
 
   /* Section Headers */
@@ -949,7 +960,7 @@ const eventosImages = [
 ━━━━━━━━━━━━━━━━━━
 *Nombre:* ${nombre}
 *Email:* ${email}
-*Telefono:* ${telefono}
+*Teléfono:* ${telefono}
 *Ciudad:* ${ciudad}
 *Puesto:* ${puesto}
 ━━━━━━━━━━━━━━━━━━

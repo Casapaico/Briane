@@ -7,9 +7,9 @@ export const services: Service[] = [
     slug: 'supervan',
     shortDescription: 'Transporte de carga pesada - Transportando la mayor carga',
     description:
-      'Brindamos servicios de transporte de carga pesada atendiendo a principales sectores del país. Desde 1980 con servicio especializado en transporte portuario y operaciones mineras.',
+      'Brindamos servicios de transporte de carga pesada atendiendo a principales sectores del país. Desde 1982 con servicio especializado en transporte portuario y operaciones mineras.',
     features: [
-      'Servicios Portuarios desde 1980',
+      'Servicios Portuarios desde 1982',
       'Operación Minera con flota ecológica GNV',
       'Monitoreo GPS 24/7 los 365 días',
       'Permisos IQBF y Matpel',

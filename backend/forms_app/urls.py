@@ -7,4 +7,5 @@ urlpatterns = [
     path('jobs/', views.JobPositionListView.as_view(), name='job-list'),
     path('apply-full/', views.FullJobApplicationCreateView.as_view(), name='job-apply-full'),
     path('newsletter/', views.NewsletterSubscriptionCreateView.as_view(), name='newsletter-subscribe'),
+    path('claim-book/', views.ClaimBookCreateView.as_view(), name='claim-book-submit'),
 ]
