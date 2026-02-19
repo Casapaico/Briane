@@ -92,12 +92,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:4321',
-    'http://localhost:4322',
-    'http://127.0.0.1:4321',
-    'http://127.0.0.1:4322',
+# CORS — permite cualquier puerto de localhost (dev)
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r'^http://localhost:\d+$',
+    r'^http://127\.0\.0\.1:\d+$',
 ]
 
 # DRF

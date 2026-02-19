@@ -47,6 +47,11 @@ export const mainNavigation: NavItem[] = [
         label: 'Noticias',
         href: '/noticias',
       },
+      {
+        label: 'BRIANE SMART',
+        href: 'http://66.23.235.30:8080/briane/#/login',
+        external: true,
+      },
     ],
   },
 ];

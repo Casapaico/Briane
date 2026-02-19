@@ -254,8 +254,24 @@ const eventosImages = [
             <h3>Puesto</h3>
           </div>
           <div class="oferta-body">
-            <h4>Conductor de Semi Trailer - Prueba</h4>
-            <a href="/aplicar" class="apply-btn">APLICAR</a>
+            <h4>Conductor de Semi Trailer</h4>
+            <button class="apply-btn" data-puesto="Conductor de Semi Trailer">APLICAR</button>
+          </div>
+          <div class="oferta-body oferta-row-divider">
+            <h4>Conductor de Trailer</h4>
+            <button class="apply-btn" data-puesto="Conductor de Trailer">APLICAR</button>
+          </div>
+          <div class="oferta-body oferta-row-divider">
+            <h4>Asistente de Almacén</h4>
+            <button class="apply-btn" data-puesto="Asistente de Almacen">APLICAR</button>
+          </div>
+          <div class="oferta-body oferta-row-divider">
+            <h4>Coordinador de Operaciones</h4>
+            <button class="apply-btn" data-puesto="Coordinador de Operaciones">APLICAR</button>
+          </div>
+          <div class="oferta-body oferta-row-divider">
+            <h4>Otros</h4>
+            <button class="apply-btn" data-puesto="Otro">APLICAR</button>
           </div>
         </div>
       </div>
@@ -733,7 +749,7 @@ const eventosImages = [
 
   /* Ofertas Section */
   .ofertas-grid {
-    max-width: 600px;
+    max-width: 680px;
     margin: 0 auto;
   }
 
@@ -757,11 +773,15 @@ const eventosImages = [
   }
 
   .oferta-body {
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md) var(--spacing-lg);
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: var(--spacing-md);
+  }
+
+  .oferta-row-divider {
+    border-top: 1px solid var(--color-gray-200);
   }
 
   .oferta-body h4 {
@@ -780,6 +800,10 @@ const eventosImages = [
     border-radius: var(--radius-md);
     transition: background-color var(--transition-fast);
     text-decoration: none;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .apply-btn:hover {
@@ -912,12 +936,16 @@ const eventosImages = [
 </style>
 
 <script>
-  // Redirect #aplicar to /aplicar page
-  if (window.location.hash === '#aplicar') {
-    window.location.replace('/aplicar');
-  }
-
   document.addEventListener('DOMContentLoaded', () => {
+    // Botones APLICAR: seleccionan el puesto en el formulario y hacen scroll
+    document.querySelectorAll('.apply-btn[data-puesto]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const puesto = (btn as HTMLButtonElement).dataset.puesto || '';
+        const select = document.getElementById('puesto') as HTMLSelectElement;
+        if (select) select.value = puesto;
+        document.getElementById('aplicar')?.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
     // Comunidad Carousel
     const comunidadImages = document.querySelectorAll('.comunidad-img');
     const prevBtn = document.querySelector('.comunidad-btn.prev');
@@ -954,18 +982,16 @@ const eventosImages = [
       const ciudad = (document.getElementById('ciudad') as HTMLInputElement).value;
       const puesto = (document.getElementById('puesto') as HTMLSelectElement).value;
 
-      const message = `*POSTULACION LABORAL - BRIANE*
+      const message = `POSTULACION LABORAL - BRIANE
 
-*Datos del Postulante:*
-━━━━━━━━━━━━━━━━━━
-*Nombre:* ${nombre}
-*Email:* ${email}
-*Teléfono:* ${telefono}
-*Ciudad:* ${ciudad}
-*Puesto:* ${puesto}
-━━━━━━━━━━━━━━━━━━
+Datos del Postulante:
+Nombre: ${nombre}
+Email: ${email}
+Telefono: ${telefono}
+Ciudad: ${ciudad}
+Puesto: ${puesto}
 
-_Por favor, adjunte su CV en este chat._`;
+Por favor, adjunte su CV en este chat.`;
 
       const whatsappNumber = '51936636750';
       const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;

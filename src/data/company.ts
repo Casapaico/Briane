@@ -44,7 +44,7 @@ export const companyInfo: CompanyInfo = {
   contact: {
     address: 'Av. Elmer Faucett N° 5104, Urb. Las Fresas, Callao, Perú',
     phone: ['+51 998 109 252', '+51 994 076 151'],
-    email: ['alvaro.villabos@supervan.pe', 'comercial@supervan.pe'],
+    email: ['alvaro.villalobos@supervan.pe', 'comercial@supervan.pe'],
     hours: 'Lunes a Viernes: 8:00 AM - 6:00 PM',
   },
   social: [

@@ -1,0 +1,1094 @@
+---
+// ChatBot.astro — Asistente conversacional BRIANE
+---
+
+<div id="cb" class="cb">
+
+  <!-- ══ FAB ══ -->
+  <div class="cb-fab-wrap">
+    <p class="cb-tooltip" id="cb-tooltip">¿En qué te ayudamos?</p>
+    <button class="cb-fab" id="cb-fab" aria-label="Abrir asistente BRIANE">
+      <!-- Icono: chat abierto -->
+      <svg class="cb-fab-i cb-fab-chat" xmlns="http://www.w3.org/2000/svg"
+        width="26" height="26" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+      <!-- Icono: cerrar -->
+      <svg class="cb-fab-i cb-fab-x" xmlns="http://www.w3.org/2000/svg"
+        width="22" height="22" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+        style="display:none">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+      <span class="cb-badge" id="cb-badge">1</span>
+    </button>
+  </div>
+
+  <!-- ══ PANEL ══ -->
+  <div class="cb-panel" id="cb-panel" aria-hidden="true" role="dialog" aria-label="Asistente BRIANE">
+
+    <!-- Header -->
+    <header class="cb-hdr">
+      <div class="cb-hdr-bot">
+        <div class="cb-hdr-ico">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <div>
+          <p class="cb-hdr-name">Asistente BRIANE</p>
+          <p class="cb-hdr-status">
+            <span class="cb-hdr-dot"></span>En línea ahora
+          </p>
+        </div>
+      </div>
+      <button class="cb-hdr-close" id="cb-close" aria-label="Cerrar chat">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Mensajes -->
+    <div class="cb-body" id="cb-body"></div>
+
+    <!-- Footer / input -->
+    <div class="cb-footer" id="cb-footer" style="display:none">
+      <textarea id="cb-inp" class="cb-inp" rows="1"
+        placeholder="Escribe tu mensaje..."></textarea>
+      <button class="cb-send" id="cb-send" aria-label="Enviar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"/>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════ STYLES ══════════════════ -->
+<style is:global>
+/* ─ Reset & root ─ */
+.cb { all: initial; }
+.cb * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+.cb {
+  position: fixed;
+  bottom: 24px;
+  right: 22px;
+  z-index: 9500;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  /* El container no debe interceptar eventos — solo FAB y panel abierto son interactivos */
+  pointer-events: none;
+}
+/* Reactivar interacción solo donde se necesita */
+.cb-fab-wrap  { pointer-events: auto; }
+.cb-panel.cb-open { pointer-events: auto; }
+
+/* ─ Tooltip ─ */
+.cb-fab-wrap { display: flex; align-items: center; gap: 10px; }
+.cb-tooltip {
+  background: #111827;
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(0,0,0,.22);
+  margin: 0;
+  animation: cb-slide-in .4s ease both;
+  pointer-events: none;
+  letter-spacing: .01em;
+}
+@keyframes cb-slide-in {
+  from { opacity:0; transform: translateX(10px); }
+  to   { opacity:1; transform: translateX(0); }
+}
+
+/* ─ FAB ─ */
+.cb-fab {
+  position: relative;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: #e3271d;
+  color: #fff;
+  border: none;
+  cursor: grab;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 18px rgba(227,39,29,.45);
+  transition: transform .2s, box-shadow .2s;
+}
+.cb-fab:hover  { transform: scale(1.07); box-shadow: 0 6px 24px rgba(227,39,29,.58); }
+.cb-fab:active { transform: scale(.95); cursor: grabbing; }
+.cb.cb-dragging .cb-fab { cursor: grabbing; transform: scale(1.08); }
+.cb.cb-dragging { user-select: none; }
+.cb-fab-i { flex-shrink: 0; }
+
+.cb-badge {
+  position: absolute;
+  top: -3px; right: -3px;
+  min-width: 19px; height: 19px;
+  border-radius: 10px;
+  background: #facc15;
+  color: #111;
+  font-size: 10px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid #fff;
+  padding: 0 4px;
+  animation: cb-pulse 2s ease-in-out infinite;
+}
+@keyframes cb-pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.2)} }
+
+/* ─ Panel ─ */
+.cb-panel {
+  width: 348px;
+  height: 530px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 12px 48px rgba(0,0,0,.18), 0 0 0 1px rgba(0,0,0,.06);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform-origin: bottom right;
+  transform: scale(.86) translateY(18px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .32s cubic-bezier(.34,1.56,.64,1), opacity .22s ease;
+}
+.cb-panel.cb-open {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+@media (max-width: 430px) {
+  .cb { bottom:14px; right:12px; }
+  .cb-panel { width: calc(100vw - 24px); height: 80svh; }
+  .cb-tooltip { display: none; }
+}
+
+/* ─ Header ─ */
+.cb-hdr {
+  background: linear-gradient(120deg, #e3271d 0%, #b8180f 100%);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.cb-hdr-bot { display: flex; align-items: center; gap: 11px; }
+.cb-hdr-ico {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.18);
+  border: 2px solid rgba(255,255,255,.32);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+.cb-hdr-name {
+  font-size: 14px; font-weight: 700; color: #fff;
+  margin: 0 0 2px;
+  line-height: 1;
+}
+.cb-hdr-status {
+  font-size: 11.5px; color: rgba(255,255,255,.8);
+  margin: 0;
+  display: flex; align-items: center; gap: 5px;
+}
+.cb-hdr-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #4ade80;
+  display: inline-block;
+  animation: cb-blink 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes cb-blink { 0%,100%{opacity:1} 50%{opacity:.35} }
+.cb-hdr-close {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(255,255,255,.16);
+  border: none; color: #fff; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .18s;
+  flex-shrink: 0;
+}
+.cb-hdr-close:hover { background: rgba(255,255,255,.28); }
+
+/* ─ Body ─ */
+.cb-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 14px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;          /* gap mínimo entre mensajes del mismo emisor */
+  background: #f4f6f9;
+  text-align: left;  /* neutraliza text-align:center heredado del sitio */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,.1) transparent;
+}
+.cb-body::-webkit-scrollbar { width: 4px; }
+.cb-body::-webkit-scrollbar-thumb { background: rgba(0,0,0,.1); border-radius: 4px; }
+
+/* ─ Burbuja BOT ─ */
+.cb-bot {
+  display: flex;
+  justify-content: flex-start;
+  animation: cb-in-l .24s ease both;
+}
+.cb-bub-bot {
+  background: #fff;
+  color: #1a1a2e;
+  border-radius: 4px 18px 18px 18px;  /* cola superior-izquierda */
+  padding: 10px 14px;
+  font-size: 13.5px;
+  line-height: 1.58;
+  text-align: left;
+  max-width: 75%;
+  box-shadow: 0 1px 3px rgba(0,0,0,.09);
+  word-break: break-word;
+}
+
+/* ─ Burbuja USUARIO ─ */
+.cb-user {
+  display: flex;
+  justify-content: flex-end;
+  animation: cb-in-r .2s ease both;
+}
+.cb-bub-user {
+  background: #e3271d;
+  color: #fff;
+  border-radius: 18px 4px 18px 18px;  /* cola superior-derecha */
+  padding: 10px 14px;
+  font-size: 13.5px;
+  line-height: 1.58;
+  text-align: left;
+  max-width: 75%;
+  box-shadow: 0 2px 8px rgba(227,39,29,.28);
+  word-break: break-word;
+}
+
+/* Gap mayor entre cambio de emisor */
+.cb-bot  + .cb-user,
+.cb-user + .cb-bot,
+.cb-opts + .cb-user,
+.cb-pills + .cb-user,
+.cb-card-wrap + .cb-user  { margin-top: 10px; }
+.cb-user + .cb-bot        { margin-top: 10px; }
+
+/* ─ Indicador de escritura (SOLO PUNTOS, sin letra) ─ */
+.cb-typing {
+  display: flex;
+  justify-content: flex-start;
+  animation: cb-in-l .18s ease both;
+}
+.cb-typing-bub {
+  /* Idéntico al bub-bot pero con dots */
+  background: #fff;
+  border-radius: 4px 18px 18px 18px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.09);
+}
+.cb-d {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #94a3b8;
+  animation: cb-bounce 1.4s ease-in-out infinite;
+}
+.cb-d:nth-child(2) { animation-delay: .22s; }
+.cb-d:nth-child(3) { animation-delay: .44s; }
+@keyframes cb-bounce {
+  0%,60%,100% { transform: translateY(0);   opacity: .45; }
+  30%          { transform: translateY(-8px); opacity: 1;   }
+}
+
+/* ─ Tarjetas de opción (menú principal y submenú) ─ */
+.cb-card-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+  width: 100%;
+  animation: cb-in-l .28s ease both;
+}
+.cb-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 12px 14px;
+  cursor: pointer;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(0,0,0,.07);
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.cb-card:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.13);
+  border-color: var(--cc, #e3271d);
+  background: #fafafa;
+}
+.cb-card:not(:disabled):active { transform: translateY(0); }
+.cb-card:disabled { opacity: .45; cursor: not-allowed; }
+
+.cb-card-ico {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  background: var(--cc, #e3271d);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--cc, #e3271d) 35%, transparent);
+}
+.cb-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  text-align: left;
+}
+.cb-card-title {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.3;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  padding: 0;
+}
+.cb-card-desc {
+  display: block;
+  font-size: 11.5px;
+  color: #64748b;
+  line-height: 1.35;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  white-space: normal;
+}
+.cb-card-arr {
+  color: #cbd5e1;
+  transition: transform .15s, color .15s;
+  flex-shrink: 0;
+}
+.cb-card:not(:disabled):hover .cb-card-arr {
+  color: var(--cc, #e3271d);
+  transform: translateX(4px);
+}
+
+/* Link-card (va a otra página) */
+a.cb-card {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ─ Pills (botones secundarios) ─ */
+.cb-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 8px;
+  animation: cb-in-l .28s ease both;
+}
+.cb-pill {
+  padding: 7px 15px;
+  border-radius: 20px;
+  font-size: 12.5px;
+  font-weight: 600;
+  border: 1.5px solid var(--cp, #e3271d);
+  color: var(--cp, #e3271d);
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .15s, color .15s;
+  line-height: 1;
+}
+.cb-pill:hover { background: var(--cp, #e3271d); color: #fff; }
+.cb-pill:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ─ Banner success/error ─ */
+.cb-banner {
+  border-radius: 12px;
+  padding: 10px 13px;
+  font-size: 13px;
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 8px;
+  animation: cb-in-l .28s ease both;
+}
+.cb-banner.ok  { background:#ecfdf5; color:#065f46; border:1px solid #6ee7b7; }
+.cb-banner.err { background:#fff1f2; color:#9f1239; border:1px solid #fda4af; }
+.cb-banner svg { flex-shrink: 0; margin-top: 1px; }
+
+/* ─ Reinicio ─ */
+.cb-restart {
+  align-self: center;
+  margin-top: 8px;
+  background: none; border: none;
+  color: #9ca3af; font-size: 11.5px;
+  cursor: pointer; text-decoration: underline;
+  font-family: inherit;
+  transition: color .15s;
+  animation: cb-in-l .3s ease both;
+}
+.cb-restart:hover { color: #6b7280; }
+
+/* ─ Footer / input ─ */
+.cb-footer {
+  border-top: 1px solid #e9ecef;
+  padding: 10px 12px;
+  background: #fff;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.cb-inp {
+  flex: 1;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 22px;
+  padding: 9px 15px;
+  font-size: 13.5px;
+  font-family: inherit;
+  resize: none;
+  outline: none;
+  max-height: 100px;
+  overflow-y: auto;
+  line-height: 1.5;
+  color: #1a1a2e;
+  background: #f9fafb;
+  transition: border-color .18s, background .18s;
+}
+.cb-inp:focus { border-color: #e3271d; background: #fff; }
+.cb-inp::placeholder { color: #adb5bd; }
+.cb-inp.err { border-color: #ef4444; }
+
+.cb-send {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: #e3271d;
+  color: #fff; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(227,39,29,.4);
+  transition: transform .15s, background .15s;
+}
+.cb-send:hover  { background: #c41e17; transform: scale(1.08); }
+.cb-send:active { transform: scale(.93); }
+
+/* ─ Animaciones ─ */
+@keyframes cb-in-l {
+  from { opacity:0; transform: translateX(-6px) translateY(4px); }
+  to   { opacity:1; transform: translateX(0)    translateY(0);   }
+}
+@keyframes cb-in-r {
+  from { opacity:0; transform: translateX(6px) translateY(4px); }
+  to   { opacity:1; transform: translateX(0)   translateY(0);   }
+}
+</style>
+
+<!-- ══════════════════ SCRIPT ══════════════════ -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var API     = 'http://localhost:8000/api';
+  var WSP_NUM = '51936636750';
+
+  /* ── DOM ── */
+  var fab      = document.getElementById('cb-fab');
+  var panel    = document.getElementById('cb-panel');
+  var badge    = document.getElementById('cb-badge');
+  var tooltip  = document.getElementById('cb-tooltip');
+  var closeBtn = document.getElementById('cb-close');
+  var body     = document.getElementById('cb-body');
+  var footer   = document.getElementById('cb-footer');
+  var inp      = document.getElementById('cb-inp');
+  var sendBtn  = document.getElementById('cb-send');
+  var icoChat  = fab.querySelector('.cb-fab-chat');
+  var icoX     = fab.querySelector('.cb-fab-x');
+
+  /* ── State ── */
+  var isOpen    = false;
+  var started   = false;
+  var collected = {};      // datos recopilados del formulario
+  var inputKey  = null;
+  var inputVal  = null;    // validación
+  var nextState = null;
+  var jobs      = [];
+
+  /* ── SVG icons (inline) ── */
+  var ICO = {
+    chat:  '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+    bag:   '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>',
+    warn:  '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+    wsp:   '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>',
+    form:  '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>',
+    list:  '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>',
+    ok:    '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+    err:   '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+    arr:   '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>',
+    ext:   '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
+  };
+
+  /* ── Abrir / cerrar ── */
+  function openPanel() {
+    isOpen = true;
+    panel.classList.add('cb-open');
+    panel.setAttribute('aria-hidden', 'false');
+    icoChat.style.display = 'none';
+    icoX.style.display    = 'block';
+    badge.style.display   = 'none';
+    if (tooltip) { tooltip.style.transition = 'opacity .3s'; tooltip.style.opacity = '0'; }
+    if (!started) { started = true; setTimeout(function(){ go('welcome'); }, 380); }
+    else { scrollEnd(); }
+  }
+  function closePanel() {
+    isOpen = false;
+    panel.classList.remove('cb-open');
+    panel.setAttribute('aria-hidden', 'true');
+    icoChat.style.display = 'block';
+    icoX.style.display    = 'none';
+  }
+  closeBtn.addEventListener('click', closePanel);
+
+  /* ── Drag ── */
+  var cbRoot    = document.getElementById('cb');
+  var dragging  = false;
+  var hasMoved  = false;
+  var dragOffX  = 0;
+  var dragOffY  = 0;
+
+  function dragStart(clientX, clientY) {
+    var rect = cbRoot.getBoundingClientRect();
+    /* Convierte bottom/right → top/left para poder mover libremente */
+    cbRoot.style.right  = 'auto';
+    cbRoot.style.bottom = 'auto';
+    cbRoot.style.left   = rect.left + 'px';
+    cbRoot.style.top    = rect.top  + 'px';
+    dragOffX = clientX - rect.left;
+    dragOffY = clientY - rect.top;
+    dragging = true;
+    hasMoved = false;
+    cbRoot.classList.add('cb-dragging');
+  }
+
+  function dragMove(clientX, clientY) {
+    if (!dragging) return;
+    var nx = clientX - dragOffX;
+    var ny = clientY - dragOffY;
+    /* Mantener dentro de la ventana */
+    nx = Math.max(0, Math.min(nx, window.innerWidth  - cbRoot.offsetWidth));
+    ny = Math.max(0, Math.min(ny, window.innerHeight - cbRoot.offsetHeight));
+    cbRoot.style.left = nx + 'px';
+    cbRoot.style.top  = ny + 'px';
+    hasMoved = true;
+  }
+
+  function dragEnd() {
+    if (!dragging) return;
+    dragging = false;
+    cbRoot.classList.remove('cb-dragging');
+  }
+
+  /* Mouse */
+  fab.addEventListener('mousedown', function(e) {
+    e.preventDefault();
+    dragStart(e.clientX, e.clientY);
+  });
+  document.addEventListener('mousemove', function(e) { dragMove(e.clientX, e.clientY); });
+  document.addEventListener('mouseup',   function()  { dragEnd(); });
+
+  /* Touch */
+  fab.addEventListener('touchstart', function(e) {
+    var t = e.touches[0];
+    dragStart(t.clientX, t.clientY);
+  }, { passive: true });
+  document.addEventListener('touchmove', function(e) {
+    if (!dragging) return;
+    e.preventDefault();
+    var t = e.touches[0];
+    dragMove(t.clientX, t.clientY);
+  }, { passive: false });
+  document.addEventListener('touchend', dragEnd);
+
+  /* Click: solo abre/cierra si no hubo movimiento */
+  fab.addEventListener('click', function() {
+    if (hasMoved) { hasMoved = false; return; }
+    isOpen ? closePanel() : openPanel();
+  });
+
+  /* Ocultar tooltip tras 6s */
+  setTimeout(function(){
+    if (!isOpen && tooltip) {
+      tooltip.style.transition = 'opacity .5s';
+      tooltip.style.opacity = '0';
+      setTimeout(function(){ if(tooltip) tooltip.style.display='none'; }, 500);
+    }
+  }, 6000);
+
+  /* ── Scroll ── */
+  function scrollEnd() { setTimeout(function(){ body.scrollTop = body.scrollHeight; }, 50); }
+
+  /* ── Escape HTML ── */
+  function esc(s) {
+    var d = document.createElement('div');
+    d.appendChild(document.createTextNode(String(s)));
+    return d.innerHTML;
+  }
+
+  /* ════════════════ UI PRIMITIVES ════════════════ */
+
+  /* Indicador de escritura: SOLO 3 puntos, sin "B" ni avatar */
+  function showTyping() {
+    var el = document.createElement('div');
+    el.className = 'cb-typing';
+    el.innerHTML =
+      '<div class="cb-typing-bub">' +
+        '<span class="cb-d"></span>' +
+        '<span class="cb-d"></span>' +
+        '<span class="cb-d"></span>' +
+      '</div>';
+    body.appendChild(el);
+    scrollEnd();
+    return el;
+  }
+
+  /* Mensaje del bot */
+  function botMsg(text, ms) {
+    return new Promise(function(res){
+      var t = showTyping();
+      setTimeout(function(){
+        t.remove();
+        var el = document.createElement('div');
+        el.className = 'cb-bot';
+        el.innerHTML = '<div class="cb-bub-bot">' + esc(text) + '</div>';
+        body.appendChild(el);
+        scrollEnd();
+        res();
+      }, ms || 750);
+    });
+  }
+
+  /* Mensaje del usuario */
+  function userMsg(text) {
+    var el = document.createElement('div');
+    el.className = 'cb-user';
+    el.innerHTML = '<div class="cb-bub-user">' + esc(text) + '</div>';
+    body.appendChild(el);
+    scrollEnd();
+  }
+
+  /* Tarjetas de opción
+     opts = [{ label, desc?, icon?, color?, next?, link?, action? }]
+  */
+  function addCards(opts) {
+    var wrap = document.createElement('div');
+    wrap.className = 'cb-card-wrap';
+
+    opts.forEach(function(o){
+      if (o.link) {
+        /* Link externo: etiqueta <a> */
+        var a = document.createElement('a');
+        a.className = 'cb-card';
+        a.href = o.link;
+        a.style.setProperty('--cc', o.color || '#e3271d');
+        a.innerHTML =
+          '<div class="cb-card-ico">' + (o.icon || ICO.arr) + '</div>' +
+          '<div class="cb-card-body">' +
+            '<span class="cb-card-title">' + esc(o.label) + '</span>' +
+            (o.desc ? '<span class="cb-card-desc">' + esc(o.desc) + '</span>' : '') +
+          '</div>' +
+          '<div class="cb-card-arr">' + ICO.ext + '</div>';
+        wrap.appendChild(a);
+        return;
+      }
+
+      var btn = document.createElement('button');
+      btn.className = 'cb-card';
+      btn.style.setProperty('--cc', o.color || '#e3271d');
+      btn.innerHTML =
+        '<div class="cb-card-ico">' + (o.icon || ICO.arr) + '</div>' +
+        '<div class="cb-card-body">' +
+          '<span class="cb-card-title">' + esc(o.label) + '</span>' +
+          (o.desc ? '<span class="cb-card-desc">' + esc(o.desc) + '</span>' : '') +
+        '</div>' +
+        '<div class="cb-card-arr">' + ICO.arr + '</div>';
+
+      btn.addEventListener('click', function(){
+        lockWrap(wrap);
+        userMsg(o.label);
+        if (o.action) { setTimeout(o.action, 260); }
+        else {
+          setTimeout(function(){
+            var t = showTyping();
+            setTimeout(function(){ t.remove(); go(o.next); }, 700);
+          }, 280);
+        }
+      }, { once: true });
+      wrap.appendChild(btn);
+    });
+
+    body.appendChild(wrap);
+    scrollEnd();
+  }
+
+  /* Pills (acciones secundarias) */
+  function addPills(opts) {
+    var wrap = document.createElement('div');
+    wrap.className = 'cb-pills';
+
+    opts.forEach(function(o){
+      if (o.link) {
+        var a = document.createElement('a');
+        a.className = 'cb-pill';
+        a.style.setProperty('--cp', o.color || '#6b7280');
+        a.href = o.link;
+        a.textContent = o.label;
+        wrap.appendChild(a);
+        return;
+      }
+      var btn = document.createElement('button');
+      btn.className = 'cb-pill';
+      btn.style.setProperty('--cp', o.color || '#6b7280');
+      btn.textContent = o.label;
+      btn.addEventListener('click', function(){
+        lockWrap(wrap);
+        userMsg(o.label);
+        setTimeout(function(){
+          var t = showTyping();
+          setTimeout(function(){ t.remove(); go(o.next); }, 700);
+        }, 280);
+      }, { once: true });
+      wrap.appendChild(btn);
+    });
+
+    body.appendChild(wrap);
+    scrollEnd();
+  }
+
+  function lockWrap(w) {
+    w.querySelectorAll('button').forEach(function(b){ b.disabled = true; });
+  }
+
+  /* Banner éxito / error */
+  function banner(text, type) {
+    var el = document.createElement('div');
+    el.className = 'cb-banner ' + type;
+    el.innerHTML = (type === 'ok' ? ICO.ok : ICO.err) + '<span>' + esc(text) + '</span>';
+    body.appendChild(el);
+    scrollEnd();
+  }
+
+  /* Botón reiniciar */
+  function addRestart() {
+    var btn = document.createElement('button');
+    btn.className = 'cb-restart';
+    btn.textContent = 'Iniciar nueva consulta';
+    btn.addEventListener('click', function(){ resetAll(); });
+    body.appendChild(btn);
+    scrollEnd();
+  }
+
+  function resetAll() {
+    body.innerHTML = '';
+    collected = {};
+    hideInput();
+    setTimeout(function(){ go('welcome'); }, 200);
+  }
+
+  /* Input de texto */
+  function showInput(placeholder, key, validate, nxt) {
+    inputKey  = key;
+    inputVal  = validate || null;
+    nextState = nxt;
+    footer.style.display = 'flex';
+    inp.placeholder = placeholder || 'Escribe aquí...';
+    inp.value = '';
+    inp.style.height = 'auto';
+    inp.classList.remove('err');
+    setTimeout(function(){ inp.focus(); }, 100);
+  }
+  function hideInput() {
+    inputKey = null; inputVal = null; nextState = null;
+    footer.style.display = 'none';
+    inp.value = '';
+    inp.classList.remove('err');
+  }
+  function submitInput() {
+    var val = inp.value.trim();
+    if (!val || !inputKey) return;
+    if (inputVal) {
+      var msg = inputVal(val);
+      if (msg) {
+        inp.classList.add('err');
+        inp.value = '';
+        inp.placeholder = msg;
+        setTimeout(function(){
+          inp.classList.remove('err');
+          inp.placeholder = 'Escribe aquí...';
+        }, 2500);
+        return;
+      }
+    }
+    collected[inputKey] = val;
+    var nxt = nextState;
+    hideInput();
+    userMsg(val);
+    setTimeout(function(){
+      var t = showTyping();
+      setTimeout(function(){ t.remove(); go(nxt); }, 700);
+    }, 260);
+  }
+
+  sendBtn.addEventListener('click', submitInput);
+  inp.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); submitInput(); }
+  });
+  inp.addEventListener('input', function(){
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+  });
+
+  /* Validadores */
+  function vEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? null : 'Correo no válido, inténtalo de nuevo'; }
+
+  /* ════════════════════════════════════════════
+     MÁQUINA DE ESTADOS
+  ════════════════════════════════════════════ */
+  function go(state) {
+    switch (state) {
+
+      /* ── BIENVENIDA ── */
+      case 'welcome':
+        botMsg('¡Hola! Soy el asistente virtual de BRIANE. ¿En qué puedo ayudarte hoy?', 850)
+          .then(function(){
+            addCards([
+              { label:'Tengo una consulta',        desc:'Envíanos un mensaje, te respondemos pronto',    icon:ICO.chat, color:'#e3271d', next:'c_name' },
+              { label:'Quiero trabajar en BRIANE', desc:'Explora nuestras oportunidades laborales',      icon:ICO.bag,  color:'#16a34a', next:'j_menu' },
+              { label:'Tengo un reclamo o queja',  desc:'Libro de reclamaciones virtual — Ley 29571',   icon:ICO.warn, color:'#ca8a04', next:'claim'  },
+            ]);
+          });
+        break;
+
+      /* ──────── FLUJO CONTACTO ──────── */
+      case 'c_name':
+        botMsg('Con gusto te ayudo. ¿Cuál es tu nombre completo?', 750)
+          .then(function(){ showInput('Ej: Juan Pérez', 'name', null, 'c_email'); });
+        break;
+
+      case 'c_email':
+        botMsg('Gracias, ' + collected.name + '. ¿Cuál es tu correo electrónico?', 700)
+          .then(function(){ showInput('correo@ejemplo.com', 'email', vEmail, 'c_phone'); });
+        break;
+
+      case 'c_phone':
+        botMsg('¿Cuál es tu número de teléfono?', 650)
+          .then(function(){ showInput('+51 999 999 999', 'phone', null, 'c_msg'); });
+        break;
+
+      case 'c_msg':
+        botMsg('¿En qué podemos ayudarte? Cuéntanos tu consulta:', 700)
+          .then(function(){
+            showInput(
+              'Describe tu consulta...',
+              'message',
+              function(v){ return v.length>=5 ? null : 'Escribe un poco más...'; },
+              'c_send'
+            );
+          });
+        break;
+
+      case 'c_send':
+        botMsg('Un momento, enviando tu consulta...', 600)
+          .then(function(){ apiContact(); });
+        break;
+
+      case 'c_ok':
+        banner('Mensaje enviado correctamente. Te responderemos pronto a ' + collected.email + '.', 'ok');
+        setTimeout(addRestart, 400);
+        break;
+
+      case 'c_err':
+        banner('No se pudo enviar el mensaje. Intenta de nuevo o visita nuestra página de contacto.', 'err');
+        setTimeout(function(){
+          addPills([
+            { label:'Intentar de nuevo', color:'#e3271d', next:'c_name' },
+            { label:'Ir a Contacto',     color:'#6b7280', link:'/contactenos' },
+          ]);
+          addRestart();
+        }, 400);
+        break;
+
+      /* ──────── FLUJO TRABAJO ──────── */
+      case 'j_menu':
+        botMsg('¡Excelente! Tenemos oportunidades para ti. ¿Qué deseas hacer?', 800)
+          .then(function(){
+            addCards([
+              { label:'Enviar CV por WhatsApp',     desc:'Completamos los datos aquí y abrimos WhatsApp', icon:ICO.wsp,  color:'#25D366', next:'j_name' },
+              { label:'Postulación completa',        desc:'Formulario detallado, adjunta tu CV',            icon:ICO.form, color:'#e3271d', link:'/aplicar' },
+              { label:'Ver ofertas laborales',       desc:'Conoce los puestos disponibles',                 icon:ICO.list, color:'#4f46e5', link:'/trabaja-con-nosotros' },
+            ]);
+          });
+        break;
+
+      case 'j_name':
+        botMsg('Perfecto. ¿Cuál es tu nombre completo?', 700)
+          .then(function(){ showInput('Ej: Juan Pérez', 'jname', null, 'j_email'); });
+        break;
+
+      case 'j_email':
+        botMsg('¿Cuál es tu correo electrónico?', 650)
+          .then(function(){ showInput('correo@ejemplo.com', 'jemail', vEmail, 'j_phone'); });
+        break;
+
+      case 'j_phone':
+        botMsg('¿Cuál es tu número de teléfono?', 650)
+          .then(function(){ showInput('+51 999 999 999', 'jphone', null, 'j_city'); });
+        break;
+
+      case 'j_city':
+        botMsg('¿En qué ciudad te encuentras?', 650)
+          .then(function(){ showInput('Ej: Lima', 'jcity', null, 'j_pos'); });
+        break;
+
+      case 'j_pos':
+        botMsg('¿A qué puesto deseas postular?', 700)
+          .then(function(){ loadJobs(); });
+        break;
+
+      case 'j_wsp':
+        doWhatsApp();
+        break;
+
+      case 'j_done':
+        banner('¡Todo listo! Abrimos WhatsApp con tus datos. ¡Mucho éxito en tu postulación!', 'ok');
+        setTimeout(addRestart, 400);
+        break;
+
+      /* ──────── FLUJO RECLAMO ──────── */
+      case 'claim':
+        botMsg(
+          'Lamentamos los inconvenientes. Para registrar tu reclamo o queja te llevo al Libro de Reclamaciones virtual. Recibirás respuesta en máximo 30 días calendario.',
+          900
+        ).then(function(){
+          addCards([
+            { label:'Ir al Libro de Reclamaciones', desc:'Formulario oficial — Ley N° 29571', icon:ICO.form, color:'#ca8a04', link:'/libro-reclamaciones' },
+          ]);
+          setTimeout(function(){
+            addPills([
+              { label:'Volver al inicio', color:'#6b7280', next:'welcome' },
+            ]);
+          }, 200);
+        });
+        break;
+
+      default: go('welcome');
+    }
+  }
+
+  /* ── API contacto ── */
+  function apiContact() {
+    fetch(API + '/contact/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: collected.name,
+        email: collected.email,
+        phone: collected.phone,
+        message: collected.message,
+        privacy_accepted: true,
+      }),
+    })
+    .then(function(r){
+      var t = showTyping();
+      setTimeout(function(){ t.remove(); go(r.ok ? 'c_ok' : 'c_err'); }, 600);
+    })
+    .catch(function(){
+      var t = showTyping();
+      setTimeout(function(){ t.remove(); go('c_err'); }, 600);
+    });
+  }
+
+  /* ── Cargar puestos ── */
+  function loadJobs() {
+    if (jobs.length) { renderJobs(); return; }
+    var t = showTyping();
+    fetch(API + '/jobs/')
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        t.remove();
+        jobs = (d.results || d || []).slice(0, 6);
+        if (!jobs.length) throw new Error('empty');
+        renderJobs();
+      })
+      .catch(function(){
+        t.remove();
+        jobs = [
+          {title:'Conductor de Semi Trailer'},
+          {title:'Conductor de Trailer'},
+          {title:'Asistente de Almacén'},
+          {title:'Coordinador de Operaciones'},
+          {title:'Otro puesto'},
+        ];
+        renderJobs();
+      });
+  }
+
+  function renderJobs() {
+    addCards(jobs.map(function(j){
+      return {
+        label:  j.title,
+        icon:   ICO.bag,
+        color:  '#16a34a',
+        action: function(){
+          collected.jpuesto = j.title;
+          /* addCards ya mostró userMsg(label), solo avanzamos estado */
+          var t = showTyping();
+          setTimeout(function(){ t.remove(); go('j_wsp'); }, 700);
+        },
+      };
+    }));
+  }
+
+  /* ── WhatsApp ── */
+  function doWhatsApp() {
+    var msg =
+      'POSTULACION LABORAL - BRIANE\n\n' +
+      'Nombre: '   + (collected.jname   || '') + '\n' +
+      'Email: '    + (collected.jemail  || '') + '\n' +
+      'Telefono: ' + (collected.jphone  || '') + '\n' +
+      'Ciudad: '   + (collected.jcity   || '') + '\n' +
+      'Puesto: '   + (collected.jpuesto || '') + '\n\n' +
+      'Por favor, adjunte su CV en este chat.';
+    window.open('https://wa.me/' + WSP_NUM + '?text=' + encodeURIComponent(msg), '_blank');
+    var t = showTyping();
+    setTimeout(function(){ t.remove(); go('j_done'); }, 800);
+  }
+
+});
+</script>
