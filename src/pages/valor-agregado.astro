@@ -227,6 +227,58 @@ const valueProps = [
     </svg>
   </div>
 
+  <!-- Alianzas Estratégicas -->
+  <section class="alianzas-section section bg-gray-50">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <h2 class="alianzas-title">Alianzas Estratégicas</h2>
+        <p class="alianzas-subtitle">Convenios que benefician a nuestros colaboradores</p>
+      </div>
+
+      <div class="alianza-card reveal">
+        <div class="alianza-image">
+          <img src="/images/convenio-upn.png" alt="Convenio SUPERVAN SAC y Universidad Privada del Norte" />
+        </div>
+        <div class="alianza-content">
+          <h3>Alianza Estratégica con la Universidad UPN</h3>
+          <p class="alianza-description">
+            Se comunica una alianza estratégica entre <strong>SUPERVAN SAC</strong> y la
+            <strong>Universidad Privada del Norte (UPN)</strong> con los siguientes descuentos:
+          </p>
+          <div class="alianza-descuentos">
+            <div class="descuento-item">
+              <span class="descuento-porcentaje">10%</span>
+              <span class="descuento-label">MBA</span>
+            </div>
+            <div class="descuento-item">
+              <span class="descuento-porcentaje">8%</span>
+              <span class="descuento-label">Diplomados</span>
+            </div>
+            <div class="descuento-item">
+              <span class="descuento-porcentaje">10%</span>
+              <span class="descuento-label">Carreras para gente que trabaja</span>
+            </div>
+          </div>
+          <div class="alianza-contactos">
+            <h4>Contactos:</h4>
+            <div class="contacto-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <span><strong>Alexandra Espinoza</strong> (Supervan): 923 649 746</span>
+            </div>
+            <div class="contacto-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <span><strong>Rafaella Garcia</strong> (Asesora UPN): 992 585 152</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <CallToAction
     title="Experimente la diferencia BRIANE"
     description="Contáctenos y descubra cómo podemos agregar valor a su operación logística."
@@ -445,6 +497,131 @@ const valueProps = [
     justify-content: center;
     color: rgba(255, 255, 255, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* Alianzas Estratégicas */
+  .alianzas-section {
+    padding: var(--spacing-4xl) 0;
+  }
+
+  .alianzas-title {
+    font-size: var(--text-3xl);
+    font-weight: var(--font-bold);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .alianzas-subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-gray-600);
+    margin-bottom: var(--spacing-3xl);
+  }
+
+  .alianza-card {
+    background: var(--color-white);
+    border-radius: var(--radius-image);
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--color-gray-100);
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .alianza-card {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .alianza-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-2xl);
+    background: var(--color-gray-50);
+  }
+
+  .alianza-image img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .alianza-content {
+    padding: var(--spacing-2xl);
+  }
+
+  .alianza-content h3 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .alianza-description {
+    color: var(--color-gray-600);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .alianza-descuentos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .descuento-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: linear-gradient(135deg, rgba(247, 192, 41, 0.1), rgba(247, 192, 41, 0.05));
+    border: 2px solid #f7c029;
+    border-radius: var(--radius-card);
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .descuento-porcentaje {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--color-primary);
+  }
+
+  .descuento-label {
+    font-size: var(--text-sm);
+    color: var(--color-gray-700);
+    text-align: center;
+    font-weight: var(--font-medium);
+  }
+
+  .alianza-contactos {
+    border-top: 1px solid var(--color-gray-200);
+    padding-top: var(--spacing-lg);
+  }
+
+  .alianza-contactos h4 {
+    font-size: var(--text-base);
+    font-weight: var(--font-bold);
+    color: var(--color-gray-900);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .contacto-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-gray-700);
+    font-size: var(--text-sm);
+  }
+
+  .contacto-item svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
   }
 </style>
 
