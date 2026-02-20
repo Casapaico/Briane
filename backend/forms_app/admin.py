@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from .models import (
     ContactSubmission, JobPosition,
-    FullJobApplication, WorkExperience, AcademicFormation,
+    FullJobApplication,
     NewsletterSubscription, ClaimBook,
 )
 
@@ -41,31 +41,12 @@ class JobPositionAdmin(admin.ModelAdmin):
 
 
 
-class WorkExperienceInline(admin.TabularInline):
-    model = WorkExperience
-    extra = 0
-    readonly_fields = ['company', 'position', 'start_date', 'end_date']
-
-    def has_add_permission(self, request, obj=None):
-        return False
-
-
-class AcademicFormationInline(admin.TabularInline):
-    model = AcademicFormation
-    extra = 0
-    readonly_fields = ['subject', 'degree', 'graduation_date', 'university', 'grade']
-
-    def has_add_permission(self, request, obj=None):
-        return False
-
-
 @admin.register(FullJobApplication)
 class FullJobApplicationAdmin(admin.ModelAdmin):
     list_display = ['full_name_display', 'email', 'position', 'is_reviewed', 'created_at']
     list_filter = ['is_reviewed', 'position', 'english_level', 'logistics_experience']
     search_fields = ['first_name', 'last_name', 'email', 'phone']
     list_editable = ['is_reviewed']
-    inlines = [WorkExperienceInline, AcademicFormationInline]
     readonly_fields = [
         'has_cv',
         'title', 'first_name', 'last_name', 'email', 'phone',

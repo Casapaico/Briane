@@ -585,7 +585,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function dragStart(clientX, clientY) {
     var rect = cbRoot.getBoundingClientRect();
-    /* Convierte bottom/right → top/left para poder mover libremente */
     cbRoot.style.right  = 'auto';
     cbRoot.style.bottom = 'auto';
     cbRoot.style.left   = rect.left + 'px';
@@ -601,7 +600,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!dragging) return;
     var nx = clientX - dragOffX;
     var ny = clientY - dragOffY;
-    /* Mantener dentro de la ventana */
     nx = Math.max(0, Math.min(nx, window.innerWidth  - cbRoot.offsetWidth));
     ny = Math.max(0, Math.min(ny, window.innerHeight - cbRoot.offsetHeight));
     cbRoot.style.left = nx + 'px';
@@ -621,7 +619,7 @@ document.addEventListener('DOMContentLoaded', function () {
     dragStart(e.clientX, e.clientY);
   });
   document.addEventListener('mousemove', function(e) { dragMove(e.clientX, e.clientY); });
-  document.addEventListener('mouseup',   function()  { dragEnd(); });
+  document.addEventListener('mouseup', dragEnd);
 
   /* Touch */
   fab.addEventListener('touchstart', function(e) {

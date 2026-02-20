@@ -41,7 +41,7 @@ export const mainNavigation: NavItem[] = [
       },
       {
         label: 'Trabaja con Nosotros',
-        href: '/trabaja-con-nosotros',
+        href: '/aplicar',
       },
       {
         label: 'Noticias',
