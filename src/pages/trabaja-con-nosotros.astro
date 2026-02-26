@@ -236,6 +236,7 @@ const eventosImages = [
           </div>
         ))}
       </div>
+      <p class="eventos-descripcion" id="eventos-descripcion">En BRIANE creemos que un equipo unido es la base del éxito. Por eso, a lo largo del año organizamos actividades y celebraciones que nos permiten compartir momentos especiales fuera del trabajo: aniversarios de la empresa, actividades deportivas, campañas sociales y reuniones de integración que fortalecen los lazos entre todos nuestros colaboradores y sus familias.</p>
     </div>
   </section>
 
@@ -619,6 +620,15 @@ const eventosImages = [
     font-weight: var(--font-semibold);
   }
 
+  .eventos-descripcion {
+    width: 100%;
+    margin: var(--spacing-2xl) 0 0;
+    font-size: var(--text-base);
+    color: var(--color-gray-600);
+    line-height: 1.8;
+    text-align: justify;
+  }
+
   /* Benefits Grid */
   .benefits-grid {
     display: grid;
@@ -707,6 +717,7 @@ const eventosImages = [
     color: var(--color-gray-700);
     line-height: 1.7;
     margin-bottom: var(--spacing-lg);
+    text-align: justify;
   }
 
   .comunidad-list {
@@ -1072,6 +1083,16 @@ Por favor, adjunte su CV en este chat.`;
           const img = comunidadImgs[i] as HTMLImageElement;
           if (img) { img.src = item.image; img.alt = item.title || img.alt; }
         });
+      })
+      .catch(() => {});
+
+    // Update descripcion de Eventos desde el backend
+    fetch(`${API_URL}/api/page-content/trabaja-con-nosotros/eventos-descripcion/`)
+      .then(res => res.ok ? res.json() : null)
+      .then(data => {
+        if (!data || !data.content) return;
+        const el = document.getElementById('eventos-descripcion');
+        if (el) el.textContent = data.content;
       })
       .catch(() => {});
   });

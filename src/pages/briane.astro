@@ -84,6 +84,7 @@ const clientesHomologados = [
   { nombre: 'CUSA', logo: '/images/homologaciones/cusa.png' },
   { nombre: 'Unicon', logo: '/images/homologaciones/unicon.svg' },
   { nombre: 'Mixercon', logo: '/images/homologaciones/mixercon.png' },
+  { nombre: 'Holcim', logo: '/images/homologaciones/holcim.png' },
 ];
 ---
 
@@ -591,6 +592,7 @@ const clientesHomologados = [
     color: var(--color-gray-700);
     line-height: 1.9;
     margin-bottom: var(--spacing-lg);
+    text-align: justify;
   }
 
   /* Gallery */
@@ -1273,6 +1275,7 @@ const clientesHomologados = [
     font-size: var(--text-base);
     color: var(--color-gray-600);
     line-height: 1.9;
+    text-align: justify;
   }
 
   @media (min-width: 768px) {
@@ -1407,6 +1410,7 @@ const clientesHomologados = [
     color: var(--color-gray-300);
     line-height: 1.9;
     margin-bottom: var(--spacing-xl);
+    text-align: justify;
   }
 
   .cultura-values {
@@ -1640,7 +1644,7 @@ const clientesHomologados = [
 
   @media (min-width: 1024px) {
     .homologaciones-grid {
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
       gap: var(--spacing-xl);
     }
   }

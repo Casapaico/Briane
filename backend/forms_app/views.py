@@ -1,4 +1,8 @@
 import json
+import logging
+
+from django.core.mail import send_mail
+from django.conf import settings
 
 from rest_framework import generics, status
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -10,6 +14,8 @@ from .serializers import (
     FullJobApplicationSerializer, NewsletterSubscriptionSerializer,
     ClaimBookSerializer,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class ContactSubmissionCreateView(generics.CreateAPIView):
@@ -87,10 +93,33 @@ class NewsletterSubscriptionCreateView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+
+        email = request.data.get('email', '')
+        self._notify_admins(email)
+
         return Response(
             {'message': 'Suscripcion realizada correctamente.'},
             status=status.HTTP_201_CREATED,
         )
+
+    def _notify_admins(self, subscriber_email: str) -> None:
+        recipients = getattr(settings, 'NEWSLETTER_NOTIFY_EMAILS', [])
+        if not recipients:
+            return
+        try:
+            send_mail(
+                subject='Nueva suscripción al boletín BRIANE',
+                message=(
+                    f'Se ha registrado una nueva suscripción al boletín informativo de BRIANE.\n\n'
+                    f'Correo del suscriptor: {subscriber_email}\n\n'
+                    f'Este es un mensaje automático, no responder.'
+                ),
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=recipients,
+                fail_silently=False,
+            )
+        except Exception as exc:
+            logger.error('Error al enviar notificación de newsletter: %s', exc)
 
 
 class ClaimBookCreateView(generics.CreateAPIView):

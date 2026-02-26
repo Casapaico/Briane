@@ -1,7 +1,19 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import GalleryImage
+from .models import GalleryImage, PageContent
+
+
+@admin.register(PageContent)
+class PageContentAdmin(admin.ModelAdmin):
+    list_display = ['page_slug', 'section_key', 'title', 'is_active', 'order']
+    list_filter = ['page_slug', 'is_active']
+    search_fields = ['page_slug', 'section_key', 'title', 'content']
+    list_editable = ['is_active', 'order']
+    fieldsets = [
+        ('Identificacion', {'fields': ['page_slug', 'section_key', 'is_active', 'order']}),
+        ('Contenido', {'fields': ['title', 'content']}),
+    ]
 
 
 @admin.register(GalleryImage)

@@ -1,6 +1,4 @@
 ---
-import { clients } from '../../data/company';
-
 export interface Props {
   title?: string;
   subtitle?: string;
@@ -10,6 +8,16 @@ const {
   title = 'Confían en Nosotros',
   subtitle = 'Empresas líderes que han elegido BRIANE como su socio logístico',
 } = Astro.props;
+
+const fallbackClients = [
+  { name: 'Cliente 1', logo: '/images/clientes/channels4_profile.jpg' },
+  { name: 'Cliente 2', logo: '/images/clientes/cusa1-removebg-preview.png' },
+  { name: 'Cliente 3', logo: '/images/clientes/images-removebg-preview.png' },
+  { name: 'Cliente 4', logo: '/images/clientes/logo.png' },
+  { name: 'Alicorp', logo: '/images/clientes/logo-alicorp.webp' },
+  { name: 'Cliente 6', logo: '/images/clientes/logotipo_blue.svg' },
+  { name: 'Holcim', logo: '/images/clientes/holcim.png' },
+];
 ---
 
 <section class="clients-section section bg-gray-50">
@@ -21,16 +29,16 @@ const {
   </div>
 
   <div class="marquee-wrapper">
-    <div class="marquee-track">
+    <div class="marquee-track" id="clients-track">
       {
-        clients.map((client) => (
+        fallbackClients.map((client) => (
           <div class="client-logo">
             <img src={client.logo} alt={client.name} />
           </div>
         ))
       }
       {
-        clients.map((client) => (
+        fallbackClients.map((client) => (
           <div class="client-logo">
             <img src={client.logo} alt={client.name} />
           </div>
@@ -39,6 +47,38 @@ const {
     </div>
   </div>
 </section>
+
+<script>
+  const API_URL = 'http://localhost:8000/api';
+
+  async function loadClients() {
+    try {
+      const res = await fetch(`${API_URL}/clients/`);
+      if (!res.ok) return;
+      const apiClients: { name: string; logo: string; url?: string }[] = await res.json();
+      if (!Array.isArray(apiClients) || apiClients.length === 0) return;
+
+      const track = document.getElementById('clients-track');
+      if (!track) return;
+
+      const logoHtml = apiClients
+        .map((client) => {
+          const logoUrl = client.logo.startsWith('http')
+            ? client.logo
+            : `http://localhost:8000${client.logo}`;
+          return `<div class="client-logo"><img src="${logoUrl}" alt="${client.name}" loading="lazy" /></div>`;
+        })
+        .join('');
+
+      // Duplicar para el efecto marquee infinito
+      track.innerHTML = logoHtml + logoHtml;
+    } catch {
+      // Usar logos estáticos de fallback (ya renderizados en el HTML)
+    }
+  }
+
+  loadClients();
+</script>
 
 <style>
   .clients-section {

@@ -43,8 +43,8 @@ export const companyInfo: CompanyInfo = {
   ],
   contact: {
     address: 'Av. Elmer Faucett N° 5104, Urb. Las Fresas, Callao, Perú',
-    phone: ['+51 998 109 252', '+51 994 076 151'],
-    email: ['alvaro.villalobos@supervan.pe', 'comercial@supervan.pe'],
+    phone: ['+51 998 109 252', '+51 992 908 617'],
+    email: ['info@supervan.pe'],
     hours: 'Lunes a Viernes: 8:00 AM - 6:00 PM',
   },
   social: [
@@ -63,7 +63,7 @@ export const companyInfo: CompanyInfo = {
 
 export const stats: Stat[] = [
   {
-    value: '40',
+    value: '44',
     label: 'Años de Experiencia',
     suffix: '+',
   },
@@ -78,7 +78,7 @@ export const stats: Stat[] = [
     suffix: '+',
   },
   {
-    value: '50000',
+    value: '35000',
     label: 'm2 de Almacenes',
     suffix: '+',
   },
@@ -91,6 +91,7 @@ export const clients: Client[] = [
   { name: 'Cliente 4', logo: '/images/clientes/logo.png' },
   { name: 'Alicorp', logo: '/images/clientes/logo-alicorp.webp' },
   { name: 'Cliente 6', logo: '/images/clientes/logotipo_blue.svg' },
+  { name: 'Holcim', logo: '/images/clientes/holcim.png' },
 ];
 
 export const teamMembers: TeamMember[] = [

@@ -1,21 +1,26 @@
 ---
-import { stats } from '../../data/company';
-
 export interface Props {
   title?: string;
   variant?: 'default' | 'primary';
 }
 
 const { title = 'BRIANE en Números', variant = 'default' } = Astro.props;
+
+const fallbackStats = [
+  { value: '44', label: 'Años de Experiencia', suffix: '+' },
+  { value: '500', label: 'Clientes Satisfechos', suffix: '+' },
+  { value: '100', label: 'Unidades de Flota', suffix: '+' },
+  { value: '35000', label: 'm2 de Almacenes', suffix: '+' },
+];
 ---
 
 <section class={`stats-section section ${variant === 'primary' ? 'stats-primary' : ''}`}>
   <div class="container">
     {title && <h2 class="stats-title reveal">{title}</h2>}
 
-    <div class="stats-grid stagger-children">
+    <div class="stats-grid stagger-children" id="stats-grid">
       {
-        stats.map((stat) => (
+        fallbackStats.map((stat) => (
           <div class="stat-card">
             <span class="stat-value" data-value={stat.value}>
               0{stat.suffix}
@@ -99,10 +104,9 @@ const { title = 'BRIANE en Números', variant = 'default' } = Astro.props;
 </style>
 
 <script>
-  // Number counter animation
-  const statValues = document.querySelectorAll('.stat-value[data-value]');
+  const API_URL = 'http://localhost:8000/api';
 
-  const animateValue = (element: Element, start: number, end: number, duration: number) => {
+  function animateValue(element: Element, start: number, end: number, duration: number) {
     const suffix = element.textContent?.replace(/[\d,]/g, '') || '';
     let startTimestamp: number | null = null;
 
@@ -115,23 +119,52 @@ const { title = 'BRIANE en Números', variant = 'default' } = Astro.props;
         window.requestAnimationFrame(step);
       }
     };
-
     window.requestAnimationFrame(step);
-  };
+  }
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const element = entry.target;
-          const value = parseInt(element.getAttribute('data-value') || '0', 10);
-          animateValue(element, 0, value, 2000);
-          observer.unobserve(element);
+  function setupObserver() {
+    const statValues = document.querySelectorAll('.stat-value[data-value]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const element = entry.target;
+            const value = parseInt(element.getAttribute('data-value') || '0', 10);
+            animateValue(element, 0, value, 2000);
+            observer.unobserve(element);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+    statValues.forEach((stat) => observer.observe(stat));
+  }
+
+  async function initStats() {
+    try {
+      const res = await fetch(`${API_URL}/stats/`);
+      if (res.ok) {
+        const apiStats: { value: string; label: string; suffix: string }[] = await res.json();
+        if (Array.isArray(apiStats) && apiStats.length > 0) {
+          const statCards = document.querySelectorAll('#stats-grid .stat-card');
+          apiStats.forEach((stat, i) => {
+            const card = statCards[i];
+            if (!card) return;
+            const valueEl = card.querySelector('.stat-value');
+            const labelEl = card.querySelector('.stat-label');
+            if (valueEl) {
+              valueEl.setAttribute('data-value', String(stat.value));
+              valueEl.textContent = `0${stat.suffix || ''}`;
+            }
+            if (labelEl) labelEl.textContent = stat.label;
+          });
         }
-      });
-    },
-    { threshold: 0.5 }
-  );
+      }
+    } catch {
+      // Usar datos estáticos de fallback (ya renderizados en el HTML)
+    }
+    setupObserver();
+  }
 
-  statValues.forEach((stat) => observer.observe(stat));
+  initStats();
 </script>

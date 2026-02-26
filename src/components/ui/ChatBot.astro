@@ -9,11 +9,7 @@
     <p class="cb-tooltip" id="cb-tooltip">¿En qué te ayudamos?</p>
     <button class="cb-fab" id="cb-fab" aria-label="Abrir asistente BRIANE">
       <!-- Icono: chat abierto -->
-      <svg class="cb-fab-i cb-fab-chat" xmlns="http://www.w3.org/2000/svg"
-        width="26" height="26" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-      </svg>
+      <img class="cb-fab-i cb-fab-chat" src="/images/briane-chat-icon.png" alt="Chat BRIANE" width="62" height="62" />
       <!-- Icono: cerrar -->
       <svg class="cb-fab-i cb-fab-x" xmlns="http://www.w3.org/2000/svg"
         width="22" height="22" viewBox="0 0 24 24" fill="none"
@@ -118,17 +114,18 @@
 /* ─ FAB ─ */
 .cb-fab {
   position: relative;
-  width: 56px; height: 56px;
-  border-radius: 50%;
-  background: #e3271d;
+  width: 64px; height: 64px;
+  border-radius: 0;
+  background: transparent;
   color: #fff;
   border: none;
   cursor: grab;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 18px rgba(227,39,29,.45);
-  transition: transform .2s, box-shadow .2s;
+  box-shadow: none;
+  transition: transform .2s;
+  padding: 0;
 }
-.cb-fab:hover  { transform: scale(1.07); box-shadow: 0 6px 24px rgba(227,39,29,.58); }
+.cb-fab:hover  { transform: scale(1.07); }
 .cb-fab:active { transform: scale(.95); cursor: grabbing; }
 .cb.cb-dragging .cb-fab { cursor: grabbing; transform: scale(1.08); }
 .cb.cb-dragging { user-select: none; }
